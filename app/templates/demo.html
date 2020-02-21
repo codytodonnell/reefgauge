@@ -1,0 +1,39 @@
+<section class="vis-controls">
+	<div>
+		<span>{{vc.data.dataset.length}}</span>
+		<span>reef assessments</span>
+	</div>
+	<div class="btn-group" uib-dropdown>
+		<button id="order-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+		Order <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+			<li role="menuitem" ng-repeat="prop in vc.data.keys" ng-click="vc.setOrder(prop)" ng-class="prop == vc.data.orderBy ? 'selected-dropdown-item' : ''">{{prop}}</li>
+		</ul>
+    </div>
+    <div class="btn-group" uib-dropdown>
+		<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+		Color <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+			<li role="menuitem" ng-repeat="prop in vc.data.keys" ng-click="vc.setColor(prop)" ng-class="prop == vc.data.colorBy ? 'selected-dropdown-item' : ''">{{prop}}</li>
+		</ul>
+    </div>
+    <div class="btn-group" uib-dropdown>
+		<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+		Size <span class="caret"></span>
+		</button>
+		<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+			<li role="menuitem" ng-repeat="prop in vc.data.keys" ng-click="vc.setSize(prop)" ng-class="prop == vc.data.sizeBy ? 'selected-dropdown-item' : ''">{{prop}}</li>
+		</ul>
+    </div>
+</section>
+<section class="vis-container">
+	<dot-matrix></dot-matrix>
+</section>
+<section class="vis-container">
+	<scatter-plot xvar="vc.xvar" yvar="vc.yvar"></scatter-plot>
+</section>
+<section class="vis-container">
+	<scatter-plot-compare xvar="vc.xvar2" yvar="vc.yvar2"></scatter-plot-compare>
+</section>

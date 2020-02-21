@@ -1,0 +1,51 @@
+<article class="main-container container-fluid">
+	<div class="main-row row">
+		<section class="sidebar col-md-3">
+			<nav>
+				<ul>
+					<li><i class="fas fa-home"></i> Reef Lense</li>
+					<li><i class="fas fa-book"></i> Glossary</li>
+				</ul>
+			</nav>
+			<div class="tabs row">
+				<h2 class="col-md-6">Science</h2>
+				<h2 class="col-md-6">Community</h2>
+				<p></p>
+			</div>
+			<div class="tab-content row">
+				<div class="col-md-12">
+					<div class="sidebar-tile">
+						<div class="btn-group var-select" uib-dropdown>
+							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+							Size: {{vc.getSizeKey().display_name}} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setSize(prop.key)" ng-class="prop == vc.config.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
+							</ul>
+					    </div>
+					    <img ng-src="{{vc.getSizeKey().image}}">
+					    <p>{{vc.getSizeKey().description}}</p>
+					</div>
+					<div class="sidebar-tile">
+						<div class="btn-group var-select" uib-dropdown>
+							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+							Color: {{vc.getColorKey().display_name}} <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setColor(prop.key)" ng-class="prop == vc.config.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
+							</ul>
+					    </div>
+					    <img ng-src="{{vc.getSizeKey().image}}">
+					    <p>{{vc.getColorKey().description}}</p>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section class="vis-container col-md-9">
+			<map></map>
+		</section>
+	</div>
+</article>
+<!-- <div class="vis-container">
+	<div id="map"></div>
+</div> -->

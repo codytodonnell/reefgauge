@@ -1,0 +1,175 @@
+html {
+	height: 100%
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Avenir, Helvetica;
+	height: 100%;
+}
+
+a {
+	text-decoration: none;
+	color: #1EAEDB;
+	transition: 0.25s;
+	cursor: pointer;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+main {
+	height: 100%;
+	margin: 0;
+}
+
+.main-container {
+	height: 100%;
+}
+
+.main-row {
+	height: 100%;
+}
+
+nav {
+	width: 100%;
+	height: 5vh;
+	line-height: 5vh;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #fff;
+	z-index: 10;
+}
+
+nav ul {
+	padding-left: 15px;
+}
+
+nav ul li {
+	display: inline-block;
+	margin-right: 10px;
+}
+
+.sidebar {
+	height: 100%;
+	border-right: 1px solid #ccc;
+}
+
+.sidebar .tabs {
+	width: 100%;
+	height: 5vh;
+	line-height: 5vh;
+	position: absolute;
+	top: 5vh;
+	background: #eee;
+	z-index: 10;
+}
+
+.sidebar .tabs h2 {
+	height: 100%;
+	line-height: 5vh;
+	text-align: left;
+	font-size: 1.5em;
+	margin: 0;
+}
+
+.sidebar .tab-content {
+	overflow: auto;
+    max-height: 90vh;
+    margin-top: 10vh;
+}
+
+.sidebar-tile {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	margin-top: 15px;
+}
+
+.sidebar-tile:last-child {
+	margin-bottom: 15px;
+}
+
+.sidebar-tile .var-select {
+	width: 100%;
+}
+
+.sidebar-tile .var-select > button {
+	width: 100%;
+    text-align: left;
+    font-size: 1.2em;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.sidebar-tile img {
+	width: 100%;
+    height: 200px;
+    padding: 15px 15px 0px 15px;
+}
+
+.sidebar-tile p {
+	padding: 15px;
+}
+
+.vis-container {
+	padding: 0;
+}
+
+#map {
+	width: 100%;
+	height: 100vh;
+}
+
+#map svg {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+}
+
+.dropdown-menu {
+	width: 100%;
+}
+
+.dropdown-menu li {
+	cursor: pointer;
+	text-align: right;
+	padding: 5px;
+}
+
+.dropdown-menu li:hover {
+	background: #eee;
+}
+
+.selected-dropdown-item {
+	background: #ccc;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 2px;
+}
+
+.axis text {
+	font-family: Avenir, Helvetica;
+	font-size: 1.5em;
+	color: #000;
+}
+
+.axis path, .axis line {
+	stroke: #000;
+}
+
+.y.axis path {
+	/*display: none;*/
+}
+
+.y.axis g.tick:first-of-type {
+	display: none;
+}
+

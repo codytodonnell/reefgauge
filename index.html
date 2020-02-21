@@ -1,0 +1,36 @@
+<!doctype html>
+<html class="no-js" lang="" ng-app="reef">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>Reef Community</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.css' rel='stylesheet' />
+        <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+		<link rel="stylesheet" href="app/css/reef.css">
+		<link rel="shortcut icon" type="image/png" href="favicon.png"/>
+    </head>
+    <body ng-cloak>
+        <main ui-view></main>
+        <script src='https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
+        <script src="bower_components/angular/angular.min.js"></script>
+        <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
+        <script src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+        <script src="node_modules/d3/dist/d3.min.js"></script>
+        <script src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+        <script src="node_modules/d3-grid/d3-grid.js"></script>
+        <script src="https://kit.fontawesome.com/ebdfb7dba1.js" crossorigin="anonymous"></script>
+
+        <script src="app/app.js"></script>
+        <script src="app/controllers/visController.js"></script>
+        <script src="app/directives/scatterDirective.js"></script>
+        <script src="app/directives/scatterTwoVarsDirective.js"></script>
+        <script src="app/directives/parallelCoordsDirective.js"></script>
+        <script src="app/directives/dotMatrixDirective.js"></script>
+        <script src="app/directives/mapDirective.js"></script>
+        <script src="app/services/visService.js"></script>
+        <script src="app/services/cleanDataService.js"></script>
+    </body>
+</html>
