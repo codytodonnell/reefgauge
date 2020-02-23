@@ -42,6 +42,10 @@
 		    	.attr('class', 'points')
 		    	.selectAll(".point");
 
+		    var tip = d3.select(map.getCanvasContainer()).append("div")	
+				.attr("class", "tooltip")				
+				.style("opacity", 0);
+
 		    var radiusScale = d3.scaleLinear()
 		    	.range([5, 10, 15, 20, 25])
 		    	.clamp(true);
@@ -106,32 +110,6 @@
 					enterPoints();
 					enterSquares();
 				}
-
-				function render() {
-					d3Projection = getD3();
-
-					path.projection(d3Projection)
-
-					svg.selectAll(".point")
-					    .attr("cx", function(d) { 
-					        var x = d3Projection(d.geometry.coordinates)[0];
-					        return x
-					    })
-					    .attr("cy", function(d) { 
-					        var y = d3Projection(d.geometry.coordinates)[1];
-					        return y
-					    });
-
-					svg.selectAll(".square")
-					    .attr("x", function(d) { 
-					        var x = d3Projection([+d.longitude, +d.latitude])[0];
-					        return x
-					    })
-					    .attr("y", function(d) { 
-					        var y = d3Projection([+d.longitude, +d.latitude])[1];
-					        return y
-					    });
-			    }
 
 				// re-render our visualization whenever the view changes
 				map.on("viewreset", function() {
@@ -231,7 +209,7 @@
 			function toggleScience() {
 				svg.selectAll(".point")
 				    .transition()
-				    .duration(1000)
+				    .duration(500)
 				    .style("fill", pointFill)
 					.style("fill-opacity", pointFillOpacity)
 					.style("stroke-opacity", pointStrokeOpacity);
@@ -240,7 +218,7 @@
 			function toggleCommunity() {
 				svg.selectAll(".square")
 				    .transition()
-				    .duration(1000)
+				    .duration(500)
 				    .style("fill", squareFill)
 					.style("fill-opacity", squareFillOpacity)
 					.style("stroke-opacity", squareStrokeOpacity)
@@ -279,6 +257,7 @@
 					.style("stroke-width", 10);
 
 				svg.append("svg:image")
+					.attr('id', 'image-' + d.id)
 					.attr('class', 'community-hover-image')
 					.attr('x', +node.attr("x") + +node.attr("width")/2 - 100)
 					.attr('y', +node.attr("y") + +node.attr("height") + 10)
@@ -299,12 +278,22 @@
 			}
 
 			function pointHover(d) {
-				d3.select(this)
-					.transition()
+				var node = d3.select(this);
+
+				node.transition()
 					.duration(500)
 					.style("stroke", "#494949")
 					.style("stroke-opacity", 0.8)
 					.style("stroke-width", 4);
+
+				var tipContent = d.properties.Site !== "" ? d.properties.Site : d.properties.Batch + " " + d.properties.Code;
+
+				tip.html('<span>' + tipContent + '</span')
+					.attr('id', d.properties.id)
+					.style('left', node.attr("cx") + "px")
+					.style('top', node.attr("cy") - node.attr("r") - 4 + "px")
+					.style('transform', 'translate(-50%, -100%)')
+					.style('opacity', 0.9);
 			}
 
 			function pointOut(d) {
@@ -314,6 +303,8 @@
 					.style("stroke", pointStroke)
 					.style("stroke-opacity", pointStrokeOpacity)
 					.style("stroke-width", pointStrokeWidth);
+
+				tip.style('opacity', 0);
 			}
 
 			function squareFill(d) {
@@ -381,6 +372,64 @@
 				return radiusScale(d.properties[config.science.sizeBy]);
 				// return 6;
 			}
+
+			function render() {
+				d3Projection = getD3();
+
+				path.projection(d3Projection);
+
+				var tipProjection = null;
+				var tipNodeRadius = null;
+
+				var hoverImage = svg.select('.community-hover-image');
+				var hoverImageNode = null;
+
+				svg.selectAll(".point")
+				    .attr("cx", function(d) {
+				    	var projection = d3Projection(d.geometry.coordinates);
+				    	if(d.properties.id === tip.attr('id')) {
+				    		tipProjection = projection;
+				    		tipNodeRadius = d3.select(this).attr('r');
+				    	}
+				        var x = projection[0];
+				        return x
+				    })
+				    .attr("cy", function(d) { 
+				        var y = d3Projection(d.geometry.coordinates)[1];
+				        return y
+				    });
+
+				svg.selectAll(".square")
+				    .attr("x", function(d) {
+				    	if(hoverImage.node() && "image-"+d.id === hoverImage.attr('id')) {
+				    		hoverImageNode = d3.select(this);
+				    	}
+				        var x = d3Projection([+d.longitude, +d.latitude])[0];
+				        return x
+				    })
+				    .attr("y", function(d) { 
+				        var y = d3Projection([+d.longitude, +d.latitude])[1];
+				        return y
+				    });
+
+				/**
+				 * Re-position tooltip based on point's new x and y values
+				 * The tooltip id is set to the data point's id so it can be retrieved from here
+				 */
+				if(tipProjection) {
+					tip.style('left', tipProjection[0] + 'px')
+						.style('top', tipProjection[1] - tipNodeRadius - 4 + 'px');
+				}
+
+				/**
+				 * Re-position hover image based on square's new x and y values
+				 * The image id is set to the "image-[data point's id]" so it can be retrieved from here
+				 */
+				if(hoverImageNode) {
+					hoverImage.attr('x', +hoverImageNode.attr("x") + +hoverImageNode.attr("width")/2 - 100)
+						.attr('y', +hoverImageNode.attr("y") + +hoverImageNode.attr("height") + 10);
+				}
+		    }
 		}
 	}
 }]);

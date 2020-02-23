@@ -164,6 +164,14 @@ nav ul li {
 	pointer-events: none;
 }
 
+.tooltip {
+	background: #494949;
+	border: 1px solid #ccc;
+	color: #fff;
+	padding: 5px;
+	pointer-events: none;
+}
+
 .line {
   fill: none;
   stroke: steelblue;
