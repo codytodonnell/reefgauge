@@ -5,6 +5,7 @@
 				<ul>
 					<li><i class="fas fa-home"></i> Reef Lense</li>
 					<li><i class="fas fa-book"></i> Glossary</li>
+					<li><button ng-click="vc.changeDrill()">Drill</button></li>
 				</ul>
 			</nav>
 			<div class="tabs row">
@@ -17,7 +18,7 @@
 					<div class="sidebar-tile">
 						<div class="btn-group var-select" uib-dropdown>
 							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-							Size: {{vc.getPropertyObject(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
+							Size: {{vc.getKeyMeta(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceSize(prop.key)" ng-class="prop == vc.config.science.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
@@ -29,7 +30,7 @@
 					<div class="sidebar-tile">
 						<div class="btn-group var-select" uib-dropdown>
 							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-							Color: {{vc.getPropertyObject(vc.config.science.colorBy).display_name}} <span class="caret"></span>
+							Color: {{vc.getKeyMeta(vc.config.science.colorBy).display_name}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceColor(prop.key)" ng-class="prop == vc.config.science.colorBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
@@ -43,6 +44,7 @@
 		</section>
 		<section class="vis-container col-md-9">
 			<map></map>
+			<science-drilldown></science-drilldown>
 		</section>
 	</div>
 </article>

@@ -172,7 +172,24 @@ nav ul li {
 	pointer-events: none;
 }
 
-.line {
+.science-drilldown {
+	background: #fff;
+	width: 90%;
+	margin: auto;
+	min-height: 500px;
+	position: absolute;
+	top: 110%;
+	left: 50%;
+    transform: translate(-50%, 0);
+    z-index: 10;
+	transition: 0.5s;
+}
+
+.science-drilldown.open {
+	top: 50%;
+}
+
+/*.line {
   fill: none;
   stroke: steelblue;
   stroke-width: 2px;
@@ -189,10 +206,12 @@ nav ul li {
 }
 
 .y.axis path {
-	/*display: none;*/
+	display: none;
 }
 
 .y.axis g.tick:first-of-type {
 	display: none;
-}
+}*/
+
+
 

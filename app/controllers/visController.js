@@ -17,14 +17,10 @@ angular.module('reef')
 	vm.setScienceOrder = visService.setScienceOrder;
 	vm.setScienceColor = visService.setScienceColor;
 	vm.setScienceSize = visService.setScienceSize;
-
-	vm.getPropertyObject = function(prop) {
-		var obj = vm.config.keys.find(function(d) { return d.key == prop; });
-		return obj;
-	};
-
-	vm.setDataMode = function(view) {
-		vm.config.dataMode = view;
-	};
+	vm.getKeyMeta = visService.getKeyMeta;
+	vm.setDataMode = visService.setDataMode;
+	vm.changeDrill = function() {
+		visService.setScienceDrillOpen(vm.config.science.drillOpen + 1);
+	}
 }]);
 

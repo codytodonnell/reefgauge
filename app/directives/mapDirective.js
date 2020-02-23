@@ -1,6 +1,6 @@
     angular.module('reef')
 
-.directive('map', ['visService', function(visService) {
+.directive('map', ['visService', '$rootScope', function(visService, $rootScope) {
 	return {
 		restrict: 'EA',
 		templateUrl: 'app/templates/map.html',
@@ -48,6 +48,7 @@
 
 		    var radiusScale = d3.scaleLinear()
 		    	.range([5, 10, 15, 20, 25])
+		    	.domain(getKeyDomain(config.science.sizeBy))
 		    	.clamp(true);
 
 		    var colorScale = d3.scaleOrdinal()
@@ -63,22 +64,6 @@
 
 			var redScale = d3.scaleLinear().range(["#E8A0A0", "#e70808"]);
 
-		    // we calculate the scale given mapbox state (derived from viewport-mercator-project's code)
-		    // to define a d3 projection
-		    function getD3() {
-				var bbox = map.getContainer().getBoundingClientRect();
-				var center = map.getCenter();
-				var zoom = map.getZoom();
-				// 512 is hardcoded tile size, might need to be 256 or changed to suit your map config
-				var scale = (512) * 0.5 / Math.PI * Math.pow(2, zoom);
-
-				var d3projection = d3.geoMercator()
-				.center([center.lng, center.lat])
-				.translate([bbox.width/2, bbox.height/2])
-				.scale(scale);
-
-				return d3projection;
-		    }
 		    // calculate the original d3 projection
 		    var d3Projection = getD3();
 		    
@@ -95,9 +80,6 @@
 
 				visService.setScienceData(scienceData);
 				visService.setCommunityData(communityData);
-
-				//radiusScale.domain(d3.extent(scienceData.features, function(d) { return d.properties[config.science.sizeBy]; }));
-				radiusScale.domain([0, 5, 10, 20, 40]);
 
 				/**
 				 * If in science mode, draw the points last
@@ -178,31 +160,28 @@
 					.style("pointer-events", pointPointerEvents)
 					.on("mouseover", pointHover)
 					.on("mouseout", pointOut)
+					.on("click", pointClick)
 					.transition().duration(1000)
 					.attr("r", pointRadius);
 			}
 
-			function exitSquares() {
-
-			}
-
-			function sizeScienceBy(prop) {
-				radiusScale.domain(d3.extent(scienceData.features, function(d) { return d.properties[prop]; }));
+			function sizeScienceBy(key) {
+				radiusScale.domain(getKeyDomain(key));
 				svg.selectAll(".point")
 				    .transition()
 				    .duration(1000)
 				    .attr('r', function(d) {
-						return radiusScale(d.properties[prop]);
+						return radiusScale(d.properties[key]);
 					});
 			}
 
-			function colorScienceBy(prop) {
-				var scale = getScienceScale(prop);
+			function colorScienceBy(key) {
+				var scale = getScienceScale(key);
 				svg.selectAll(".point")
 				    .transition()
 				    .duration(1000)
 				    .style('fill', function(d) {
-						return scale(d.properties[prop]);
+						return scale(d.properties[key]);
 					});
 			}
 
@@ -231,20 +210,32 @@
 				nodesGroup.appendChild(nodesGroup.firstElementChild);
 			}
 
-			function getScienceScale(prop) {
+			function getScienceScale(key) {
 				var scale = null;
-				var keyObj = visService.getKeyObj(prop);
-				if(keyObj.scale == 'ordinal') {
+				var keyMeta = visService.getKeyMeta(key);
+				if(keyMeta.scale == 'ordinal') {
 					scale = colorScale;
-				} else if(keyObj.scale == 'linear' && keyObj.beneficial == true) {
+				} else if(keyMeta.scale == 'linear') {
 					scale = greenScale;
-				} else if(keyObj.scale == 'linear' && keyObj.beneficial == false) {
-					scale = redScale;
 				}
+				// } else if(keyObj.scale == 'linear' && keyObj.beneficial == false) {
+				// 	scale = redScale;
+				// }
 				// scale.domain(d3.extent(scienceData.features, function(d) { return d.properties[prop]; }));
-				scale.domain([0, 5, 10, 20, 40]);
+				scale.domain(getKeyDomain(key));
 
 				return scale;
+			}
+
+			function getKeyDomain(key) {
+				var domain = visService.getKeyMeta(config.science.sizeBy).domain;
+				if(domain) {
+					return domain;
+				} else if(scienceData) {
+					return d3.extent(scienceData.features, function(d) { return d.properties[key]; });
+				} else {
+					return null;
+				}
 			}
 
 			function squareHover(d) {
@@ -297,14 +288,48 @@
 			}
 
 			function pointOut(d) {
-				d3.select(this)
-					.transition()
-					.duration(500)
-					.style("stroke", pointStroke)
-					.style("stroke-opacity", pointStrokeOpacity)
-					.style("stroke-width", pointStrokeWidth);
+				if(!d.selected) {
+					d3.select(this)
+						.transition()
+						.duration(500)
+						.style("stroke", pointStroke)
+						.style("stroke-opacity", pointStrokeOpacity)
+						.style("stroke-width", pointStrokeWidth);
+				}
 
 				tip.style('opacity', 0);
+			}
+
+			function pointClick(d) {
+				d.selected = !d.selected;
+
+				if(d.selected) {
+					visService.setScienceDrillDatum(d);
+					visService.setScienceDrillOpen(true);
+					svg.selectAll(".point")
+						.transition()
+						.duration(500)
+						.style("stroke", pointStroke)
+						.style("stroke-opacity", pointStrokeOpacity)
+						.style("stroke-width", pointStrokeWidth);
+					d3.select(this)
+						.transition()
+						.duration(500)
+						.style("stroke", "#494949")
+						.style("stroke-opacity", 0.8)
+						.style("stroke-width", 4);
+				} else {
+					visService.setScienceDrillDatum(null);
+					visService.setScienceDrillOpen(false);
+					d3.select(this)
+						.transition()
+						.duration(500)
+						.style("stroke", pointStroke)
+						.style("stroke-opacity", pointStrokeOpacity)
+						.style("stroke-width", pointStrokeWidth);
+				}
+
+				$rootScope.$broadcast('pointClicked');
 			}
 
 			function squareFill(d) {
@@ -429,6 +454,23 @@
 					hoverImage.attr('x', +hoverImageNode.attr("x") + +hoverImageNode.attr("width")/2 - 100)
 						.attr('y', +hoverImageNode.attr("y") + +hoverImageNode.attr("height") + 10);
 				}
+		    }
+
+		    // we calculate the scale given mapbox state (derived from viewport-mercator-project's code)
+		    // to define a d3 projection
+		    function getD3() {
+				var bbox = map.getContainer().getBoundingClientRect();
+				var center = map.getCenter();
+				var zoom = map.getZoom();
+				// 512 is hardcoded tile size, might need to be 256 or changed to suit your map config
+				var scale = (512) * 0.5 / Math.PI * Math.pow(2, zoom);
+
+				var d3projection = d3.geoMercator()
+				.center([center.lng, center.lat])
+				.translate([bbox.width/2, bbox.height/2])
+				.scale(scale);
+
+				return d3projection;
 		    }
 		}
 	}
