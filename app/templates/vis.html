@@ -1,6 +1,6 @@
 <article class="main-container container-fluid">
 	<div class="main-row row">
-		<section class="sidebar col-md-3">
+		<section class="sidebar col-sm-3">
 			<nav>
 				<ul>
 					<li><i class="fas fa-home"></i> Reef Lense</li>
@@ -8,19 +8,19 @@
 				</ul>
 			</nav>
 			<div class="tabs row">
-				<h2 class="col-md-6">Science</h2>
-				<h2 class="col-md-6">Community</h2>
+				<h2 class="col-md-6" ng-click="vc.setDataMode('science')" ng-class="vc.config.dataMode == 'science' ? 'tab-selected' : ''">Science</h2>
+				<h2 class="col-md-6" ng-click="vc.setDataMode('community')" ng-class="vc.config.dataMode == 'community' ? 'tab-selected' : ''">Community</h2>
 				<p></p>
 			</div>
 			<div class="tab-content row">
-				<div class="col-md-12">
+				<div class="col-sm-12">
 					<div class="sidebar-tile">
 						<div class="btn-group var-select" uib-dropdown>
 							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-							Size: {{vc.getSizeKey().display_name}} <span class="caret"></span>
+							Size: {{vc.getPropertyObject(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setSize(prop.key)" ng-class="prop == vc.config.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
+								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceSize(prop.key)" ng-class="prop == vc.config.science.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
 							</ul>
 					    </div>
 					    <img ng-src="{{vc.getSizeKey().image}}">
@@ -29,10 +29,10 @@
 					<div class="sidebar-tile">
 						<div class="btn-group var-select" uib-dropdown>
 							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-							Color: {{vc.getColorKey().display_name}} <span class="caret"></span>
+							Color: {{vc.getPropertyObject(vc.config.science.colorBy).display_name}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setColor(prop.key)" ng-class="prop == vc.config.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
+								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceColor(prop.key)" ng-class="prop == vc.config.science.colorBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
 							</ul>
 					    </div>
 					    <img ng-src="{{vc.getSizeKey().image}}">

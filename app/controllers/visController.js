@@ -14,18 +14,17 @@ angular.module('reef')
 	vm.xvar2 = "CCA";
 	vm.yvar2 = "MA";
 
-	vm.setOrder = visService.setOrder;
-	vm.setColor = visService.setColor;
-	vm.setSize = visService.setSize;
+	vm.setScienceOrder = visService.setScienceOrder;
+	vm.setScienceColor = visService.setScienceColor;
+	vm.setScienceSize = visService.setScienceSize;
 
-	vm.getSizeKey = function() {
-		var obj = vm.config.keys.find(function(d) { return d.key == vm.config.sizeBy; });
+	vm.getPropertyObject = function(prop) {
+		var obj = vm.config.keys.find(function(d) { return d.key == prop; });
 		return obj;
 	};
 
-	vm.getColorKey = function() {
-		var obj = vm.config.keys.find(function(d) { return d.key == vm.config.colorBy; });
-		return obj;
+	vm.setDataMode = function(view) {
+		vm.config.dataMode = view;
 	};
 }]);
 

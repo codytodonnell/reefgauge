@@ -2,10 +2,15 @@ angular.module('reef')
 
 .factory('visService', function() {
 	var config = {
-		data: null,
-		orderBy: 'SLCavg',
-		colorBy: 'SLCavg',
-		sizeBy: 'SLCavg',
+		science: {
+			data: null,
+			orderBy: 'SLCavg',
+			colorBy: 'SLCavg',
+			sizeBy: 'SLCavg'
+		},
+		community: {
+			data: null,
+		},
 		dataMode: 'science',
 		dataView: 'map',
 		keys: [
@@ -40,6 +45,7 @@ angular.module('reef')
 				key: "SLCavg",
 				display_name: "Live Coral Cover",
 				scale: 'linear',
+				domain: [0, 5, 10, 20, 40],
 				beneficial: true,
 				group: "coral",
 				image: "",
@@ -182,25 +188,33 @@ angular.module('reef')
 		config = config;
 	};
 
-	var setData = function(data) {
-		config.data = data;
+	var setScienceData = function(data) {
+		config.science.data = data;
+	};
+
+	var setCommunityData = function(data) {
+		config.community.data = data;
 	};
 
 	var setKeys = function(keys) {
 		config.keys = keys;
 	};
 
-	var setOrder = function(prop) {
-		config.orderBy = prop;
+	var setScienceOrder = function(prop) {
+		config.science.orderBy = prop;
 	};
 
-	var setColor = function(prop) {
-		config.colorBy = prop;
+	var setScienceColor = function(prop) {
+		config.science.colorBy = prop;
 	};
 
-	var setSize = function(prop) {
-		config.sizeBy = prop;
+	var setScienceSize = function(prop) {
+		config.science.sizeBy = prop;
 	};
+
+	var setDataView = function(view) {
+		config.dataView = view;
+	}
 
 	var getKeyObj = function(key) {
 		var obj = config.keys.find(function(d) { return d.key == key; });
@@ -211,11 +225,13 @@ angular.module('reef')
 		getKeyMap: getKeyMap,
 		getConfig: getConfig,
 		setConfig: setConfig,
-		setData: setData,
+		setScienceData: setScienceData,
+		setCommunityData: setCommunityData,
 		setKeys: setKeys,
-		setOrder: setOrder,
-		setColor: setColor,
-		setSize: setSize,
+		setScienceOrder: setScienceOrder,
+		setScienceColor: setScienceColor,
+		setScienceSize: setScienceSize,
+		setDataView: setDataView,
 		getKeyObj: getKeyObj
 	}
 });

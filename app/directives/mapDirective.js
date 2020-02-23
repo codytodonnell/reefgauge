@@ -23,21 +23,41 @@
 
 			var config = visService.getConfig();
 
-			var data = null;
+			var scienceData = null;
 
-			var commData = null;
+			var communityData = null;
 
 		    // Setup our svg layer that we can manipulate with d3
 		    var svg = d3.select(map.getCanvasContainer()).append("svg");
 
-		    var radiusScale = d3.scaleLinear().range([4, 40]);
+		    var nodes = d3.select('svg')
+		    	.append('g')
+		    	.attr('id', 'nodes');
+
+		    var squares = nodes.append('g')
+		    	.attr('class', 'squares')
+		    	.selectAll(".square");
+
+		    var points = nodes.append('g')
+		    	.attr('class', 'points')
+		    	.selectAll(".point");
+
+		    var radiusScale = d3.scaleLinear()
+		    	.range([5, 10, 15, 20, 25])
+		    	.clamp(true);
 
 		    var colorScale = d3.scaleOrdinal()
-				.range(d3.schemeCategory10);
+				.range(d3.schemeCategory10)
+				.domain(['benthos', 'coral', 'fish']);
 
-			var greenScale = d3.scaleLinear().range(["#babcb8", "#42AD3E"]);
+			// var greenScale = d3.scaleLinear().range(["#99AD98", "#42AD3E"]);
+			// #008080,#70a494,#b4c8a8,#f6edbd,#edbb8a,#de8a5a,#ca562c
+			// var greenScale = d3.scaleLinear().range(["#e70808", "#E8A0A0", "#aaa", "#99AD98", "#42AD3E"]);
+			var greenScale = d3.scaleLinear()
+				.range(["#ca562c", "#edbb8a", "#f6edbd", "#b4c8a8", "#008080"])
+				.clamp(true);
 
-			var redScale = d3.scaleLinear().range(["#babcb8", "#e70808"]);
+			var redScale = d3.scaleLinear().range(["#E8A0A0", "#e70808"]);
 
 		    // we calculate the scale given mapbox state (derived from viewport-mercator-project's code)
 		    // to define a d3 projection
@@ -65,45 +85,27 @@
 		    	d3.csv("data/inat-elkhorn-coral-observations.csv")
 		    ]).then(function(results) {
 
-		    	data = results[0];
+		    	scienceData = results[0];
 
-		    	commData = results[1];
+		    	communityData = results[1];
 
-		    	//visService.setKeys(d3.keys(data.features[0].properties));
-				visService.setData(data);
+				visService.setScienceData(scienceData);
+				visService.setCommunityData(communityData);
 
-				radiusScale.domain(d3.extent(data.features, function(d) { return d.properties[config.sizeBy]; }));
+				//radiusScale.domain(d3.extent(scienceData.features, function(d) { return d.properties[config.science.sizeBy]; }));
+				radiusScale.domain([0, 5, 10, 20, 40]);
 
-				var points = svg.selectAll(".point")
-					.data(data.features);
-
-				var squares = svg.selectAll(".square")
-					.data(commData);
-
-				squares.enter().append("rect")
-					.attr("class", "square")
-					.attr("height", 0)
-					.attr("width", 0)
-					.style("fill", "#aaa")
-					.style("fill-opacity", 0.4)
-					.style("stroke", "#aaa")
-					.style("stroke-width", 1)
-					.style("stroke-opacity", 0.5)
-					.transition().duration(1000)
-					.attr("height", 10)
-					.attr("width", 10);
-
-				points.enter().append("circle")
-					.attr("class", "point")
-					.attr("r", 1)
-					.style("fill", "#0082a3")
-					.style("fill-opacity", 0.6)
-					.style("stroke", "#004d60")
-					.style("stroke-width", 1)
-					.transition().duration(1000)
-					.attr("r", function(d) {
-						return radiusScale(d.properties[config.sizeBy]);
-					});
+				/**
+				 * If in science mode, draw the points last
+				 * If in community mode, draw the squares last
+				 */
+				if(config.dataMode == 'science') {
+					enterSquares();
+					enterPoints();
+				} else {
+					enterPoints();
+					enterSquares();
+				}
 
 				function render() {
 					d3Projection = getD3();
@@ -144,26 +146,70 @@
 				render();
 		    });
 
-		    $scope.$watch(function() { return visService.getConfig().sizeBy; }, function(newValue, oldValue) {
-				if(newValue && data) {
-					sizeBy(newValue);
+		    $scope.$watch(function() { return visService.getConfig().science.sizeBy; }, function(newValue, oldValue) {
+				if(newValue && scienceData) {
+					sizeScienceBy(newValue);
 				}
 			});
 
-			$scope.$watch(function() { return visService.getConfig().colorBy; }, function(newValue, oldValue) {
-				if(newValue && data) {
-					colorBy(newValue);
+			$scope.$watch(function() { return visService.getConfig().science.colorBy; }, function(newValue, oldValue) {
+				if(newValue && scienceData) {
+					colorScienceBy(newValue);
 				}
 			});
 
 			$scope.$watch(function() { return visService.getConfig().dataMode; }, function(newValue, oldValue) {
-				if(newValue && data && newValue !== oldValue) {
-					
+				if(newValue && newValue !== oldValue) {
+					reverseNodeOrder();
+					toggleScience();
+					toggleCommunity();
 				}
 			});
 
-			function sizeBy(prop) {
-				radiusScale.domain(d3.extent(data.features, function(d) { return d.properties[prop]; }));
+			function enterSquares() {
+				squares.data(communityData)
+					.enter().append("rect")
+					.attr("class", "square")
+					.attr("height", 0)
+					.attr("width", 0)
+					.style("fill", squareFill)
+					.style("fill-opacity", squareFillOpacity)
+					.style("stroke", squareStroke)
+					.style("stroke-width", squareStrokeWidth)
+					.style("stroke-opacity", squareStrokeOpacity)
+					.style("cursor", squareCursor)
+					.style("pointer-events", squarePointerEvents)
+					.on("mouseover", squareHover)
+					.on("mouseout", squareOut)
+					.transition().duration(1000)
+					.attr("height", 10)
+					.attr("width", 10);
+			}
+
+			function enterPoints() {
+				points.data(scienceData.features)
+					.enter().append("circle")
+					.attr("class", "point")
+					.attr("r", 1)
+					.style("fill", pointFill)
+					.style("fill-opacity", pointFillOpacity)
+					.style("stroke", pointStroke)
+					.style("stroke-width", pointStrokeWidth)
+					.style("stroke-opacity", pointStrokeOpacity)
+					.style("cursor", pointCursor)
+					.style("pointer-events", pointPointerEvents)
+					.on("mouseover", pointHover)
+					.on("mouseout", pointOut)
+					.transition().duration(1000)
+					.attr("r", pointRadius);
+			}
+
+			function exitSquares() {
+
+			}
+
+			function sizeScienceBy(prop) {
+				radiusScale.domain(d3.extent(scienceData.features, function(d) { return d.properties[prop]; }));
 				svg.selectAll(".point")
 				    .transition()
 				    .duration(1000)
@@ -172,7 +218,42 @@
 					});
 			}
 
-			function colorBy(prop) {
+			function colorScienceBy(prop) {
+				var scale = getScienceScale(prop);
+				svg.selectAll(".point")
+				    .transition()
+				    .duration(1000)
+				    .style('fill', function(d) {
+						return scale(d.properties[prop]);
+					});
+			}
+
+			function toggleScience() {
+				svg.selectAll(".point")
+				    .transition()
+				    .duration(1000)
+				    .style("fill", pointFill)
+					.style("fill-opacity", pointFillOpacity)
+					.style("stroke-opacity", pointStrokeOpacity);
+			}
+
+			function toggleCommunity() {
+				svg.selectAll(".square")
+				    .transition()
+				    .duration(1000)
+				    .style("fill", squareFill)
+					.style("fill-opacity", squareFillOpacity)
+					.style("stroke-opacity", squareStrokeOpacity)
+					.style("cursor", squareCursor)
+					.style("pointer-events", squarePointerEvents);
+			}
+
+			function reverseNodeOrder() {
+				var nodesGroup = document.getElementById("nodes");
+				nodesGroup.appendChild(nodesGroup.firstElementChild);
+			}
+
+			function getScienceScale(prop) {
 				var scale = null;
 				var keyObj = visService.getKeyObj(prop);
 				if(keyObj.scale == 'ordinal') {
@@ -182,13 +263,123 @@
 				} else if(keyObj.scale == 'linear' && keyObj.beneficial == false) {
 					scale = redScale;
 				}
-				scale.domain(d3.extent(data.features, function(d) { return d.properties[prop]; }));
-				svg.selectAll(".point")
-				    .transition()
-				    .duration(1000)
-				    .style('fill', function(d) {
-						return scale(d.properties[prop]);
-					});
+				// scale.domain(d3.extent(scienceData.features, function(d) { return d.properties[prop]; }));
+				scale.domain([0, 5, 10, 20, 40]);
+
+				return scale;
+			}
+
+			function squareHover(d) {
+				var node = d3.select(this);
+
+				node.transition()
+					.duration(500)
+					.style("stroke", "#494949")
+					.style("stroke-opacity", 0.8)
+					.style("stroke-width", 10);
+
+				svg.append("svg:image")
+					.attr('class', 'community-hover-image')
+					.attr('x', +node.attr("x") + +node.attr("width")/2 - 100)
+					.attr('y', +node.attr("y") + +node.attr("height") + 10)
+					.attr('width', 200)
+					.attr("xlink:href", d.image_url);
+			}
+
+			function squareOut(d) {
+				d3.select(this)
+					.transition()
+					.duration(500)
+					.style("stroke", squareStroke)
+					.style("stroke-opacity", squareStrokeOpacity)
+					.style("stroke-width", squareStrokeWidth);
+
+				d3.selectAll(".community-hover-image")
+					.remove();
+			}
+
+			function pointHover(d) {
+				d3.select(this)
+					.transition()
+					.duration(500)
+					.style("stroke", "#494949")
+					.style("stroke-opacity", 0.8)
+					.style("stroke-width", 4);
+			}
+
+			function pointOut(d) {
+				d3.select(this)
+					.transition()
+					.duration(500)
+					.style("stroke", pointStroke)
+					.style("stroke-opacity", pointStrokeOpacity)
+					.style("stroke-width", pointStrokeWidth);
+			}
+
+			function squareFill(d) {
+				return config.dataMode === 'community' ? colorScale('fish') : "#aaa";
+			}
+
+			function squareStrokeOpacity(d) {
+				return config.dataMode === 'community' ? 0.8 : 0;
+			}
+
+			function squareFillOpacity(d) {
+				return config.dataMode === 'community' ? 0.8 : 0.4;
+			}
+
+			function squareStroke(d) {
+				return "#aaa";
+			}
+
+			function squareStrokeWidth(d) {
+				return 1;
+			}
+
+			function squareCursor(d) {
+				return config.dataMode === 'community' ? 'pointer' : 'none';
+			}
+
+			function squarePointerEvents(d) {
+				return config.dataMode === 'community' ? 'all' : 'none';
+			}
+
+			function pointFill(d) {
+				if(config.dataMode === 'science') {
+					var scale = getScienceScale(config.science.colorBy);
+					return scale(d.properties[config.science.colorBy]);
+				} else {
+					return '#aaa';
+				}
+			}
+
+			function pointFillOpacity(d) {
+				return config.dataMode === 'science' ? 0.5 : 0.1;
+			}
+
+			function pointStrokeOpacity(d) {
+				return config.dataMode === 'science' ? 0.3 : 0;
+			}
+
+			function pointStroke(d) {
+				return "#004d60";
+			}
+
+			function pointStrokeWidth(d) {
+				return 1;
+			}
+
+			function pointCursor(d) {
+				return config.dataMode === 'science' ? 'pointer' : 'none';
+			}
+
+			function pointPointerEvents(d) {
+				return config.dataMode === 'science' ? 'all' : 'none';
+			}
+
+			function pointRadius(d) {
+				return radiusScale(d.properties[config.science.sizeBy]);
+				// return 6;
 			}
 		}
 	}
