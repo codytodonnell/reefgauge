@@ -4,18 +4,19 @@ angular.module('reef')
 	var config = {
 		science: {
 			data: null,
-			orderBy: 'SLCavg',
-			colorBy: 'SLCavg',
-			sizeBy: 'SLCavg',
+			orderBy: 'slcavg',
+			colorBy: 'slcavg',
+			sizeBy: 'slcavg',
 			drillOpen: false,
 			drillDatum: null
 		},
 		community: {
 			data: null,
+			filters: keyService.getFiltersByGroup('Coral')
 		},
 		dataMode: 'science',
 		dataView: 'map',
-		keys: keyService.keys
+		keys: keyService.scienceKeys
 	};
 
 	var getKeyMeta = function(key) {
@@ -71,6 +72,10 @@ angular.module('reef')
 		config.science.drillDatum = d;
 	};
 
+	var setCommunityFilters = function(group) {
+		config.community.filters = keyService.getFiltersByGroup(group.name);
+	};
+
 	return {
 		getKeyMeta: getKeyMeta,
 		getConfig: getConfig,
@@ -84,6 +89,7 @@ angular.module('reef')
 		setDataMode: setDataMode,
 		setDataView: setDataView,
 		setScienceDrillOpen: setScienceDrillOpen,
-		setScienceDrillDatum: setScienceDrillDatum
+		setScienceDrillDatum: setScienceDrillDatum,
+		setCommunityFilters: setCommunityFilters
 	}
 }]);

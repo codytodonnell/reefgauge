@@ -1,6 +1,6 @@
 angular.module('reef')
 
-.factory('cleanDataService', function() {
+.factory('cleanDataService', ['$interval', function($interval) {
 
 	var mergeCSVsAsJSON = function(download, asGeoJSON) {
 		Promise.all([
@@ -9,15 +9,16 @@ angular.module('reef')
 		    d3.csv('data/FishBiomassBySite.csv'),
 		    d3.csv('data/CoralMortalityPrevalenceBySite-10cm.csv'),
 		    d3.csv('data/CoralMortalityPrevalenceBySite-4cm.csv'),
-		    d3.csv('data/CoralRecruitsBySite.csv')
-		]).then(function(files) {
-		    files.forEach(function(f) {
-		    	f.forEach(function(d) {
+		    d3.csv('data/CoralRecruitsBySite.csv'),
+		    d3.csv('data/ReliefBySite.csv')
+		]).then(function(data) {
+		    data.forEach(function(r) {
+		    	r.forEach(function(d) {
 		    		d.Code = d.Code ? d.Code : d.Latitude.toString() + ':' + d.Longitude.toString();
 		    		d.id = d.Code + '_' + d.Batch;
 		    	});
 		    });
-		    var mergedData = joinArrays(files, asGeoJSON);
+		    var mergedData = joinArrays(data, asGeoJSON);
 		    console.log(mergedData);
 		    if(download) {
 			    var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(mergedData));
@@ -36,7 +37,7 @@ angular.module('reef')
 	function joinArrays(arrs, asGeoJSON) {
 	  	var idMap = {};
 	  	var stringKeys = ['id', 'Batch', 'Code', 'Site', 'Date', 'Zone', 'Subregion', 'Shelf', 'Ecoregion']
-	  	var floatKeys = [ 'Latitude', 'Longitude', 'Depth', 'SLCavg', 'CCA', 'MA', 'AINV', 'POSsum', 'NEGsum', 'PARRavg', 'GROUavg', 'Tavg', 'Havg', 'Iavg', 'Pavg', 'BI', 'PercSmallAM', 'PercLargeAM', 'T_ALL'];
+	  	var floatKeys = [ 'Latitude', 'Longitude', 'Depth', 'SLCavg', 'CCA', 'MA', 'AINV', 'POSsum', 'NEGsum', 'PARRavg', 'GROUavg', 'Tavg', 'Havg', 'Iavg', 'Pavg', 'BI', 'PercSmallAM', 'PercLargeAM', 'T_ALL', 'Rmax'];
 	  	var targetKeys = stringKeys.concat(floatKeys);
 
 	  	console.log(targetKeys.length);
@@ -82,9 +83,16 @@ angular.module('reef')
 			}
 	  	} else {
 			for(property in idMap) {
-				console.log(Object.keys(idMap[property]).length);
 				if(Object.keys(idMap[property]).length == targetKeys.length) {
-					newArray.push(idMap[property]);
+					var newArrayItem = idMap[property];
+					Object.keys(newArrayItem).forEach(function(origProp) {
+						var lowercaseProp = origProp.toLowerCase();
+						if (lowercaseProp != undefined) {
+							newArrayItem[lowercaseProp] = newArrayItem[origProp];
+							delete newArrayItem[origProp];
+						}
+					});
+					newArray.push(newArrayItem);
 				}
 			}
 	  	}
@@ -92,7 +100,32 @@ angular.module('reef')
 		return newArray;
 	}
 
+	var bulkFetchCommunityData = function() {
+		var page = 1;
+		var cumulativeData = [];
+		var interval = $interval(function() {
+			d3.json("https://api.inaturalist.org/v1/observations?project_id=66630&order=desc&order_by=created_at&page=" + page).then(function(data) {
+				console.log(data);
+				console.log(page);
+				cumulativeData = cumulativeData.concat(data.results);
+				if(page === 214) {
+					var dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(cumulativeData));
+					var downloadAnchorNode = document.createElement('a');
+					downloadAnchorNode.setAttribute('href', dataStr);
+					downloadAnchorNode.setAttribute('download', 'inat-reefgauge-observations.json');
+					document.body.appendChild(downloadAnchorNode); // required for firefox
+					downloadAnchorNode.click();
+					downloadAnchorNode.remove();
+
+					$interval.cancel(interval);
+				}
+				page++;
+			});
+		}, 1000);
+	};
+
 	return {
-		mergeCSVsAsJSON: mergeCSVsAsJSON
+		mergeCSVsAsJSON: mergeCSVsAsJSON,
+		bulkFetchCommunityData: bulkFetchCommunityData
 	}
-});
+}]);

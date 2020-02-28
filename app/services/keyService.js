@@ -5,65 +5,312 @@ angular.module('reef')
 	* List of all the scientific keys and their metadata
 	* Still questioning whether this should be a map or an array, but may be too small to matter right now
 	**/
-	var keys = [
+	var scienceKeys = [
 		{
-			key: "CCA",
-			display_name: "Crustose Coralline Algae",
-			scale: 'linear',
-			beneficial: true,
-			group: "benthos",
-			image: "",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-		},
-		{
-			key: "MA",
-			display_name: "Macroalgae",
-			scale: 'linear',
-			beneficial: false,
-			group: "benthos",
-			image: "",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-		},
-		{
-			key: "AINV",
-			display_name: "Aggressive Invertebrates",
-			scale: 'linear',
-			beneficial: false,
-			group: "benthos",
-			image: "",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-		},
-		{
-			key: "SLCavg",
+			key: "slcavg",
 			display_name: "Live Coral Cover",
 			scale: 'linear',
 			domain: [0, 5, 10, 20, 40],
 			beneficial: true,
 			group: "coral",
+			top_level: true,
+			children: ["t_all", "perclargeam", "percsmallam"],
 			image: "",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 		},
 		{
-			key: "Havg",
-			display_name: "Herviorous Fish Biomass",
+			key: "rmax",
+			display_name: "Reef Height",
 			scale: 'linear',
+			domain: [0, 5, 10, 20, 40],
+			beneficial: true,
+			group: "coral",
+			image: "",
+			description: "Coral reefs provide habitat for fish and other reef organisms. The structural relief is a measure of a coral reef’s vertical height and is a proxy for reef complexity (holes and crevices). Reefs with higher relief and/or complexity often provide more habitat for of fish and reef biota."
+		},
+		{
+			key: "havg",
+			display_name: "Herbivorous Fish",
+			scale: 'linear',
+			domain: [960, 1919, 2879, 3479, 3480],
 			beneficial: true,
 			group: "fish",
+			top_level: true,
+			children: ["parravg"],
 			image: "",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 		},
 		{
-			key: "Pavg",
-			display_name: "Piscivorous Fish Biomass",
+			key: "pavg",
+			display_name: "Piscivorous Fish",
 			scale: 'linear',
+			domain: [500, 1000, 2999, 6999, 7000],
 			beneficial: true,
 			group: "fish",
+			top_level: true,
+			children: ["grouavg"],
+			image: "",
+			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+		},
+		{
+			key: "cca",
+			display_name: "Crustose Coralline Algae",
+			scale: 'linear',
+			domain: [0, 1, 5.1, 12.1, 25],
+			beneficial: true,
+			group: "benthos",
+			top_level: false,
+			image: "",
+			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+		},
+		{
+			key: "ma",
+			display_name: "Macroalgae",
+			scale: 'linear',
+			domain: [25, 12.1, 5.1, 1, 0],
+			beneficial: false,
+			group: "benthos",
+			top_level: false,
+			image: "",
+			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+		},
+		{
+			key: "possum",
+			display_name: "Bethic Promoters",
+			scale: 'linear',
+			domain: [5, 15, 29.9, 59.9, 60],
+			beneficial: true,
+			group: "benthos",
+			top_level: true,
+			children: ["cca"],
+			image: "",
+			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+		},
+		{
+			key: "negsum",
+			display_name: "Bethic Detractors",
+			scale: 'linear',
+			domain: [60, 59.9, 29.9, 15, 5],
+			beneficial: false,
+			group: "benthos",
+			top_level: true,
+			children: ["ma"],
 			image: "",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
 		}
 	];
 
+	/*
+	* List of all the scientific keys and their metadata
+	* Still questioning whether this should be a map or an array, but may be too small to matter right now
+	**/
+	var communityFilterGroups = [
+		{
+			name: "Coral",
+			selected: true,
+			open: false,
+			filters: [
+				{
+					key: "taxon_family_name",
+					value: "Agariciidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Astrocoeniidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Meandrinidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Merulinidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Milleporidae",
+					value_common_name: "Fire Corals",
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Montastraeidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Faviidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Oculinidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Poritidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Siderastreidae",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_genus_name",
+					value: "Acropora",
+					value_common_name: "Table, Elkhorn, and Staghorn Corals",
+					checked: true
+				},
+			]
+		},
+		{
+			name: "Herbivorous Fish",
+			selected: false,
+			open: false,
+			filters: [
+				{
+					key: "taxon_family_name",
+					value: "Scaridae",
+					value_common_name: "Parrotfishes",
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Acanthuridae",
+					value_common_name: "Surgeonfishes, Tangs, and Unicornfishes",
+					checked: true
+				}
+			]
+		},
+		{
+			name: "Piscivorous Fish",
+			selected: false,
+			open: false,
+			filters: [
+				{
+					key: "taxon_family_name",
+					value: "Serranidae",
+					value_common_name: "Groupers",
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Haemulidae",
+					value_common_name: "Grunts",
+					checked: true
+				},
+				{
+					key: "taxon_family_name",
+					value: "Lutjanidae",
+					value_common_name: "Snappers",
+					checked: true
+				}
+			]
+		},
+		{
+			name: "Benthic Promoters",
+			selected: false,
+			open: false,
+			filters: [
+				{
+					key: "taxon_order_name",
+					value: "Corallinales",
+					value_common_name: "Coralline Algae",
+					checked: true
+				}
+			]
+		},
+		{
+			name: "Benthic Detractors",
+			selected: false,
+			open: false,
+			filters: [
+				{
+					key: "taxon_order_name",
+					value: "Nostoc",
+					value_common_name: "Cyanobacteria",
+					checked: true
+				},
+				{
+					key: "taxon_genus_name",
+					value: "Halimeda",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_genus_name",
+					value: "Galaxaura",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_genus_name",
+					value: "Dictyota",
+					value_common_name: "Y-branched Algae",
+					checked: true
+				},
+				{
+					key: "taxon_genus_name",
+					value: "Caulerpa",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_genus_name",
+					value: "Cliona",
+					value_common_name: null,
+					checked: true
+				},
+				{
+					key: "taxon_genus_name",
+					value: "Peyssonnelia",
+					value_common_name: null,
+					checked: true
+				}
+			]
+		}
+	];
+
+	var getFiltersByGroup = function(group) {
+		var item = communityFilterGroups.find(function(g) {
+			return g.name === group;
+		});
+		return item.filters;
+	};
+
+	var getFilterDisplayName = function(filter) {
+		var taxonType = capitalize(filter.key.split('_')[1]);
+		if(filter.value_common_name) {
+			return filter.value_common_name + ' (' + taxonType + ' ' + filter.value + ')';
+		} else {
+			return taxonType + ' ' + filter.value;
+		}
+	};
+
+	function capitalize(s) {
+		if (typeof s !== 'string') return '';
+		return s.charAt(0).toUpperCase() + s.slice(1);
+	}
+
 	return {
-		keys: keys
+		scienceKeys: scienceKeys,
+		communityFilterGroups: communityFilterGroups,
+		getFiltersByGroup: getFiltersByGroup,
+		getFilterDisplayName: getFilterDisplayName
 	}
 });
