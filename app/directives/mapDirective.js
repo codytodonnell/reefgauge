@@ -38,9 +38,8 @@
 		    	.append('g')
 		    	.attr('id', 'nodes');
 
-		    var squares = nodes.append('g')
-		    	.attr('class', 'squares')
-		    	.selectAll(".square");
+		    var squaresG = nodes.append('g')
+		    	.attr('class', 'squares');
 
 		    var points = nodes.append('g')
 		    	.attr('class', 'points')
@@ -87,16 +86,13 @@
 				visService.setCommunityData(communityData);
 
 				/**
-				 * If in science mode, draw the points last
-				 * If in community mode, draw the squares last
+				 * Initially draw science node group on top of community node group
+				 * If dataMode is community, reverse the order so community node group is on top
 				 */
-				if(config.dataMode == 'science') {
-					enterSquares();
-					enterPoints();
-				} else {
-					enterPoints();
-					enterSquares();
-				}
+				if(config.dataMode == 'community') reverseNodeOrder(); 
+
+				enterSquares();
+				enterPoints();
 
 				// re-render our visualization whenever the view changes
 				map.on("viewreset", function() {
@@ -127,7 +123,8 @@
 
 		    $scope.$watch(function() { return visService.getConfig().community.filters; }, function(newValue, oldValue) {
 				if(newValue && communityData) {
-					changeCommunityFilters();
+					enterSquares();
+					render();
 				}
 			});
 
@@ -152,12 +149,15 @@
 			});
 
 			function enterSquares() {
-				squares.data(communityData)
-					.enter().append("rect")
-					.filter(applyCommunityFilters)
+			 	var squares = squaresG.selectAll('.square')
+			 		.data(communityData.filter(applyCommunityFilters));
+
+			    squares.exit().remove();
+				
+				squares.enter().append("rect")
 					.attr("class", "square")
-					.attr("height", 0)
-					.attr("width", 0)
+					.attr("height", 10)
+					.attr("width", 10)
 					.style("fill", squareFill)
 					.style("fill-opacity", squareFillOpacity)
 					.style("stroke", squareStroke)
@@ -166,10 +166,7 @@
 					.style("cursor", squareCursor)
 					.style("pointer-events", squarePointerEvents)
 					.on("mouseover", squareHover)
-					.on("mouseout", squareOut)
-					.transition().duration(1000)
-					.attr("height", 10)
-					.attr("width", 10);
+					.on("mouseout", squareOut);
 			}
 
 			function enterPoints() {
@@ -192,10 +189,11 @@
 			}
 
 			function changeCommunityFilters() {
-				svg.selectAll(".square")
-				    .transition()
-				    .duration(500)
-				    .filter(applyCommunityFilters);
+				var sq = svg.selectAll(".square")
+					.data(communityData.filter(applyCommunityFilters));
+
+				sq.exit().remove();
+				sq.enter()
 			}
 
 			function sizeScienceBy(key) {
@@ -484,11 +482,11 @@
 				    	if(hoverImage.node() && "image-"+d.id === hoverImage.attr('id')) {
 				    		hoverImageNode = d3.select(this);
 				    	}
-				        var x = d3Projection([d.longitude, d.latitude])[0];
+				        var x = d3Projection([+d.longitude, +d.latitude])[0];
 				        return x
 				    })
 				    .attr("y", function(d) {
-				        var y = d3Projection([d.longitude, d.latitude])[1];
+				        var y = d3Projection([+d.longitude, +d.latitude])[1];
 				        return y
 				    });
 

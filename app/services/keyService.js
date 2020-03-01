@@ -107,7 +107,7 @@ angular.module('reef')
 	var communityFilterGroups = [
 		{
 			name: "Coral",
-			selected: true,
+			selected: false,
 			open: false,
 			filters: [
 				{
@@ -224,7 +224,7 @@ angular.module('reef')
 		},
 		{
 			name: "Benthic Promoters",
-			selected: false,
+			selected: true,
 			open: false,
 			filters: [
 				{
@@ -302,6 +302,13 @@ angular.module('reef')
 		}
 	};
 
+	var setInitialFiltersGroup = function(group) {
+		communityFilterGroups.forEach(function(g) {
+			g.selected = g.name === group ? true : false;
+		});
+		return getFiltersByGroup(group);
+	};
+
 	function capitalize(s) {
 		if (typeof s !== 'string') return '';
 		return s.charAt(0).toUpperCase() + s.slice(1);
@@ -311,6 +318,7 @@ angular.module('reef')
 		scienceKeys: scienceKeys,
 		communityFilterGroups: communityFilterGroups,
 		getFiltersByGroup: getFiltersByGroup,
-		getFilterDisplayName: getFilterDisplayName
+		getFilterDisplayName: getFilterDisplayName,
+		setInitialFiltersGroup: setInitialFiltersGroup
 	}
 });

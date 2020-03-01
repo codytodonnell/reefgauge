@@ -12,9 +12,9 @@ angular.module('reef')
 		},
 		community: {
 			data: null,
-			filters: keyService.getFiltersByGroup('Coral')
+			filters: keyService.setInitialFiltersGroup('Benthic Promoters')
 		},
-		dataMode: 'science',
+		dataMode: 'community',
 		dataView: 'map',
 		keys: keyService.scienceKeys
 	};
