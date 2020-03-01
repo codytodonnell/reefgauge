@@ -181,21 +181,61 @@ nav ul li {
 	pointer-events: none;
 }
 
-.science-drilldown {
+.drilldown {
 	background: #fff;
 	width: 90%;
 	margin: auto;
-	height: 45vh;
+	height: auto;
 	position: absolute;
-	top: 110%;
+	top: 100%;
 	left: 50%;
     transform: translate(-50%, 0);
     z-index: 10;
+    padding: 15px;
 	transition: 0.5s;
 }
 
-.science-drilldown.open {
-	top: 50%;
+.drilldown.open {
+	transform: translate(-50%, -110%);
+}
+
+.drilldown h3 {
+	margin: 0;
+}
+
+.drilldown .community-drill img {
+	width: 100%;
+}
+
+.drilldown .drill-header {
+	margin-bottom: 15px;
+}
+
+.drilldown .drill-row:not(:last-child) {
+	margin-bottom: 15px;
+}
+
+.dash-item {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.dash-value {
+	margin-top: 5px;
+	font-size: 1.5em;
+	display: block;
+}
+
+.dash-units {
+	font-size: 0.8em;
+	display: block;
+}
+
+.dash-label {
+	padding: 5px;
+	display: block;
+	background: #eee;
 }
 
 /*.line {

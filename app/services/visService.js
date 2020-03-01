@@ -6,17 +6,18 @@ angular.module('reef')
 			data: null,
 			orderBy: 'slcavg',
 			colorBy: 'slcavg',
-			sizeBy: 'slcavg',
-			drillOpen: false,
-			drillDatum: null
+			sizeBy: 'slcavg'
 		},
 		community: {
 			data: null,
-			filters: keyService.setInitialFiltersGroup('Benthic Promoters')
+			filterGroup: 'Coral',
+			filters: keyService.setInitialFiltersGroup('Coral')
 		},
-		dataMode: 'community',
+		dataMode: 'science',
 		dataView: 'map',
-		keys: keyService.scienceKeys
+		keys: keyService.scienceKeys,
+		drillOpen: false,
+		drillItem: null
 	};
 
 	var getKeyMeta = function(key) {
@@ -64,12 +65,12 @@ angular.module('reef')
 		config.dataView = view;
 	};
 
-	var setScienceDrillOpen = function(val) {
-		config.science.drillOpen = val;
+	var setDrillOpen = function(val) {
+		config.drillOpen = val;
 	};
 
-	var setScienceDrillDatum = function(d) {
-		config.science.drillDatum = d;
+	var setDrillItem = function(d) {
+		config.drillItem = d;
 	};
 
 	var setCommunityFilters = function(group) {
@@ -88,8 +89,8 @@ angular.module('reef')
 		setScienceSize: setScienceSize,
 		setDataMode: setDataMode,
 		setDataView: setDataView,
-		setScienceDrillOpen: setScienceDrillOpen,
-		setScienceDrillDatum: setScienceDrillDatum,
+		setDrillOpen: setDrillOpen,
+		setDrillItem: setDrillItem,
 		setCommunityFilters: setCommunityFilters
 	}
 }]);

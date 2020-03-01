@@ -1,6 +1,6 @@
     angular.module('reef')
 
-.directive('map', ['visService', '$rootScope', function(visService, $rootScope) {
+.directive('map', ['$rootScope', 'visService', 'keyService', '$timeout', function($rootScope, visService, keyService, $timeout) {
 	return {
 		restrict: 'EA',
 		templateUrl: 'app/templates/map.html',
@@ -55,8 +55,8 @@
 		    	.clamp(true);
 
 		    var ordinalColorScale = d3.scaleOrdinal()
-				.range(d3.schemeCategory10)
-				.domain(['benthos', 'coral', 'fish']);
+				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471', '#cf597e'])
+				.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthic Detractors', 'Benthic Promoters']);
 
 			// var linearColorScale = d3.scaleLinear().range(["#99AD98", "#42AD3E"]);
 			// #008080,#70a494,#b4c8a8,#f6edbd,#edbb8a,#de8a5a,#ca562c
@@ -81,6 +81,12 @@
 		    	scienceData = results[0];
 
 		    	communityData = results[1];
+
+		    	communityData.forEach(function(d) {
+		    		d.latitude = +d.latitude;
+		    		d.longitude = +d.longitude;
+		    		keyService.assignFilterGroupToItem(d);
+		    	});
 
 				visService.setScienceData(scienceData);
 				visService.setCommunityData(communityData);
@@ -158,7 +164,7 @@
 					.attr("class", "square")
 					.attr("height", 10)
 					.attr("width", 10)
-					.style("fill", squareFill)
+					.style("fill", "none")
 					.style("fill-opacity", squareFillOpacity)
 					.style("stroke", squareStroke)
 					.style("stroke-width", squareStrokeWidth)
@@ -166,7 +172,13 @@
 					.style("cursor", squareCursor)
 					.style("pointer-events", squarePointerEvents)
 					.on("mouseover", squareHover)
-					.on("mouseout", squareOut);
+					.on("mouseout", squareOut)
+					.on("click", squareClick);
+
+				squaresG.selectAll('.square')
+					.transition()
+					.duration(250)
+					.style("fill", squareFill);
 			}
 
 			function enterPoints() {
@@ -286,33 +298,79 @@
 			}
 
 			function squareHover(d) {
-				var node = d3.select(this);
+				if(!d.selected) {
+					var node = d3.select(this);
 
-				node.transition()
-					.duration(500)
-					.style("stroke", "#494949")
-					.style("stroke-opacity", 0.8)
-					.style("stroke-width", 10);
+					node.transition()
+						.duration(500)
+						.style("stroke", "#494949")
+						.style("stroke-opacity", 0.8)
+						.style("stroke-width", 10);
 
-				svg.append("svg:image")
-					.attr('id', 'image-' + d.id)
-					.attr('class', 'community-hover-image')
-					.attr('x', +node.attr("x") + +node.attr("width")/2 - 100)
-					.attr('y', +node.attr("y") + +node.attr("height") + 10)
-					.attr('width', 200)
-					.attr("xlink:href", d.image_url);
+					svg.append("svg:image")
+						.attr('id', 'image-' + d.id)
+						.attr('class', 'community-hover-image')
+						.attr('x', +node.attr("x") + +node.attr("width")/2 - 100)
+						.attr('y', +node.attr("y") + +node.attr("height") + 10)
+						.attr('width', 200)
+						.attr("xlink:href", d.image_url);
+				}
 			}
 
 			function squareOut(d) {
-				d3.select(this)
-					.transition()
-					.duration(500)
-					.style("stroke", squareStroke)
-					.style("stroke-opacity", squareStrokeOpacity)
-					.style("stroke-width", squareStrokeWidth);
+				if(!d.selected) {
+					d3.select(this)
+						.transition()
+						.duration(500)
+						.style("stroke", squareStroke)
+						.style("stroke-opacity", squareStrokeOpacity)
+						.style("stroke-width", squareStrokeWidth);
+				}
 
 				d3.selectAll(".community-hover-image")
 					.remove();
+			}
+
+			function squareClick(d) {
+				d.selected = !d.selected;
+				console.log(d);
+				if(d.selected) {
+					visService.setDrillItem(d);
+					visService.setDrillOpen(true);
+					svg.selectAll(".square")
+						.transition()
+						.duration(500)
+						.style("stroke", squareStroke)
+						.style("stroke-opacity", squareStrokeOpacity)
+						.style("stroke-width", squareStrokeWidth)
+						.each(function(s) {
+							if(s.id !== d.id) s.selected = false;
+						});
+					d3.select(this)
+						.transition()
+						.duration(500)
+						.style("stroke", "#494949")
+						.style("stroke-opacity", 0.8)
+						.style("stroke-width", 10);
+
+					squareOut(d);
+				} else {
+					visService.setDrillOpen(false);
+					$timeout(function() {
+						visService.setDrillItem(null);
+					}, 500);
+					d3.select(this)
+						.transition()
+						.duration(500)
+						.style("stroke", squareStroke)
+						.style("stroke-opacity", squareStrokeOpacity)
+						.style("stroke-width", squareStrokeWidth);
+				}
+
+				$rootScope.$broadcast('nodeClicked');
+				var bounds = map.getBounds();
+				var quarterHeight = (bounds._ne.lat - bounds._sw.lat) * 0.25;
+				map.panTo([d.longitude, (d.latitude - quarterHeight)]);
 			}
 
 			function pointHover(d) {
@@ -351,8 +409,8 @@
 				d.selected = !d.selected;
 				console.log(d);
 				if(d.selected) {
-					visService.setScienceDrillDatum(d);
-					visService.setScienceDrillOpen(true);
+					visService.setDrillItem(d);
+					visService.setDrillOpen(true);
 					svg.selectAll(".point")
 						.transition()
 						.duration(500)
@@ -369,8 +427,10 @@
 						.style("stroke-opacity", 0.8)
 						.style("stroke-width", 4);
 				} else {
-					visService.setScienceDrillDatum(null);
-					visService.setScienceDrillOpen(false);
+					visService.setDrillOpen(false);
+					$timeout(function() {
+						visService.setDrillItem(null);
+					}, 500);
 					d3.select(this)
 						.transition()
 						.duration(500)
@@ -379,14 +439,14 @@
 						.style("stroke-width", pointStrokeWidth);
 				}
 
-				$rootScope.$broadcast('pointClicked');
+				$rootScope.$broadcast('nodeClicked');
 				var bounds = map.getBounds();
 				var quarterHeight = (bounds._ne.lat - bounds._sw.lat) * 0.25;
 				map.panTo([d.longitude, (d.latitude - quarterHeight)]);
 			}
 
 			function squareFill(d) {
-				return config.dataMode === 'community' ? ordinalColorScale('fish') : "#aaa";
+				return config.dataMode === 'community' ? ordinalColorScale(d.filter_group) : "#aaa";
 			}
 
 			function squareStrokeOpacity(d) {
@@ -482,11 +542,11 @@
 				    	if(hoverImage.node() && "image-"+d.id === hoverImage.attr('id')) {
 				    		hoverImageNode = d3.select(this);
 				    	}
-				        var x = d3Projection([+d.longitude, +d.latitude])[0];
+				        var x = d3Projection([d.longitude, d.latitude])[0];
 				        return x
 				    })
 				    .attr("y", function(d) {
-				        var y = d3Projection([+d.longitude, +d.latitude])[1];
+				        var y = d3Projection([d.longitude, d.latitude])[1];
 				        return y
 				    });
 

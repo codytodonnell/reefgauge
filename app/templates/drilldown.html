@@ -1,0 +1,31 @@
+<div class="drilldown" ng-class="{'open': open}">
+	<div ng-if="item && isCommunity" class="community-drill">
+		<div class="row">
+			<div class="col-sm-5">
+				<img ng-src="{{item.image_url}}">
+			</div>
+			<div class="col-sm-7">
+				<h3>{{item.common_name}}</h3>
+				<span>Observed by {{item.user_login}} on {{item.observed_on}}</span>
+			</div>
+		</div>
+	</div>
+	<div ng-if="item && !isCommunity" class="science-drill">
+		<div class="drill-header">
+			<h3>{{item.site !== "" ? item.site : item.batch + " " + item.code}}</h3>
+			<span>{{item.zone}} | Average depth of {{item.depth}}m | Assessed on {{item.date}}</span>
+		</div>
+		<div class="row drill-row" ng-repeat="group in nestedKeys">
+			<div class="col-sm-1">
+				<h4>{{group.key}}</h4>
+			</div>
+			<div class="col-sm-2" ng-repeat="k in group.values">
+				<div class="dash-item">
+					<span class="dash-label">{{k.display_name}}</span>
+					<span class="dash-value">{{item[k.key]}}</span>
+					<span class="dash-units">{{k.units}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -9,11 +9,13 @@ angular.module('reef')
 		{
 			key: "slcavg",
 			display_name: "Live Coral Cover",
+			units: '% of sampled area',
 			scale: 'linear',
 			domain: [0, 5, 10, 20, 40],
 			beneficial: true,
-			group: "coral",
+			group: "Coral",
 			top_level: true,
+			selected: true,
 			children: ["t_all", "perclargeam", "percsmallam"],
 			image: "",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -21,20 +23,22 @@ angular.module('reef')
 		{
 			key: "rmax",
 			display_name: "Reef Height",
+			units: 'centimeters',
 			scale: 'linear',
 			domain: [0, 5, 10, 20, 40],
 			beneficial: true,
-			group: "coral",
+			group: "Coral",
 			image: "",
 			description: "Coral reefs provide habitat for fish and other reef organisms. The structural relief is a measure of a coral reef’s vertical height and is a proxy for reef complexity (holes and crevices). Reefs with higher relief and/or complexity often provide more habitat for of fish and reef biota."
 		},
 		{
 			key: "havg",
 			display_name: "Herbivorous Fish",
+			units: 'biomass (grams/100m2)',
 			scale: 'linear',
 			domain: [960, 1919, 2879, 3479, 3480],
 			beneficial: true,
-			group: "fish",
+			group: "Fish",
 			top_level: true,
 			children: ["parravg"],
 			image: "",
@@ -43,10 +47,11 @@ angular.module('reef')
 		{
 			key: "pavg",
 			display_name: "Piscivorous Fish",
+			units: 'biomass (grams/100m2)',
 			scale: 'linear',
 			domain: [500, 1000, 2999, 6999, 7000],
 			beneficial: true,
-			group: "fish",
+			group: "Fish",
 			top_level: true,
 			children: ["grouavg"],
 			image: "",
@@ -55,10 +60,11 @@ angular.module('reef')
 		{
 			key: "cca",
 			display_name: "Crustose Coralline Algae",
+			units: '% of sampled area',
 			scale: 'linear',
 			domain: [0, 1, 5.1, 12.1, 25],
 			beneficial: true,
-			group: "benthos",
+			group: "Benthos",
 			top_level: false,
 			image: "",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -66,10 +72,11 @@ angular.module('reef')
 		{
 			key: "ma",
 			display_name: "Macroalgae",
+			units: '% of sampled area',
 			scale: 'linear',
 			domain: [25, 12.1, 5.1, 1, 0],
 			beneficial: false,
-			group: "benthos",
+			group: "Benthos",
 			top_level: false,
 			image: "",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -77,10 +84,11 @@ angular.module('reef')
 		{
 			key: "possum",
 			display_name: "Bethic Promoters",
+			units: '% of sampled area',
 			scale: 'linear',
 			domain: [5, 15, 29.9, 59.9, 60],
 			beneficial: true,
-			group: "benthos",
+			group: "Benthos",
 			top_level: true,
 			children: ["cca"],
 			image: "",
@@ -89,10 +97,11 @@ angular.module('reef')
 		{
 			key: "negsum",
 			display_name: "Bethic Detractors",
+			units: '% of sampled area',
 			scale: 'linear',
 			domain: [60, 59.9, 29.9, 15, 5],
 			beneficial: false,
-			group: "benthos",
+			group: "Benthos",
 			top_level: true,
 			children: ["ma"],
 			image: "",
@@ -309,6 +318,17 @@ angular.module('reef')
 		return getFiltersByGroup(group);
 	};
 
+	var assignFilterGroupToItem = function(d) {
+		var filterGroup = null;
+		communityFilterGroups.forEach(function(g) {
+			g.filters.forEach(function(f) {
+				if(d[f.key] === f.value) {
+					return d.filter_group = g.name;
+				}
+			});
+		});
+	};
+
 	function capitalize(s) {
 		if (typeof s !== 'string') return '';
 		return s.charAt(0).toUpperCase() + s.slice(1);
@@ -319,6 +339,7 @@ angular.module('reef')
 		communityFilterGroups: communityFilterGroups,
 		getFiltersByGroup: getFiltersByGroup,
 		getFilterDisplayName: getFilterDisplayName,
-		setInitialFiltersGroup: setInitialFiltersGroup
+		setInitialFiltersGroup: setInitialFiltersGroup,
+		assignFilterGroupToItem: assignFilterGroupToItem,
 	}
 });
