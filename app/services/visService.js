@@ -75,6 +75,7 @@ angular.module('reef')
 
 	var setCommunityFilters = function(group) {
 		config.community.filters = keyService.getFiltersByGroup(group.name);
+		config.community.filterGroup = group.name;
 	};
 
 	return {

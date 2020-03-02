@@ -33,7 +33,7 @@
 							<p ng-if="k.open">{{k.description}}</p>
 						</div>
 					</div>
-					<div class="sidebar-tile">
+					<!-- <div class="sidebar-tile">
 						<div class="btn-group var-select" uib-dropdown>
 							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
 							Size: {{vc.getKeyMeta(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
@@ -56,7 +56,7 @@
 					    </div>
 					    <img ng-src="{{vc.getSizeKey().image}}">
 					    <p>{{vc.getColorKey().description}}</p>
-					</div>
+					</div> -->
 				</div>
 				<div class="col-sm-12" ng-show="vc.config.dataMode === 'community'">
 					<div>
@@ -79,6 +79,7 @@
 		<section class="vis-container col-md-9">
 			<map></map>
 			<drilldown></drilldown>
+			<legend config="vc.config"></legend>
 		</section>
 	</div>
 </article>

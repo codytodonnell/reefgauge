@@ -1,0 +1,17 @@
+<div class="legend">
+	<h3>Legend</h3>
+	<div ng-show="config.dataMode === 'science'">
+		<div class="row">
+			<div class="col-xs-6">
+				<p>{{colorKey.display_name}}</p>
+				<p class="units">{{colorKey.units}}</p>
+			</div>
+			<div class="col-xs-6">
+				<p>{{colorKey.display_name}}</p>
+				<p class="units">{{colorKey.units}}</p>
+			</div>
+		</div>
+		<svg id="legend-science-svg"></svg>
+	</div>
+	<svg id="legend-community-svg" ng-show="config.dataMode === 'community'"></svg>
+</div>

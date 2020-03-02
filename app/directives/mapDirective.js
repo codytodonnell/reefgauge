@@ -49,10 +49,9 @@
 				.attr("class", "tooltip")				
 				.style("opacity", 0);
 
-		    var radiusScale = d3.scaleLinear()
+		    var radiusScale = d3.scaleThreshold()
 		    	.range([5, 10, 15, 20, 25])
-		    	.domain(getKeyDomain(config.science.sizeBy))
-		    	.clamp(true);
+		    	.domain(getKeyDomain(config.science.sizeBy));
 
 		    var ordinalColorScale = d3.scaleOrdinal()
 				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471', '#cf597e'])
@@ -61,9 +60,11 @@
 			// var linearColorScale = d3.scaleLinear().range(["#99AD98", "#42AD3E"]);
 			// #008080,#70a494,#b4c8a8,#f6edbd,#edbb8a,#de8a5a,#ca562c
 			// var linearColorScale = d3.scaleLinear().range(["#e70808", "#E8A0A0", "#aaa", "#99AD98", "#42AD3E"]);
-			var linearColorScale = d3.scaleLinear()
-				.range(["#ca562c", "#edbb8a", "#f6edbd", "#b4c8a8", "#008080"])
-				.clamp(true);
+			var colorScalePositive = d3.scaleThreshold()
+				.range(["#ca562c", "#edbb8a", "#f6edbd", "#b4c8a8", "#008080"]);
+
+			var colorScaleNegative = d3.scaleThreshold()
+				.range(["#008080", "#b4c8a8", "#f6edbd", "#edbb8a", "#ca562c"]);
 
 			var redScale = d3.scaleLinear().range(["#E8A0A0", "#e70808"]);
 
@@ -274,13 +275,12 @@
 				var keyMeta = visService.getKeyMeta(key);
 				if(keyMeta.scale == 'ordinal') {
 					colorScale = ordinalColorScale;
-				} else if(keyMeta.scale == 'linear') {
-					colorScale = linearColorScale;
+				} else if(keyMeta.scale == 'linear' && keyMeta.positive) {
+					colorScale = colorScalePositive;
+				} else if(keyMeta.scale == 'linear' && !keyMeta.positive) {
+					colorScale = colorScaleNegative;
 				}
-				// } else if(keyObj.scale == 'linear' && keyObj.beneficial == false) {
-				// 	scale = redScale;
-				// }
-				// scale.domain(d3.extent(scienceData.features, function(d) { return d[prop]; }));
+
 				colorScale.domain(getKeyDomain(key));
 
 				return colorScale;

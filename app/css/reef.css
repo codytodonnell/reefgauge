@@ -238,6 +238,40 @@ nav ul li {
 	background: #eee;
 }
 
+.legend {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 10;
+	background: #474747;
+	opacity: 0.7;
+	border: 1px solid #ccc;
+	padding: 15px;
+	color: #fff;
+	font-size: 0.8em;
+}
+
+.legend h3 {
+	margin-top: 0;
+	margin-bottom: 15px;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.legend p {
+	margin: 0;
+}
+
+.legend .units {
+	font-size: 0.8em;
+}
+
+.legend svg text {
+	font-size: 0.9em;
+	fill: #fff;
+}
+
 /*.line {
   fill: none;
   stroke: steelblue;
