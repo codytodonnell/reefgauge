@@ -5,6 +5,7 @@
 			<nav>
 				<ul>
 					<li ng-click="vc.openHomePopup()"><i class="fas fa-home"></i> ReefGauge</li>
+					<li ng-click="vc.openContribute()"><i class="far fa-eye"></i> Contribute</li>
 					<li><i class="fas fa-book"></i> Glossary</li>
 				</ul>
 			</nav>
@@ -26,6 +27,7 @@
 							<div ng-if="k.selected">
 								<img ng-src="{{k.image}}">
 								<p>{{k.description}}</p>
+								<a ng-click="vc.goToCommunityGroup(k.group)">See community observations of {{k.group}} <i class="fas fa-arrow-right"></i></a>
 							</div>
 						</div>
 					</div>
@@ -63,8 +65,9 @@
 								<button class="btn btn-plain" ng-if="!vc.hasAnyCheckedFilters(g)" ng-click="vc.checkAllFiltersInGroup(g)">Check All</button>
 								<button class="btn btn-plain" ng-if="vc.hasAnyCheckedFilters(g)" ng-click="vc.uncheckAllFiltersInGroup(g)">Uncheck All</button>
 								<ul class="checkbox-list">
-									<li ng-repeat="f in g.filters"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}</label></li>
+									<li ng-repeat="f in g.filters"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></label></li>
 								</ul>
+								<a ng-click="vc.goToScienceKey(g.name)">See scientific assessments of {{g.name}} <i class="fas fa-arrow-right"></i></a>
 							</div>
 						</div>
 					</div>

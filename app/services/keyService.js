@@ -27,7 +27,7 @@ angular.module('reef')
 			units: 'centimeters',
 			short_units: 'cm',
 			scale: 'linear',
-			domain: [5, 10, 20, 40],
+			domain: [15, 33, 66, 100],
 			positive: true,
 			group: "Coral",
 			image: "",
@@ -41,7 +41,7 @@ angular.module('reef')
 			scale: 'linear',
 			domain: [960, 1919, 2879, 3479],
 			positive: true,
-			group: "Fish",
+			group: "Herbivorous Fish",
 			top_level: true,
 			children: ["parravg"],
 			image: "images/parrotfish.jpg",
@@ -55,7 +55,7 @@ angular.module('reef')
 			scale: 'linear',
 			domain: [500, 1000, 2999, 6999],
 			positive: true,
-			group: "Fish",
+			group: "Piscivorous Fish",
 			top_level: true,
 			children: ["grouavg"],
 			image: "images/grouper.jpg",
@@ -73,7 +73,7 @@ angular.module('reef')
 			group: "Benthos",
 			top_level: true,
 			children: ["ma"],
-			image: "",
+			image: "images/macroalgae.jpg",
 			description: "Benthos refers to the small organisms that inhabit reef structures and the ocean floor and play a key role in coral growth or mortality. A reef’s benthic community is made up of promoters that help promote coral growth and detractors that prevent corals from surviving. Crustose coralline algae, a benthic promoter, helps cement reefs together and provide surface for coral larvae. Macroalgae, a benthic detractor, can outcompete coral and completely cover sections of reef. AGRRA uses a benthic index from 1-4 to represent a reef’s ratio of benthic promoters to benthic detractors with a higher index indicating a greater majority of promoters."
 		},
 		{
@@ -255,7 +255,7 @@ angular.module('reef')
 			]
 		},
 		{
-			name: "Benthic Promoters",
+			name: "Benthos",
 			selected: true,
 			open: false,
 			filters: [
@@ -263,15 +263,9 @@ angular.module('reef')
 					key: "taxon_order_name",
 					value: "Corallinales",
 					value_common_name: "Coralline Algae",
-					checked: true
-				}
-			]
-		},
-		{
-			name: "Benthic Detractors",
-			selected: false,
-			open: false,
-			filters: [
+					checked: true,
+					promoter: true
+				},
 				{
 					key: "taxon_order_name",
 					value: "Nostoc",
@@ -316,6 +310,55 @@ angular.module('reef')
 				}
 			]
 		}
+		// {
+		// 	name: "Benthic Detractors",
+		// 	selected: false,
+		// 	open: false,
+		// 	filters: [
+		// 		{
+		// 			key: "taxon_order_name",
+		// 			value: "Nostoc",
+		// 			value_common_name: "Cyanobacteria",
+		// 			checked: true
+		// 		},
+		// 		{
+		// 			key: "taxon_genus_name",
+		// 			value: "Halimeda",
+		// 			value_common_name: null,
+		// 			checked: true
+		// 		},
+		// 		{
+		// 			key: "taxon_genus_name",
+		// 			value: "Galaxaura",
+		// 			value_common_name: null,
+		// 			checked: true
+		// 		},
+		// 		{
+		// 			key: "taxon_genus_name",
+		// 			value: "Dictyota",
+		// 			value_common_name: "Y-branched Algae",
+		// 			checked: true
+		// 		},
+		// 		{
+		// 			key: "taxon_genus_name",
+		// 			value: "Caulerpa",
+		// 			value_common_name: null,
+		// 			checked: true
+		// 		},
+		// 		{
+		// 			key: "taxon_genus_name",
+		// 			value: "Cliona",
+		// 			value_common_name: null,
+		// 			checked: true
+		// 		},
+		// 		{
+		// 			key: "taxon_genus_name",
+		// 			value: "Peyssonnelia",
+		// 			value_common_name: null,
+		// 			checked: true
+		// 		}
+		// 	]
+		// }
 	];
 
 	var getFiltersByGroup = function(groupName) {

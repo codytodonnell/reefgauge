@@ -48,9 +48,13 @@ angular.module('reef')
 			var colorScaleIndex = d3.scaleThreshold()
 				.range(["#ca562c", "#edbb8a", "#b4c8a8", "#008080"]);
 
+			// var ordinalColorScale = d3.scaleOrdinal()
+			// 	.range(['#39b185', '#9ccb86', '#eeb479', '#e88471', '#cf597e'])
+			// 	.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthic Detractors', 'Benthic Promoters']);
+
 			var ordinalColorScale = d3.scaleOrdinal()
-				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471', '#cf597e'])
-				.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthic Detractors', 'Benthic Promoters']);
+				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471'])
+				.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthos']);
 
 			var radiusScale = d3.scaleThreshold()
 		    	.range([5, 10, 15, 20, 25]);

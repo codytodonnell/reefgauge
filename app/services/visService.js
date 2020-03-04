@@ -18,7 +18,8 @@ angular.module('reef')
 		keys: keyService.scienceKeys,
 		drillOpen: false,
 		drillItem: null,
-		home_open: true
+		home_open: true,
+		popup_page: 'home'
 	};
 
 	var getKeyMeta = function(key) {

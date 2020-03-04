@@ -144,6 +144,10 @@ nav ul li:hover {
 	cursor: default;
 }
 
+.checkbox-list {
+	margin-bottom: 10px;
+}
+
 .checkbox-list li {
 	margin-top: 5px;
 	white-space: nowrap;
@@ -348,6 +352,12 @@ nav ul li:hover {
 	margin: auto;
 }
 
+.popup-container nav {
+	display: block;
+	position: relative;
+	text-align: center;
+}
+
 .home-popup-bg {
 	position: absolute;
 	width: 100%;
@@ -376,6 +386,8 @@ nav ul li:hover {
 	transform: translate(-50%, -100%);
 	z-index: 20;
 	padding: 20px;
+	max-height: 95vh;
+	overflow: auto;
 	transition: 0.5s;
 }
 
@@ -412,6 +424,10 @@ nav ul li:hover {
 
 .home-popup-fg .tile:hover span {
 	color: #852D9B;
+}
+
+.contribute-popup .tile {
+	width: 100%;
 }
 
 /*.line {

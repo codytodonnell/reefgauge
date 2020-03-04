@@ -34,10 +34,10 @@ angular.module('reef')
 				$scope.open = false;
 				$timeout(function() {
 					$scope.item = null;
+					$scope.isCommunity = null;
 				}, 500);
 				visService.setDrillOpen(false);
 				visService.setDrillItem(null);
-				$scope.isCommunity = null;
 				$rootScope.$broadcast('drillClosed');
 			};
 

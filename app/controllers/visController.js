@@ -1,7 +1,7 @@
 angular.module('reef')
 
-.controller('visController', ['$scope', 'visService', 'cleanDataService', 'keyService',
- function($scope, visService, cleanDataService, keyService) {
+.controller('visController', ['$scope', 'visService', 'cleanDataService', 'keyService', '$timeout',
+ function($scope, visService, cleanDataService, keyService, $timeout) {
 	var vm = this;
 
 	// cleanDataService.mergeCSVsAsJSON(false, false);
@@ -21,19 +21,22 @@ angular.module('reef')
 	vm.setScienceColor = visService.setScienceColor;
 	vm.setScienceSize = visService.setScienceSize;
 	vm.getKeyMeta = visService.getKeyMeta;
-	vm.setDataMode = visService.setDataMode;
+	vm.setDataMode = function(mode) {
+		document.getElementsByClassName('tab-content')[0].scrollTop = 0;
+		visService.setDataMode(mode);
+	};
 	vm.communityFilterGroups = keyService.communityFilterGroups;
 	vm.getFilterDisplayName = keyService.getFilterDisplayName;
 	vm.setCommunityFilters = visService.setCommunityFilters;
 
-	vm.toggleScienceKeyTile = function(tile) {
+	vm.toggleScienceKeyTile = function(tile, forceOpen) {
 		var isOpen = tile.open;
 		vm.topLevelKeys.forEach(function(k) {
 			k.open = false;
 			k.selected = false;
 		});
 
-		if(!isOpen) {
+		if(!isOpen || forceOpen) {
 			tile.open = true;
 			tile.selected = true;
 			setScienceSizeAndColor(tile.key);
@@ -56,6 +59,20 @@ angular.module('reef')
 		} else {
 			tile.selected = true;
 		}
+	};
+
+	vm.goToCommunityGroup = function(groupName) {
+		vm.setDataMode('community');
+		var tile = vm.communityFilterGroups.find(function(g) { return g.name === groupName });
+		vm.toggleCommunityFilterGroup(tile);
+	};
+
+	vm.goToScienceKey = function(groupName) {
+		vm.setDataMode('science');
+		var tile = vm.topLevelKeys.find(function(k) { return k.group === groupName });
+		$timeout(function() {
+			vm.toggleScienceKeyTile(tile);
+		}, 250);
 	};
 
 	vm.checkAllFiltersInGroup = function(group) {
@@ -82,6 +99,12 @@ angular.module('reef')
 
 	vm.openHomePopup = function() {
 		vm.config.home_open = true;
+		vm.config.popup_page = 'home';
+	};
+
+	vm.openContribute = function() {
+		vm.config.home_open = true;
+		vm.config.popup_page = 'contribute';
 	};
 
 	function setScienceSizeAndColor(key) {

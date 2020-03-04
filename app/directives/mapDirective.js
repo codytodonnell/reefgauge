@@ -54,8 +54,8 @@
 		    	.domain(getKeyDomain(config.science.sizeBy));
 
 		    var ordinalColorScale = d3.scaleOrdinal()
-				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471', '#cf597e'])
-				.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthic Detractors', 'Benthic Promoters']);
+				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471'])
+				.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthos']);
 
 			// var linearColorScale = d3.scaleLinear().range(["#99AD98", "#42AD3E"]);
 			// #008080,#70a494,#b4c8a8,#f6edbd,#edbb8a,#de8a5a,#ca562c
