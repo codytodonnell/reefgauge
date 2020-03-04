@@ -17,8 +17,8 @@ angular.module('reef')
 			top_level: true,
 			selected: true,
 			children: ["t_all", "perclargeam", "percsmallam"],
-			image: "",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+			image: "images/live-coral-cover.jpg",
+			description: "Corals are the basic building blocks of reefs, providing habitat for a diverse range of underwater organisms, and ensuring a healthy ecosystem. Looking at how much of a reef is covered by living coral helps us gauge how healthy a reef is. Over the past decade, live coral cover has been notably low across most of the Caribbean."
 		},
 		{
 			key: "rmax",
@@ -41,8 +41,8 @@ angular.module('reef')
 			group: "Fish",
 			top_level: true,
 			children: ["parravg"],
-			image: "",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+			image: "images/parrotfish.jpg",
+			description: "Herbivorous fish such as Parrotfishes and Surgeonfishes keep corals healthy by feeding on a seaweed known as macroalgae that can compete with and overgrow corals. An abundant population of herbivorous fish can graze on macroalgae and help maintain space for coral larvae and young coral to thrive."
 		},
 		{
 			key: "pavg",
@@ -54,8 +54,21 @@ angular.module('reef')
 			group: "Fish",
 			top_level: true,
 			children: ["grouavg"],
+			image: "images/grouper.jpg",
+			description: "Piscivorous fish, fish that feed on other fish, are important members of reef systems because they keep populations of coral-preying organisms in check. Look out for piscivorous fish like Groupers and Snappers — these are indicators of a healthy reef."
+		},
+		{
+			key: "bi",
+			display_name: "Benthos",
+			units: 'index from 1-4',
+			scale: 'index',
+			domain: [2, 3, 4],
+			positive: true,
+			group: "Benthos",
+			top_level: true,
+			children: ["ma"],
 			image: "",
-			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+			description: "Benthos refers to the small organisms that inhabit reef structures and the ocean floor and play a key role in coral growth or mortality. A reef’s benthic community is made up of promoters that help promote coral growth and detractors that prevent corals from surviving. Crustose coralline algae, a benthic promoter, helps cement reefs together and provide surface for coral larvae. Macroalgae, a benthic detractor, can outcompete coral and completely cover sections of reef. AGRRA uses a benthic index from 1-4 to represent a reef’s ratio of benthic promoters to benthic detractors with a higher index indicating a greater majority of promoters."
 		},
 		{
 			key: "cca",
@@ -74,7 +87,7 @@ angular.module('reef')
 			display_name: "Macroalgae",
 			units: '% of sampled area',
 			scale: 'linear',
-			domain: [25, 12.1, 5.1, 1],
+			domain: [1, 5.1, 12.1, 25],
 			positive: false,
 			group: "Benthos",
 			top_level: false,
@@ -89,7 +102,7 @@ angular.module('reef')
 			domain: [5, 15, 29.9, 59.9],
 			positive: true,
 			group: "Benthos",
-			top_level: true,
+			top_level: false,
 			children: ["cca"],
 			image: "",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -102,7 +115,7 @@ angular.module('reef')
 			domain: [5, 15, 29.9, 59.9],
 			positive: false,
 			group: "Benthos",
-			top_level: true,
+			top_level: false,
 			children: ["ma"],
 			image: "",
 			description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."

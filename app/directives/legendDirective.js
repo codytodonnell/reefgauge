@@ -8,6 +8,8 @@ angular.module('reef')
 		},
 		templateUrl: 'app/templates/legend.html',
 		link: function($scope) {
+			$scope.open = true;
+
 			$scope.sizeKey = visService.getKeyMeta($scope.config.science.sizeBy);
 
 			$scope.colorKey = visService.getKeyMeta($scope.config.science.colorBy);
@@ -20,8 +22,8 @@ angular.module('reef')
 
 		    // set the dimensions and margins of the graph
 			var margin = {top: 20, right: 5, bottom: 5, left: 15},
-			    width = 375 - margin.left - margin.right,
-			    height = 250 - margin.top - margin.bottom;
+			    width = 330 - margin.left - margin.right,
+			    height = 230 - margin.top - margin.bottom;
 
 		    var svgScience = d3.select('#legend-science-svg')
 		    	.attr("width", width + margin.left + margin.right)
@@ -43,6 +45,9 @@ angular.module('reef')
 			var colorScaleNegative = d3.scaleThreshold()
 				.range(["#008080", "#b4c8a8", "#f6edbd", "#edbb8a", "#ca562c"]);
 
+			var colorScaleIndex = d3.scaleThreshold()
+				.range(["#ca562c", "#edbb8a", "#b4c8a8", "#008080"]);
+
 			var ordinalColorScale = d3.scaleOrdinal()
 				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471', '#cf597e'])
 				.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthic Detractors', 'Benthic Promoters']);
@@ -60,6 +65,7 @@ angular.module('reef')
 		    	.data(colorLegendValues)
 		    	.enter()
 		    	.append('g')
+		    	.attr('class', 'color-point')
 		    	.attr('transform', function(d, i) {
 		    		return 'translate(' + margin.left + ', ' + band(i) + ')';
 		    	});
@@ -75,6 +81,7 @@ angular.module('reef')
 		    	.data(sizeLegendValues)
 		    	.enter()
 		    	.append('g')
+		    	.attr('class', 'size-point')
 		    	.attr('transform', function(d, i) {
 		    		return 'translate(' + width*0.6 + ',' + band(i) + ')';
 		    	});
@@ -109,7 +116,7 @@ angular.module('reef')
 		    	$scope.sizeKey = visService.getKeyMeta($scope.config.science.sizeBy);
 				$scope.colorKey = visService.getKeyMeta($scope.config.science.colorBy);
 
-				colorScale = $scope.colorKey.positive ? colorScalePositive : colorScaleNegative;
+				colorScale = getScienceColorScale();
 				labelScale = $scope.colorKey.positive ? labelScalePositive : labelScaleNegative;
 
 				colorScale.domain($scope.colorKey.domain);
@@ -137,6 +144,15 @@ angular.module('reef')
 			    		}
 			    	});
 
+			    svgScience.selectAll('.color-point')
+			    	.style('opacity', function(d, i) {
+			    		if($scope.colorKey.key === 'bi' && i === 4) {
+			    			return 0;
+			    		} else {
+			    			return 1;
+			    		}
+			    	});
+
 			    sizePoint.data(sizeLegendValues);
 
 			    sizePoint.select('circle')
@@ -152,6 +168,15 @@ angular.module('reef')
 			    			return d + ' - ' + sizeLegendValues[i+1] + ' (' + labelScale[i] + ')';
 			    		}
 			    	});
+
+			    svgScience.selectAll('.size-point')
+			    	.style('opacity', function(d, i) {
+			    		if($scope.sizeKey.key === 'bi' && i === 4) {
+			    			return 0;
+			    		} else {
+			    			return 1;
+			    		}
+			    	});
 		    }
 
 		    function updateCommunityLegend() {
@@ -159,8 +184,22 @@ angular.module('reef')
 		    		.style('fill', ordinalColorScale($scope.config.community.filterGroup));
 
 		    	square.select('text')
-		    		.text($scope.config.community.filterGroup + ' Observation');
+		    		.text('1 ' + $scope.config.community.filterGroup + ' Observation');
 		    }
+
+		    function getScienceColorScale() {
+		    	if($scope.colorKey.scale == 'linear' && $scope.colorKey.positive) {
+					return colorScalePositive;
+				} else if($scope.colorKey.scale == 'linear' && !$scope.colorKey.positive) {
+					return colorScaleNegative;
+				} else if($scope.colorKey.scale == 'index') {
+					return colorScaleIndex;
+				}
+		    }
+
+		    $scope.toggleLegend = function() {
+		    	$scope.open = !$scope.open;
+		    };
 
 		    $scope.$watchGroup(['config.science.sizeBy', 'config.science.colorBy'], function(newValues, oldValues, scope) {
 		    	console.log(newValues);

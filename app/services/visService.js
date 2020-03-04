@@ -17,7 +17,8 @@ angular.module('reef')
 		dataView: 'map',
 		keys: keyService.scienceKeys,
 		drillOpen: false,
-		drillItem: null
+		drillItem: null,
+		home_open: true
 	};
 
 	var getKeyMeta = function(key) {

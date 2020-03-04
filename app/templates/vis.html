@@ -1,9 +1,10 @@
+<home-popup config="vc.config"></home-popup>
 <article class="main-container container-fluid">
 	<div class="main-row row">
 		<section class="sidebar col-sm-3">
 			<nav>
 				<ul>
-					<li><i class="fas fa-home"></i> ReefGauge</li>
+					<li ng-click="vc.openHomePopup()"><i class="fas fa-home"></i> ReefGauge</li>
 					<li><i class="fas fa-book"></i> Glossary</li>
 				</ul>
 			</nav>
@@ -19,44 +20,34 @@
 						<p>Between 2007 and 2016, AGRRA scientists have conducted over 700 assessments of coral reefs throughout the Caribbean, South Atlanta Ocean, and Gulf of Mexico. These assessments help us understand how healthy a reef is by measuring dozens of factors related to coral, fish, and benthos. Together, these factors tell a story for each reef. Each circle you see here represents a reef while its size and color represent key factors measured by scientists.</p>
 					</div>
 					<div>
-						<ul>
-							<li><a>How does algae impact coral reefs?</a></li>
-							<li><a>How do fish populations impact coral reefs?</a></li>
-							<li><a>Where are coral reefs the healthiest?</a></li>
-							<li><a>Explore all the reef indicators</a></li>
-						</ul>
-					</div>
-					<div>
 						<h3>Reef Health Indicators</h3>
-						<div class="sidebar-tile expandable" ng-repeat="k in vc.topLevelKeys" ng-click="vc.toggleScienceKeyTile(k)" ng-class="{'tile-selected': k.selected}">
+						<div class="tile expandable" ng-repeat="k in vc.topLevelKeys" ng-click="vc.toggleScienceKeyTile(k)" ng-class="{'tile-selected': k.selected}">
 							<h4>{{k.display_name}}</h4>
-							<p ng-if="k.open">{{k.description}}</p>
+							<div ng-if="k.selected">
+								<img ng-src="{{k.image}}">
+								<p>{{k.description}}</p>
+							</div>
 						</div>
 					</div>
-					<!-- <div class="sidebar-tile">
+					<div>
+						<h3>Explore all the Indicators</h3>
 						<div class="btn-group var-select" uib-dropdown>
 							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-							Size: {{vc.getKeyMeta(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
+							Size points by {{vc.getKeyMeta(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceSize(prop.key)" ng-class="prop == vc.config.science.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
 							</ul>
 					    </div>
-					    <img ng-src="{{vc.getSizeKey().image}}">
-					    <p>{{vc.getSizeKey().description}}</p>
-					</div>
-					<div class="sidebar-tile">
 						<div class="btn-group var-select" uib-dropdown>
 							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
-							Color: {{vc.getKeyMeta(vc.config.science.colorBy).display_name}} <span class="caret"></span>
+							Color points by {{vc.getKeyMeta(vc.config.science.colorBy).display_name}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceColor(prop.key)" ng-class="prop == vc.config.science.colorBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
 							</ul>
-					    </div>
-					    <img ng-src="{{vc.getSizeKey().image}}">
-					    <p>{{vc.getColorKey().description}}</p>
-					</div> -->
+					    </div>					
+					</div>
 				</div>
 				<div class="col-sm-12" ng-show="vc.config.dataMode === 'community'">
 					<div>
@@ -65,10 +56,10 @@
 					</div>
 					<div>
 						<h3>Observation Filters</h3>
-						<div class="sidebar-tile expandable" ng-repeat="g in vc.communityFilterGroups" ng-click="vc.toggleCommunityFilterGroup(g)" ng-class="{'tile-selected': g.selected}">
+						<div class="tile expandable" ng-repeat="g in vc.communityFilterGroups" ng-click="vc.toggleCommunityFilterGroup(g)" ng-class="{'tile-selected': g.selected}">
 							<h4>{{g.name}}</h4>
-							<p ng-if="g.open">{{g.info}}</p>
-							<ul ng-if="g.open">
+							<p ng-if="g.selected">{{g.info}}</p>
+							<ul ng-if="g.selected">
 								<li ng-repeat="f in g.filters">{{vc.getFilterDisplayName(f)}}</li>
 							</ul>
 						</div>
@@ -83,6 +74,3 @@
 		</section>
 	</div>
 </article>
-<!-- <div class="vis-container">
-	<div id="map"></div>
-</div> -->

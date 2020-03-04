@@ -66,6 +66,9 @@
 			var colorScaleNegative = d3.scaleThreshold()
 				.range(["#008080", "#b4c8a8", "#f6edbd", "#edbb8a", "#ca562c"]);
 
+			var colorScaleIndex = d3.scaleThreshold()
+				.range(["#ca562c", "#edbb8a", "#b4c8a8", "#008080"]);
+
 			var redScale = d3.scaleLinear().range(["#E8A0A0", "#e70808"]);
 
 		    // calculate the original d3 projection
@@ -279,6 +282,8 @@
 					colorScale = colorScalePositive;
 				} else if(keyMeta.scale == 'linear' && !keyMeta.positive) {
 					colorScale = colorScaleNegative;
+				} else if(keyMeta.scale == 'index') {
+					colorScale = colorScaleIndex;
 				}
 
 				colorScale.domain(getKeyDomain(key));

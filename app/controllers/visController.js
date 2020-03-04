@@ -57,6 +57,10 @@ angular.module('reef')
 		}
 	};
 
+	vm.openHomePopup = function() {
+		vm.config.home_open = true;
+	};
+
 	function setScienceSizeAndColor(key) {
 		visService.setScienceSize(key);
 		visService.setScienceColor(key);
