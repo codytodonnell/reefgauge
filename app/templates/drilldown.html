@@ -1,4 +1,5 @@
 <div class="drilldown" ng-class="{'open': open}">
+	<button class="btn btn-plain close-button" ng-click="close()"><i class="fas fa-times"></i></button>
 	<div ng-if="item && isCommunity" class="community-drill">
 		<div class="row">
 			<div class="col-sm-5">
@@ -13,9 +14,71 @@
 	<div ng-if="item && !isCommunity" class="science-drill">
 		<div class="drill-header">
 			<h3>{{item.site !== "" ? item.site : item.batch + " " + item.code}}</h3>
-			<span>{{item.zone}} | Average depth of {{item.depth}}m | Assessed on {{item.date}}</span>
+			<!-- <span>{{item.zone}} | Average depth of {{item.depth}}m | Assessed on {{item.date}}</span> -->
 		</div>
-		<div class="row drill-row" ng-repeat="group in nestedKeys">
+		<div>
+			<table class="quad col-sm-6">
+				<tr>
+					<td class="quad-block" ng-style="{'background': getScaledColor(coralKey, item[coralKey.key])}">
+						<span class="quad-label">{{coralKey.display_name}}</span>
+						<span class="quad-value">{{item[coralKey.key]}}</span>
+						<span class="quad-units">{{coralKey.units}}</span>
+					</td>
+					<td class="quad-block" ng-style="{'background': getScaledColor(benthosKey, item[benthosKey.key])}">
+						<span class="quad-label">{{benthosKey.display_name}}</span>
+						<span class="quad-value">{{item[benthosKey.key]}}</span>
+						<span class="quad-units">{{benthosKey.units}}</span>
+					</td>
+				</tr>
+				<tr>
+					<td class="quad-block" ng-style="{'background': getScaledColor(herbKey, item[herbKey.key])}">
+						<span class="quad-label">{{herbKey.display_name}}</span>
+						<span class="quad-value">{{item[herbKey.key]}}</span>
+						<span class="quad-units">{{herbKey.units}}</span>
+					</td>
+					<td class="quad-block" ng-style="{'background': getScaledColor(piscKey, item[piscKey.key])}">
+						<span class="quad-label">{{piscKey.display_name}}</span>
+						<span class="quad-value">{{item[piscKey.key]}}</span>
+						<span class="quad-units">{{piscKey.units}}</span>
+					</td>
+				</tr>
+			</table>
+			<div class="col-sm-6">
+				<table class="details-table">
+					<tr>
+						<td>Assessed on</td>
+						<td>{{item.date}}</td>
+					</tr>
+					<tr>
+						<td>Shelf</td>
+						<td>{{item.shelf}}</td>
+					</tr>
+					<tr>
+						<td>Ecoregion</td>
+						<td>{{item.ecoregion}}</td>
+					</tr>
+					<tr>
+						<td>Reef Zone</td>
+						<td>{{item.zone}}</td>
+					</tr>
+					<tr>
+						<td>Average Depth</td>
+						<td>{{item.depth}} m</td>
+					</tr>
+					<tr ng-repeat="k in notTopKeys">
+						<td>{{k.display_name_alt ? k.display_name_alt : k.display_name}}</td>
+						<td>{{item[k.key]}} {{k.short_units}}</td>
+					</tr>
+				</table>
+
+				<!-- <div class="dash-item">
+					<span class="dash-label">{{k.display_name}}</span>
+					<span class="dash-value">{{item[k.key]}}</span>
+					<span class="dash-units">{{k.units}}</span>
+				</div> -->
+			</div>
+		</div>
+		<!-- <div class="row drill-row" ng-repeat="group in nestedKeys">
 			<div class="col-sm-1">
 				<h4>{{group.key}}</h4>
 			</div>
@@ -26,6 +89,6 @@
 					<span class="dash-units">{{k.units}}</span>
 				</div>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </div>

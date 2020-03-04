@@ -11,7 +11,7 @@ angular.module('reef')
 		community: {
 			data: null,
 			filterGroup: 'Coral',
-			filters: keyService.setInitialFiltersGroup('Coral')
+			filters: keyService.setInitialFiltersByGroup('Coral')
 		},
 		dataMode: 'science',
 		dataView: 'map',

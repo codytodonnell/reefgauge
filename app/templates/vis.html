@@ -32,7 +32,7 @@
 					<div>
 						<h3>Explore all the Indicators</h3>
 						<div class="btn-group var-select" uib-dropdown>
-							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+							<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
 							Size points by {{vc.getKeyMeta(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -40,7 +40,7 @@
 							</ul>
 					    </div>
 						<div class="btn-group var-select" uib-dropdown>
-							<button id="color-button" type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">
+							<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
 							Color points by {{vc.getKeyMeta(vc.config.science.colorBy).display_name}} <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
@@ -55,13 +55,17 @@
 						<p>Between 2007 and 2016, AGRRA scientists have conducted over 700 assessments of coral reefs throughout the Caribbean, South Atlanta Ocean, and Gulf of Mexico. These assessments help us understand how healthy a reef is by measuring dozens of factors related to coral, fish, and benthos. Together, these factors tell a story for each reef. Each circle you see here represents a reef while its size and color represent key factors measured by scientists.</p>
 					</div>
 					<div>
-						<h3>Observation Filters</h3>
+						<h3>Reef Groups</h3>
 						<div class="tile expandable" ng-repeat="g in vc.communityFilterGroups" ng-click="vc.toggleCommunityFilterGroup(g)" ng-class="{'tile-selected': g.selected}">
 							<h4>{{g.name}}</h4>
-							<p ng-if="g.selected">{{g.info}}</p>
-							<ul ng-if="g.selected">
-								<li ng-repeat="f in g.filters">{{vc.getFilterDisplayName(f)}}</li>
-							</ul>
+							<div ng-if="g.selected">
+								<p>{{g.info}}</p>
+								<button class="btn btn-plain" ng-if="!vc.hasAnyCheckedFilters(g)" ng-click="vc.checkAllFiltersInGroup(g)">Check All</button>
+								<button class="btn btn-plain" ng-if="vc.hasAnyCheckedFilters(g)" ng-click="vc.uncheckAllFiltersInGroup(g)">Uncheck All</button>
+								<ul class="checkbox-list">
+									<li ng-repeat="f in g.filters"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}</label></li>
+								</ul>
+							</div>
 						</div>
 					</div>
 				</div>

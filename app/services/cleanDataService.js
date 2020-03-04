@@ -87,7 +87,7 @@ angular.module('reef')
 					var newArrayItem = idMap[property];
 					Object.keys(newArrayItem).forEach(function(origProp) {
 						var lowercaseProp = origProp.toLowerCase();
-						if (lowercaseProp != undefined) {
+						if (lowercaseProp != undefined && lowercaseProp !== origProp) {
 							newArrayItem[lowercaseProp] = newArrayItem[origProp];
 							delete newArrayItem[origProp];
 						}

@@ -24,6 +24,7 @@ angular.module('reef')
 	vm.setDataMode = visService.setDataMode;
 	vm.communityFilterGroups = keyService.communityFilterGroups;
 	vm.getFilterDisplayName = keyService.getFilterDisplayName;
+	vm.setCommunityFilters = visService.setCommunityFilters;
 
 	vm.toggleScienceKeyTile = function(tile) {
 		var isOpen = tile.open;
@@ -55,6 +56,28 @@ angular.module('reef')
 		} else {
 			tile.selected = true;
 		}
+	};
+
+	vm.checkAllFiltersInGroup = function(group) {
+		group.filters.forEach(function(f) {
+			f.checked = true;
+		});
+		visService.setCommunityFilters(group);
+	};
+
+	vm.uncheckAllFiltersInGroup = function(group) {
+		group.filters.forEach(function(f) {
+			f.checked = false;
+		});
+		visService.setCommunityFilters(group);
+	};
+
+	vm.hasAnyCheckedFilters = function(group) {
+		var hasChecked = false;
+		group.filters.forEach(function(f) {
+			if(f.checked) return hasChecked = true;
+		});
+		return hasChecked;
 	};
 
 	vm.openHomePopup = function() {

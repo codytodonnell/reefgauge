@@ -10,6 +10,7 @@ angular.module('reef')
 			key: "slcavg",
 			display_name: "Live Coral Cover",
 			units: '% of sampled area',
+			short_units: '%',
 			scale: 'linear',
 			domain: [5, 10, 20, 40],
 			positive: true,
@@ -24,6 +25,7 @@ angular.module('reef')
 			key: "rmax",
 			display_name: "Reef Height",
 			units: 'centimeters',
+			short_units: 'cm',
 			scale: 'linear',
 			domain: [5, 10, 20, 40],
 			positive: true,
@@ -35,6 +37,7 @@ angular.module('reef')
 			key: "havg",
 			display_name: "Herbivorous Fish",
 			units: 'biomass (grams/100m2)',
+			short_units: 'g/100m2',
 			scale: 'linear',
 			domain: [960, 1919, 2879, 3479],
 			positive: true,
@@ -48,6 +51,7 @@ angular.module('reef')
 			key: "pavg",
 			display_name: "Piscivorous Fish",
 			units: 'biomass (grams/100m2)',
+			short_units: 'g/100m2',
 			scale: 'linear',
 			domain: [500, 1000, 2999, 6999],
 			positive: true,
@@ -60,7 +64,9 @@ angular.module('reef')
 		{
 			key: "bi",
 			display_name: "Benthos",
+			display_name_alt: "Benthic Index",
 			units: 'index from 1-4',
+			short_units: '',
 			scale: 'index',
 			domain: [2, 3, 4],
 			positive: true,
@@ -74,6 +80,7 @@ angular.module('reef')
 			key: "cca",
 			display_name: "Crustose Coralline Algae",
 			units: '% of sampled area',
+			short_units: '%',
 			scale: 'linear',
 			domain: [1, 5.1, 12.1, 25],
 			positive: true,
@@ -86,6 +93,7 @@ angular.module('reef')
 			key: "ma",
 			display_name: "Macroalgae",
 			units: '% of sampled area',
+			short_units: '%',
 			scale: 'linear',
 			domain: [1, 5.1, 12.1, 25],
 			positive: false,
@@ -98,6 +106,7 @@ angular.module('reef')
 			key: "possum",
 			display_name: "Bethic Promoters",
 			units: '% of sampled area',
+			short_units: '%',
 			scale: 'linear',
 			domain: [5, 15, 29.9, 59.9],
 			positive: true,
@@ -111,6 +120,7 @@ angular.module('reef')
 			key: "negsum",
 			display_name: "Bethic Detractors",
 			units: '% of sampled area',
+			short_units: '%',
 			scale: 'linear',
 			domain: [5, 15, 29.9, 59.9],
 			positive: false,
@@ -308,11 +318,16 @@ angular.module('reef')
 		}
 	];
 
-	var getFiltersByGroup = function(group) {
-		var item = communityFilterGroups.find(function(g) {
-			return g.name === group;
+	var getFiltersByGroup = function(groupName) {
+		var group = communityFilterGroups.find(function(g) {
+			return g.name === groupName;
 		});
-		return item.filters;
+
+		var filters = group.filters.filter(function(f) { 
+			return f.checked === true; 
+		});
+
+		return filters;
 	};
 
 	var getFilterDisplayName = function(filter) {
@@ -324,11 +339,11 @@ angular.module('reef')
 		}
 	};
 
-	var setInitialFiltersGroup = function(group) {
+	var setInitialFiltersByGroup = function(groupName) {
 		communityFilterGroups.forEach(function(g) {
-			g.selected = g.name === group ? true : false;
+			g.selected = g.name === groupName ? true : false;
 		});
-		return getFiltersByGroup(group);
+		return getFiltersByGroup(groupName);
 	};
 
 	var assignFilterGroupToItem = function(d) {
@@ -342,6 +357,12 @@ angular.module('reef')
 		});
 	};
 
+	var getScienceKeyByName = function(keyName) {
+		return scienceKeys.find(function(k) {
+			return k.key === keyName;
+		});
+	}
+
 	function capitalize(s) {
 		if (typeof s !== 'string') return '';
 		return s.charAt(0).toUpperCase() + s.slice(1);
@@ -352,7 +373,8 @@ angular.module('reef')
 		communityFilterGroups: communityFilterGroups,
 		getFiltersByGroup: getFiltersByGroup,
 		getFilterDisplayName: getFilterDisplayName,
-		setInitialFiltersGroup: setInitialFiltersGroup,
+		setInitialFiltersByGroup: setInitialFiltersByGroup,
 		assignFilterGroupToItem: assignFilterGroupToItem,
+		getScienceKeyByName: getScienceKeyByName
 	}
 });

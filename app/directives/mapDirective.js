@@ -158,6 +158,28 @@
 				}
 			});
 
+			$rootScope.$on('drillClosed', function(event, data) {
+				svg.selectAll(".square")
+					.transition()
+					.duration(500)
+					.style("stroke", squareStroke)
+					.style("stroke-opacity", squareStrokeOpacity)
+					.style("stroke-width", squareStrokeWidth)
+					.each(function(s) {
+						s.selected = false;
+					});
+
+				svg.selectAll(".point")
+					.transition()
+					.duration(500)
+					.style("stroke", pointStroke)
+					.style("stroke-opacity", pointStrokeOpacity)
+					.style("stroke-width", pointStrokeWidth)
+					.each(function(p) {
+						p.selected = false;
+					});
+			});
+
 			function enterSquares() {
 			 	var squares = squaresG.selectAll('.square')
 			 		.data(communityData.filter(applyCommunityFilters));

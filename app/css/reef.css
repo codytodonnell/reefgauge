@@ -117,12 +117,12 @@ nav ul li:hover {
 	margin-top: 15px;
 	padding: 15px;
 	box-shadow: 1px 1px #aaa;
+	cursor: pointer;
 	transition: 0.5s;
 }
 
 .tile.expandable:not(.tile-selected):hover {
 	background: #eee;
-	cursor: pointer;
 }
 
 .tile:last-child {
@@ -141,6 +141,28 @@ nav ul li:hover {
 
 .tile-selected {
 	border: 2px solid #000;
+	cursor: default;
+}
+
+.checkbox-list li {
+	margin-top: 5px;
+	white-space: nowrap;
+    overflow: auto;
+}
+
+.checkbox-list label {
+	margin-left: 5px;
+	font-weight: normal;
+}
+
+.btn-plain {
+	background: #ddd;
+	border: 1px solid #aaa;
+	transition: 0.25s;
+}
+
+.btn-plain:hover {
+	background: #ccc;
 }
 
 .var-select {
@@ -232,7 +254,14 @@ nav ul li:hover {
 	margin-bottom: 15px;
 }
 
-.dash-item {
+.close-button {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 20;
+}
+
+/*.dash-item {
 	border: 1px solid #ccc;
 	border-radius: 5px;
 	text-align: center;
@@ -253,6 +282,30 @@ nav ul li:hover {
 	padding: 5px;
 	display: block;
 	background: #eee;
+}*/
+
+.quad-block {
+	height: 150px;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+.quad-block span {
+	display: block;
+	text-align: center;
+}
+
+.quad-value {
+	font-size: 2em;
+}
+
+.details-table tr:not(:first-child) td {
+	padding-top: 5px;
+}
+
+.details-table td:first-child {
+	min-width: 200px;
+	font-weight: bold;
 }
 
 .legend {
