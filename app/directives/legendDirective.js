@@ -121,7 +121,8 @@ angular.module('reef')
 				$scope.colorKey = visService.getKeyMeta($scope.config.science.colorBy);
 
 				colorScale = getScienceColorScale();
-				labelScale = $scope.colorKey.positive ? labelScalePositive : labelScaleNegative;
+				colorLabelScale = $scope.colorKey.positive ? labelScalePositive : labelScaleNegative;
+				sizeLabelScale = $scope.sizeKey.positive ? labelScalePositive : labelScaleNegative;
 
 				colorScale.domain($scope.colorKey.domain);
 				radiusScale.domain($scope.sizeKey.domain);
@@ -140,11 +141,11 @@ angular.module('reef')
 			    colorPoint.select('text')
 			    	.text(function(d, i) { 
 			    		if(i == 0) {
-			    			return '<' + colorLegendValues[1] + ' (' + labelScale[i] + ')';
+			    			return '<' + colorLegendValues[1] + ' (' + colorLabelScale[i] + ')';
 			    		} else if(i === colorLegendValues.length - 1) {
-			    			return '>' + d + ' (' + labelScale[i] + ')';
+			    			return '>' + d + ' (' + colorLabelScale[i] + ')';
 			    		} else {
-			    			return d + ' - ' + colorLegendValues[i+1] + ' (' + labelScale[i] + ')';
+			    			return d + ' - ' + colorLegendValues[i+1] + ' (' + colorLabelScale[i] + ')';
 			    		}
 			    	});
 
@@ -165,11 +166,11 @@ angular.module('reef')
 			    sizePoint.select('text')
 			    	.text(function(d, i) { 
 			    		if(i == 0) {
-			    			return '<' + sizeLegendValues[1] + ' (' + labelScale[i] + ')';
+			    			return '<' + sizeLegendValues[1] + ' (' + sizeLabelScale[i] + ')';
 			    		} else if(i === sizeLegendValues.length - 1) {
-			    			return '>' + d + ' (' + labelScale[i] + ')';
+			    			return '>' + d + ' (' + sizeLabelScale[i] + ')';
 			    		} else {
-			    			return d + ' - ' + sizeLegendValues[i+1] + ' (' + labelScale[i] + ')';
+			    			return d + ' - ' + sizeLegendValues[i+1] + ' (' + sizeLabelScale[i] + ')';
 			    		}
 			    	});
 
