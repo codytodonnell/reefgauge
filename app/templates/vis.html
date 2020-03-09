@@ -10,8 +10,8 @@
 				</ul>
 			</nav>
 			<div class="tabs row">
-				<h2 class="col-md-6" ng-click="vc.setDataMode('science')" ng-class="vc.config.dataMode == 'science' ? 'tab-selected' : ''">Science</h2>
-				<h2 class="col-md-6" ng-click="vc.setDataMode('community')" ng-class="vc.config.dataMode == 'community' ? 'tab-selected' : ''">Community</h2>
+				<h2 class="col-md-6" ng-click="vc.setDataMode('science')" ng-class="vc.config.dataMode == 'science' ? 'tab-selected' : ''"><i class="fas fa-clipboard"></i> Science</h2>
+				<h2 class="col-md-6" ng-click="vc.setDataMode('community')" ng-class="vc.config.dataMode == 'community' ? 'tab-selected' : ''"><i class="fas fa-user-friends"></i> Community</h2>
 				<p></p>
 			</div>
 			<div class="tab-content row">
@@ -27,7 +27,7 @@
 							<div ng-if="k.selected">
 								<img ng-src="{{k.image}}">
 								<p>{{k.description}}</p>
-								<a ng-click="vc.goToCommunityGroup(k.group)">See community observations of {{k.group}} <i class="fas fa-arrow-right"></i></a>
+								<a ng-click="vc.goToCommunityGroup(k.group)"><i class="fas fa-user-friends"></i> Flip to community observations of {{k.group}}</a>
 							</div>
 						</div>
 					</div>
@@ -67,14 +67,14 @@
 								<ul class="checkbox-list">
 									<li ng-repeat="f in g.filters"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></label></li>
 								</ul>
-								<a ng-click="vc.goToScienceKey(g.name)">See scientific assessments of {{g.name}} <i class="fas fa-arrow-right"></i></a>
+								<a ng-click="vc.goToScienceKey(g.name)"><i class="fas fa-clipboard"></i> Flip to scientific assessments of {{g.name}}</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</section>
-		<section class="vis-container col-md-9">
+		<section class="vis-container col-sm-9">
 			<map></map>
 			<drilldown></drilldown>
 			<legend config="vc.config"></legend>

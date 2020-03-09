@@ -18,7 +18,9 @@
 				container: 'map',
 				style: 'mapbox://styles/mapbox/light-v10',
 				center: [-74.015, 21.257],
-				zoom: 4.0
+				zoom: 4,
+				minZoom: 3.5,
+				maxBounds: [[-105.86389277033904, -3.163228674565218],[-38.74399127489755, 41.63340723008753]]
 			});
 
 			var config = visService.getConfig();
