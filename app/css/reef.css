@@ -447,6 +447,14 @@ nav ul li:hover {
 	width: 100%;
 }
 
+.disclaimer {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	background: #FFDD63;
+	padding: 15px;
+	text-align: center;
+}
+
 /*.line {
   fill: none;
   stroke: steelblue;
