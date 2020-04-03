@@ -22,6 +22,9 @@ angular.module('reef')
 		popup_page: 'home'
 	};
 
+	var scalePositiveColors = ["#ca562c", "#edbb8a", "#f6edbd", "#b4c8a8", "#008080"];
+	// #3D315B #9E56AF #8D5A97 #2B59C3
+
 	var getKeyMeta = function(key) {
 		var meta = config.keys.find(function(d) { return d.key === key; });
 		return meta;
