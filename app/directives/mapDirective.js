@@ -56,22 +56,20 @@
 		    	.domain(getKeyDomain(config.science.sizeBy));
 
 		    var ordinalColorScale = d3.scaleOrdinal()
-				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471'])
-				.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthos']);
+				.range(visService.categoricalColors)
+				.domain(['Fish', 'Coral', 'Benthos']);
 
 			// var linearColorScale = d3.scaleLinear().range(["#99AD98", "#42AD3E"]);
 			// #008080,#70a494,#b4c8a8,#f6edbd,#edbb8a,#de8a5a,#ca562c
 			// var linearColorScale = d3.scaleLinear().range(["#e70808", "#E8A0A0", "#aaa", "#99AD98", "#42AD3E"]);
 			var colorScalePositive = d3.scaleThreshold()
-				.range(["#ca562c", "#edbb8a", "#f6edbd", "#b4c8a8", "#008080"]);
+				.range(visService.divergentColorsAsc);
 
 			var colorScaleNegative = d3.scaleThreshold()
-				.range(["#008080", "#b4c8a8", "#f6edbd", "#edbb8a", "#ca562c"]);
+				.range(visService.divergentColorsDesc);
 
 			var colorScaleIndex = d3.scaleThreshold()
-				.range(["#ca562c", "#edbb8a", "#b4c8a8", "#008080"]);
-
-			var redScale = d3.scaleLinear().range(["#E8A0A0", "#e70808"]);
+				.range(visService.divergentColorsAlt);
 
 		    // calculate the original d3 projection
 		    var d3Projection = getD3();
@@ -99,9 +97,9 @@
 
 				/**
 				 * Initially draw science node group on top of community node group
-				 * If dataMode is community, reverse the order so community node group is on top
+				 * If community is showing but science isn't, reverse the order so community node group is on top
 				 */
-				if(config.dataMode == 'community') reverseNodeOrder(); 
+				if(config.community.show && !config.science.show) reverseNodeOrder(); 
 
 				enterSquares();
 				enterPoints();
@@ -154,9 +152,7 @@
 
 			$scope.$watch(function() { return visService.getConfig().dataMode; }, function(newValue, oldValue) {
 				if(newValue && newValue !== oldValue) {
-					reverseNodeOrder();
-					toggleScience();
-					toggleCommunity();
+					// reverseNodeOrder();
 				}
 			});
 
@@ -299,7 +295,7 @@
 
 			function getScienceColorScale(key) {
 				var colorScale = null;
-				var keyMeta = visService.getKeyMeta(key);
+				var keyMeta = keyService.getScienceKeyByName(key);
 				if(keyMeta.scale == 'ordinal') {
 					colorScale = ordinalColorScale;
 				} else if(keyMeta.scale == 'linear' && keyMeta.positive) {
@@ -316,7 +312,7 @@
 			}
 
 			function getKeyDomain(key) {
-				var domain = visService.getKeyMeta(key).domain;
+				var domain = keyService.getScienceKeyByName(key).domain;
 				if(domain) {
 					return domain;
 				} else if(scienceData) {
@@ -475,15 +471,15 @@
 			}
 
 			function squareFill(d) {
-				return config.dataMode === 'community' ? ordinalColorScale(d.filter_group) : "#aaa";
+				return config.community.show ? ordinalColorScale(d.filter_group) : "#aaa";
 			}
 
 			function squareStrokeOpacity(d) {
-				return config.dataMode === 'community' ? 0.8 : 0;
+				return config.community.show ? 0.8 : 0;
 			}
 
 			function squareFillOpacity(d) {
-				return config.dataMode === 'community' ? 0.8 : 0.4;
+				return config.community.show ? 0.8 : 0.4;
 			}
 
 			function squareStroke(d) {
@@ -495,15 +491,15 @@
 			}
 
 			function squareCursor(d) {
-				return config.dataMode === 'community' ? 'pointer' : 'none';
+				return config.community.show ? 'pointer' : 'none';
 			}
 
 			function squarePointerEvents(d) {
-				return config.dataMode === 'community' ? 'all' : 'none';
+				return config.community.show ? 'all' : 'none';
 			}
 
 			function pointFill(d) {
-				if(config.dataMode === 'science') {
+				if(config.science.show) {
 					var scale = getScienceColorScale(config.science.colorBy);
 					return scale(d[config.science.colorBy]);
 				} else {
@@ -512,11 +508,11 @@
 			}
 
 			function pointFillOpacity(d) {
-				return config.dataMode === 'science' ? 0.5 : 0.1;
+				return config.science.show ? 0.5 : 0.1;
 			}
 
 			function pointStrokeOpacity(d) {
-				return config.dataMode === 'science' ? 0.3 : 0;
+				return config.science.show ? 0.3 : 0;
 			}
 
 			function pointStroke(d) {
@@ -528,11 +524,11 @@
 			}
 
 			function pointCursor(d) {
-				return config.dataMode === 'science' ? 'pointer' : 'none';
+				return config.science.show ? 'pointer' : 'none';
 			}
 
 			function pointPointerEvents(d) {
-				return config.dataMode === 'science' ? 'all' : 'none';
+				return config.science.show ? 'all' : 'none';
 			}
 
 			function pointRadius(d) {

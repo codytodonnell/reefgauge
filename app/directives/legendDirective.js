@@ -1,6 +1,6 @@
 angular.module('reef')
 
-.directive('legend', ['visService', '$rootScope', function(visService, $rootScope) {
+.directive('legend', ['keyService', 'visService', '$rootScope', function(keyService, visService, $rootScope) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -10,9 +10,9 @@ angular.module('reef')
 		link: function($scope) {
 			$scope.open = true;
 
-			$scope.sizeKey = visService.getKeyMeta($scope.config.science.sizeBy);
+			$scope.sizeKey = keyService.getScienceKeyByName($scope.config.science.sizeBy);
 
-			$scope.colorKey = visService.getKeyMeta($scope.config.science.colorBy);
+			$scope.colorKey = keyService.getScienceKeyByName($scope.config.science.colorBy);
 
 			var colorLegendValues = angular.copy($scope.colorKey.domain);
 			colorLegendValues.unshift(0);
@@ -40,21 +40,21 @@ angular.module('reef')
 			var colorScale = null;
 
 			var colorScalePositive = d3.scaleThreshold()
-				.range(["#ca562c", "#edbb8a", "#f6edbd", "#b4c8a8", "#008080"]);
+				.range(visService.divergentColorsAsc);
 
 			var colorScaleNegative = d3.scaleThreshold()
-				.range(["#008080", "#b4c8a8", "#f6edbd", "#edbb8a", "#ca562c"]);
+				.range(visService.divergentColorsDesc);
 
 			var colorScaleIndex = d3.scaleThreshold()
-				.range(["#ca562c", "#edbb8a", "#b4c8a8", "#008080"]);
+				.range(visService.divergentColorsAlt);
 
 			// var ordinalColorScale = d3.scaleOrdinal()
 			// 	.range(['#39b185', '#9ccb86', '#eeb479', '#e88471', '#cf597e'])
 			// 	.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthic Detractors', 'Benthic Promoters']);
 
 			var ordinalColorScale = d3.scaleOrdinal()
-				.range(['#39b185', '#9ccb86', '#eeb479', '#e88471'])
-				.domain(['Herbivorous Fish', 'Piscivorous Fish', 'Coral', 'Benthos']);
+				.range(visService.categoricalColors)
+				.domain(['Fish', 'Coral', 'Benthos']);
 
 			var radiusScale = d3.scaleThreshold()
 		    	.range([5, 10, 15, 20, 25]);
@@ -98,7 +98,7 @@ angular.module('reef')
 
 		    var square = svgCommunity.append('g')
 		    	.attr('transform', function(d, i) {
-		    		return 'translate(' + margin.left + ', ' + 5 + ')';
+		    		return 'translate(' + (margin.left - 5) + ', ' + 5 + ')';
 		    	});
 		    
 		    square.append('rect')
@@ -110,15 +110,15 @@ angular.module('reef')
 				.style("stroke-opacity", 0.8);
 
 			square.append('text')
-				.attr('x', 20)
+				.attr('x', 30)
 				.attr('alignment-baseline', 'hanging');
 
 		    updateScienceLegend();
 		    updateCommunityLegend();
 
 		    function updateScienceLegend() {
-		    	$scope.sizeKey = visService.getKeyMeta($scope.config.science.sizeBy);
-				$scope.colorKey = visService.getKeyMeta($scope.config.science.colorBy);
+		    	$scope.sizeKey = keyService.getScienceKeyByName($scope.config.science.sizeBy);
+				$scope.colorKey = keyService.getScienceKeyByName($scope.config.science.colorBy);
 
 				colorScale = getScienceColorScale();
 				colorLabelScale = $scope.colorKey.positive ? labelScalePositive : labelScaleNegative;

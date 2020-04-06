@@ -1,7 +1,7 @@
 <home-popup config="vc.config"></home-popup>
 <article class="main-container container-fluid">
 	<div class="main-row row">
-		<section class="sidebar col-sm-3">
+		<section class="sidebar col-sm-4">
 			<nav>
 				<ul>
 					<li ng-click="vc.openHomePopup()"><i class="fas fa-home"></i> ReefGauge</li>
@@ -10,71 +10,65 @@
 				</ul>
 			</nav>
 			<div class="tabs row">
-				<h2 class="col-md-6" ng-click="vc.setDataMode('science')" ng-class="vc.config.dataMode == 'science' ? 'tab-selected' : ''"><i class="fas fa-clipboard"></i> Science</h2>
-				<h2 class="col-md-6" ng-click="vc.setDataMode('community')" ng-class="vc.config.dataMode == 'community' ? 'tab-selected' : ''"><i class="fas fa-user-friends"></i> Community</h2>
-				<p></p>
+				<h2 ng-repeat="g in vc.config.keys" class="col-md-3" ng-click="vc.showKeyGroup(g)" ng-class="g.selected ? 'tab-selected' : ''"><i class="fas fa-clipboard"></i> {{g.group}}</h2>
+				<h2 class="col-md-3" ng-click="vc.showCompareTab()" ng-class="vc.config.compare_open ? 'tab-selected' : ''"><i class="fas fa-exchange-alt"></i> Compare</h2>
 			</div>
-			<div class="tab-content row">
-				<div class="col-sm-12" ng-show="vc.config.dataMode === 'science'">
-					<div>
+			<!-- <div>
 						<h3>Scientific Assessments of Reef Health</h3>
 						<p>Between 2007 and 2016, scientists have conducted over 700 assessments of coral reefs throughout the Caribbean, Gulf of Mexico, and Western Atlantic. These assessments are part of the <a href="https://www.agrra.org/" target="_blank">Atlantic and Gulf Rapid Reef Assessment (AGRRA)</a> which help us understand how healthy a reef is by measuring dozens of factors related to coral, fish, and benthos. Each circle you see here represents a reef while its size and color represent key factors measured by the assessment.</p>
-					</div>
+					</div> -->
+			<div class="tab-content row">
+				<div ng-repeat="g in vc.config.keys" class="col-sm-12" ng-show="g.selected">
 					<div>
-						<h3>Reef Health Indicators</h3>
-						<div class="tile expandable" ng-repeat="k in vc.topLevelKeys" ng-click="vc.toggleScienceKeyTile(k)" ng-class="{'tile-selected': k.selected}">
+						<h3>{{g.group}} Indicators</h3>
+						<div class="tile expandable" ng-repeat="k in g.scienceKeys" ng-click="vc.selectScienceKey(g, k)" ng-class="{'tile-selected': k.selected}">
 							<h4>{{k.display_name}}</h4>
 							<div ng-if="k.selected">
-								<img ng-src="{{k.image}}">
+								<!-- <img ng-src="{{k.image}}"> -->
 								<p>{{k.description}}</p>
-								<a ng-click="vc.goToCommunityGroup(k.group)"><i class="fas fa-user-friends"></i> Flip to community observations of {{k.group}}</a>
+								<!-- <a ng-click="vc.goToCommunityGroup(k.group)"><i class="fas fa-user-friends"></i> Flip to community observations of {{k.group}}</a> -->
 							</div>
 						</div>
 					</div>
 					<div>
-						<h3>Explore all the Indicators</h3>
-						<div class="btn-group var-select" uib-dropdown>
-							<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
-							Size points by {{vc.getKeyMeta(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceSize(prop.key)" ng-class="prop == vc.config.science.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
-							</ul>
-					    </div>
-						<div class="btn-group var-select" uib-dropdown>
-							<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
-							Color points by {{vc.getKeyMeta(vc.config.science.colorBy).display_name}} <span class="caret"></span>
-							</button>
-							<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-								<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceColor(prop.key)" ng-class="prop == vc.config.science.colorBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
-							</ul>
-					    </div>					
-					</div>
-				</div>
-				<div class="col-sm-12" ng-show="vc.config.dataMode === 'community'">
-					<div>
-						<h3>Community Observations of Coral Reefs</h3>
+						<h3>{{g.group}} Observations</h3>
 						<p>Visual observations of reef environments are key to understanding their health. ReefGauge has collected over 6,000 observations of relevant reef health indicators from the dive community. These observations are submitted through our <a href="https://www.inaturalist.org/projects/reefgauge" target="_blank">partnered citizen science project on iNaturalist</a>. Each square on the map represents one observation. Browse the different reef groups to see observations of key health indicators for that group.</p>
 					</div>
 					<div>
-						<h3>Reef Groups</h3>
-						<div class="tile expandable" ng-repeat="g in vc.communityFilterGroups" ng-click="vc.toggleCommunityFilterGroup(g)" ng-class="{'tile-selected': g.selected}">
-							<h4>{{g.name}}</h4>
-							<div ng-if="g.selected">
-								<p>{{g.info}}</p>
-								<button class="btn btn-plain" ng-if="!vc.hasAnyCheckedFilters(g)" ng-click="vc.checkAllFiltersInGroup(g)">Check All</button>
-								<button class="btn btn-plain" ng-if="vc.hasAnyCheckedFilters(g)" ng-click="vc.uncheckAllFiltersInGroup(g)">Uncheck All</button>
-								<ul class="checkbox-list">
-									<li ng-repeat="f in g.filters"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></label></li>
-								</ul>
-								<a ng-click="vc.goToScienceKey(g.name)"><i class="fas fa-clipboard"></i> Flip to scientific assessments of {{g.name}}</a>
+						<button class="btn btn-plain" ng-if="!vc.hasAnyCheckedFilters(g)" ng-click="vc.checkAllFiltersInGroup(g)">Check All</button>
+						<button class="btn btn-plain" ng-if="vc.hasAnyCheckedFilters(g)" ng-click="vc.uncheckAllFiltersInGroup(g)">Uncheck All</button>
+						<!-- <ul class="checkbox-list">
+							<li ng-repeat="f in g.communityKeys"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></label></li>
+						</ul> -->
+						<div class="checkbox-grid row">
+							<div class="grid-item-container col-md-4" ng-repeat="f in g.communityKeys">
+								<button class="btn btn-primary" ng-model="f.checked" uib-btn-checkbox ng-change="vc.setCommunityFilters(g)">{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></button>
 							</div>
 						</div>
 					</div>
 				</div>
+				<div class="col-sm-12" ng-show="vc.config.compare_open">
+					<h3>Explore all the Indicators</h3>
+					<div class="btn-group var-select" uib-dropdown>
+						<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
+						Size points by {{vc.getScienceKeyByName(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+							<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceSize(prop.key)" ng-class="prop == vc.config.science.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
+						</ul>
+				    </div>
+					<div class="btn-group var-select" uib-dropdown>
+						<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
+						Color points by {{vc.getScienceKeyByName(vc.config.science.colorBy).display_name}} <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+							<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceColor(prop.key)" ng-class="prop == vc.config.science.colorBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
+						</ul>
+				    </div>					
+				</div>
 			</div>
 		</section>
-		<section class="vis-container col-sm-9">
+		<section class="vis-container col-sm-8">
 			<map></map>
 			<drilldown></drilldown>
 			<legend config="vc.config"></legend>

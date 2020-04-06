@@ -15,34 +15,58 @@ angular.module('reef')
 	vm.xvar2 = "CCA";
 	vm.yvar2 = "MA";
 
-	vm.topLevelKeys = getTopLevelKeys();
+	// vm.topLevelKeys = getTopLevelKeys();
 
 	vm.setScienceOrder = visService.setScienceOrder;
 	vm.setScienceColor = visService.setScienceColor;
 	vm.setScienceSize = visService.setScienceSize;
-	vm.getKeyMeta = visService.getKeyMeta;
+	vm.getScienceKeyByName = keyService.getScienceKeyByName;
 	vm.setDataMode = function(mode) {
-		document.getElementsByClassName('tab-content')[0].scrollTop = 0;
+		
 		visService.setDataMode(mode);
 	};
 	vm.communityFilterGroups = keyService.communityFilterGroups;
 	vm.getFilterDisplayName = keyService.getFilterDisplayName;
 	vm.setCommunityFilters = visService.setCommunityFilters;
 
-	vm.toggleScienceKeyTile = function(tile, forceOpen) {
-		var isOpen = tile.open;
-		vm.topLevelKeys.forEach(function(k) {
-			k.open = false;
+	vm.showKeyGroup = function(keyGroup) {
+		document.getElementsByClassName('tab-content')[0].scrollTop = 0;
+		vm.config.compare_open = false;
+		vm.config.keys.forEach(function(g) {
+			if(g.group === keyGroup.group) {
+				g.selected = true;
+			} else {
+				g.selected = false;
+			}
+		});
+		var selectedKey = keyGroup.scienceKeys.find(function(k) { return k.selected == true; });
+		vm.selectScienceKey(keyGroup, selectedKey);
+		visService.setCommunityFilters(keyGroup);
+	};
+
+	vm.showCompareTab = function(keyGroup) {
+		document.getElementsByClassName('tab-content')[0].scrollTop = 0;
+		vm.config.keys.forEach(function(g) {
+			g.selected = false;
+		});
+		vm.config.compare_open = true;
+	};
+
+	vm.selectScienceKey = function(keyGroup, key) {
+		// var isOpen = tile.open;
+		keyGroup.scienceKeys.forEach(function(k) {
 			k.selected = false;
 		});
+		key.selected = true;
+		setScienceSizeAndColor(key.key);
 
-		if(!isOpen || forceOpen) {
-			tile.open = true;
-			tile.selected = true;
-			setScienceSizeAndColor(tile.key);
-		} else {
-			tile.selected = true;
-		}
+		// if(!isOpen || forceOpen) {
+		// 	tile.open = true;
+		// 	tile.selected = true;
+		// 	setScienceSizeAndColor(tile.key);
+		// } else {
+		// 	tile.selected = true;
+		// }
 	};
 
 	vm.toggleCommunityFilterGroup = function(tile) {
@@ -75,24 +99,24 @@ angular.module('reef')
 		}, 250);
 	};
 
-	vm.checkAllFiltersInGroup = function(group) {
-		group.filters.forEach(function(f) {
-			f.checked = true;
+	vm.checkAllFiltersInGroup = function(keyGroup) {
+		keyGroup.communityKeys.forEach(function(k) {
+			k.checked = true;
 		});
-		visService.setCommunityFilters(group);
+		visService.setCommunityFilters(keyGroup);
 	};
 
-	vm.uncheckAllFiltersInGroup = function(group) {
-		group.filters.forEach(function(f) {
-			f.checked = false;
+	vm.uncheckAllFiltersInGroup = function(keyGroup) {
+		keyGroup.communityKeys.forEach(function(k) {
+			k.checked = false;
 		});
-		visService.setCommunityFilters(group);
+		visService.setCommunityFilters(keyGroup);
 	};
 
-	vm.hasAnyCheckedFilters = function(group) {
+	vm.hasAnyCheckedFilters = function(keyGroup) {
 		var hasChecked = false;
-		group.filters.forEach(function(f) {
-			if(f.checked) return hasChecked = true;
+		keyGroup.communityKeys.forEach(function(k) {
+			if(k.checked) return hasChecked = true;
 		});
 		return hasChecked;
 	};
@@ -112,8 +136,8 @@ angular.module('reef')
 		visService.setScienceColor(key);
 	}
 
-	function getTopLevelKeys() {
-		return vm.config.keys.filter(function(d) { return d.top_level === true; })
-	}
+	// function getTopLevelKeys() {
+	// 	return vm.config.keys.filter(function(d) { return d.top_level === true; })
+	// }
 }]);
 

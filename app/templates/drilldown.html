@@ -68,7 +68,7 @@
 						<td>Average Depth</td>
 						<td>{{item.depth}} m</td>
 					</tr>
-					<tr ng-repeat="k in notTopKeys">
+					<tr ng-repeat="k in nonPrimaryIndicatorKeys">
 						<td>{{k.display_name_alt ? k.display_name_alt : k.display_name}}</td>
 						<td>{{item[k.key]}} {{k.short_units}}</td>
 					</tr>

@@ -18,9 +18,7 @@ angular.module('reef')
 			$scope.herbKey = keyService.getScienceKeyByName('havg');
 			$scope.piscKey = keyService.getScienceKeyByName('pavg');
 
-			$scope.notTopKeys = visService.getConfig().keys.filter(function(k) {
-				return !k.top_level;
-			});
+			$scope.nonPrimaryIndicatorKeys = getNonPrimaryIndicatorKeys();
 
 			var colorScalePositive = d3.scaleThreshold()
 				.range(["#ca562c", "#edbb8a", "#f6edbd", "#b4c8a8", "#008080"]);
@@ -47,6 +45,16 @@ angular.module('reef')
 				$scope.isCommunity = $scope.item ? $scope.item.hasOwnProperty('taxon_id') : null;
 				$scope.$apply();
 			});
+
+			function getNonPrimaryIndicatorKeys() {
+				var keys = [];
+				visService.getConfig().keys.forEach(function(g) {
+					g.scienceKeys.forEach(function(k) {
+						if(!k.primary_indicator) keys.push(k);
+					});
+				});
+				return keys;
+			}
 		}
 	}
 }]);

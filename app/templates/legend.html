@@ -1,6 +1,7 @@
 <div class="legend">
 	<h3 ng-click="toggleLegend()">Legend <i class="fas pull-right" ng-class="open ? 'fa-minus' : 'fa-plus'"></i></h3>
-	<div ng-show="open && config.dataMode === 'science'">
+	<svg id="legend-community-svg" ng-show="open"></svg>
+	<div ng-show="open">
 		<div class="row">
 			<div class="col-xs-6">
 				<p>{{colorKey.display_name}}</p>
@@ -13,5 +14,4 @@
 		</div>
 		<svg id="legend-science-svg"></svg>
 	</div>
-	<svg id="legend-community-svg" ng-show="open && config.dataMode === 'community'"></svg>
 </div>
