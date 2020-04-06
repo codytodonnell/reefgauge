@@ -31,7 +31,7 @@ angular.module('reef')
 
 	var divergentColorsAlt = ["#ca562c", "#edbb8a", "#b4c8a8", "#008080"];
 
-	var categoricalColors = ['#2B59C3', '#8D5A97', '#CE2780'];
+	var categoricalColors = ['#712684', '#2B59C3', '#CE2780'];
 
 	var getConfig = function() {
 		return config;

@@ -10,7 +10,7 @@
 				</ul>
 			</nav>
 			<div class="tabs row">
-				<h2 ng-repeat="g in vc.config.keys" class="col-md-3" ng-click="vc.showKeyGroup(g)" ng-class="g.selected ? 'tab-selected' : ''"><i class="fas fa-clipboard"></i> {{g.group}}</h2>
+				<h2 ng-repeat="g in vc.config.keys" class="col-md-3" ng-click="vc.showKeyGroup(g)" ng-class="{'tab-selected': g.selected, {{g.group.toLowerCase()}}: true}"><i class="fas fa-clipboard"></i> {{g.group}}</h2>
 				<h2 class="col-md-3" ng-click="vc.showCompareTab()" ng-class="vc.config.compare_open ? 'tab-selected' : ''"><i class="fas fa-exchange-alt"></i> Compare</h2>
 			</div>
 			<!-- <div>
@@ -20,7 +20,7 @@
 			<div class="tab-content row">
 				<div ng-repeat="g in vc.config.keys" class="col-sm-12" ng-show="g.selected">
 					<div>
-						<h3>{{g.group}} Indicators</h3>
+						<h3 ng-class="{'{{g.group.toLowerCase()}}': true}">{{g.group}} Indicators</h3>
 						<div class="tile expandable" ng-repeat="k in g.scienceKeys" ng-click="vc.selectScienceKey(g, k)" ng-class="{'tile-selected': k.selected}">
 							<h4>{{k.display_name}}</h4>
 							<div ng-if="k.selected">
@@ -31,7 +31,7 @@
 						</div>
 					</div>
 					<div>
-						<h3>{{g.group}} Observations</h3>
+						<h3 ng-class="{'{{g.group.toLowerCase()}}': true}">{{g.group}} Observations</h3>
 						<p>Visual observations of reef environments are key to understanding their health. ReefGauge has collected over 6,000 observations of relevant reef health indicators from the dive community. These observations are submitted through our <a href="https://www.inaturalist.org/projects/reefgauge" target="_blank">partnered citizen science project on iNaturalist</a>. Each square on the map represents one observation. Browse the different reef groups to see observations of key health indicators for that group.</p>
 					</div>
 					<div>

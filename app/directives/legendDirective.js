@@ -54,7 +54,7 @@ angular.module('reef')
 
 			var ordinalColorScale = d3.scaleOrdinal()
 				.range(visService.categoricalColors)
-				.domain(['Fish', 'Coral', 'Benthos']);
+				.domain(['Coral', 'Fish', 'Benthos']);
 
 			var radiusScale = d3.scaleThreshold()
 		    	.range([5, 10, 15, 20, 25]);

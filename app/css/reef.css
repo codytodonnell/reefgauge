@@ -97,8 +97,21 @@ nav ul li:hover {
 
 .sidebar .tab-selected {
 	border-bottom-color: #000 !important;
-	background: #852D9B;
     color: #fff;
+    pointer-events: none;
+    background: #494949;
+}
+
+.sidebar .tab-selected.coral {
+	background: #712684;
+}
+
+.sidebar .tab-selected.fish {
+	background: #2B59C3;
+}
+
+.sidebar .tab-selected.benthos {
+	background: #CE2780;
 }
 
 .sidebar .tabs h2.tab-selected:hover {
@@ -115,7 +128,18 @@ nav ul li:hover {
 .sidebar .tab-content h3 {
 	font-size: 1.3em;
 	margin-top: 20px;
-	color: #3066BE;
+}
+
+.sidebar .tab-content h3.coral {
+	color: #712684;
+}
+
+.sidebar .tab-content h3.fish {
+	color: #2B59C3;
+}
+
+.sidebar .tab-content h3.benthos {
+	color: #CE2780;
 }
 
 .tile {

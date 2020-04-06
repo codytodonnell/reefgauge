@@ -57,7 +57,7 @@
 
 		    var ordinalColorScale = d3.scaleOrdinal()
 				.range(visService.categoricalColors)
-				.domain(['Fish', 'Coral', 'Benthos']);
+				.domain(['Coral', 'Fish', 'Benthos']);
 
 			// var linearColorScale = d3.scaleLinear().range(["#99AD98", "#42AD3E"]);
 			// #008080,#70a494,#b4c8a8,#f6edbd,#edbb8a,#de8a5a,#ca562c
