@@ -13,6 +13,14 @@
 		<link rel="shortcut icon" type="image/png" href="favicon.png"/>
     </head>
     <body ng-cloak>
+    	<nav>
+			<ul>
+				<li ui-sref="home"><i class="fas fa-home"></i> ReefGauge</li>
+				<li ui-sref="explore"><i class="fas fa-globe-americas"></i> Explore</li>
+				<li ui-sref="contribute"><i class="far fa-eye"></i> Contribute</li>
+				<li ui-sref="glossary"><i class="fas fa-book"></i> Glossary</li>
+			</ul>
+		</nav>
         <main ui-view></main>
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
         <script src="bower_components/angular/angular.min.js"></script>

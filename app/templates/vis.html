@@ -1,14 +1,6 @@
-<home-popup config="vc.config"></home-popup>
-<article class="main-container container-fluid">
-	<div class="main-row row">
+<article class="explore-container container-fluid">
+	<div class="explore-row row">
 		<section class="sidebar col-sm-4">
-			<nav>
-				<ul>
-					<li ng-click="vc.openHomePopup()"><i class="fas fa-home"></i> ReefGauge</li>
-					<li ng-click="vc.openContribute()"><i class="far fa-eye"></i> Contribute</li>
-					<li><i class="fas fa-book"></i> Glossary</li>
-				</ul>
-			</nav>
 			<div class="tabs row">
 				<h2 ng-repeat="g in vc.config.keys" class="col-md-3" ng-click="vc.showKeyGroup(g)" ng-class="{'tab-selected': g.selected, {{g.group.toLowerCase()}}: true}"><i class="fas fa-clipboard"></i> {{g.group}}</h2>
 				<h2 class="col-md-3" ng-click="vc.showCompareTab()" ng-class="vc.config.compare_open ? 'tab-selected' : ''"><i class="fas fa-exchange-alt"></i> Compare</h2>

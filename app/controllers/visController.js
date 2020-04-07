@@ -1,7 +1,7 @@
 angular.module('reef')
 
-.controller('visController', ['$scope', 'visService', 'cleanDataService', 'keyService', '$timeout',
- function($scope, visService, cleanDataService, keyService, $timeout) {
+.controller('visController', ['$scope', 'visService', 'cleanDataService', 'keyService', '$timeout', '$state', '$stateParams',
+ function($scope, visService, cleanDataService, keyService, $timeout, $state, $stateParams) {
 	var vm = this;
 
 	// cleanDataService.mergeCSVsAsJSON(false, false);
@@ -21,10 +21,6 @@ angular.module('reef')
 	vm.setScienceColor = visService.setScienceColor;
 	vm.setScienceSize = visService.setScienceSize;
 	vm.getScienceKeyByName = keyService.getScienceKeyByName;
-	vm.setDataMode = function(mode) {
-		
-		visService.setDataMode(mode);
-	};
 	vm.communityFilterGroups = keyService.communityFilterGroups;
 	vm.getFilterDisplayName = keyService.getFilterDisplayName;
 	vm.setCommunityFilters = visService.setCommunityFilters;
@@ -42,14 +38,16 @@ angular.module('reef')
 		var selectedKey = keyGroup.scienceKeys.find(function(k) { return k.selected == true; });
 		vm.selectScienceKey(keyGroup, selectedKey);
 		visService.setCommunityFilters(keyGroup);
+		$state.go('explore', {group: keyGroup.group}, {notify: false});
 	};
 
-	vm.showCompareTab = function(keyGroup) {
+	vm.showCompareTab = function() {
 		document.getElementsByClassName('tab-content')[0].scrollTop = 0;
 		vm.config.keys.forEach(function(g) {
 			g.selected = false;
 		});
 		vm.config.compare_open = true;
+		$state.go('explore', {group: 'Compare'}, {notify: false});
 	};
 
 	vm.selectScienceKey = function(keyGroup, key) {
@@ -131,9 +129,23 @@ angular.module('reef')
 		vm.config.popup_page = 'contribute';
 	};
 
+	initConfig();
+
 	function setScienceSizeAndColor(key) {
 		visService.setScienceSize(key);
 		visService.setScienceColor(key);
+	}
+
+	function initConfig() {
+		if($stateParams.group && ($stateParams.group === 'Coral' || $stateParams.group === 'Fish' || $stateParams.group === 'Benthos')) {
+			var keyGroup = keyService.getKeyGroupByName($stateParams.group);
+			vm.showKeyGroup(keyGroup);
+		} else if($stateParams.group && stateParams.group === 'Compare') {
+			vm.showCompareTab();
+		} else {
+			var keyGroup = keyService.getKeyGroupByName('Coral');
+			vm.showKeyGroup(keyGroup);
+		}
 	}
 
 	// function getTopLevelKeys() {

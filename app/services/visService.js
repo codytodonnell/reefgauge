@@ -20,8 +20,6 @@ angular.module('reef')
 		keys: keyService.keys,
 		drillOpen: false,
 		drillItem: null,
-		home_open: true,
-		popup_page: 'home',
 		compare_open: false
 	};
 

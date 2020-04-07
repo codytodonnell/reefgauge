@@ -413,6 +413,12 @@ angular.module('reef')
 		return key;
 	};
 
+	var getKeyGroupByName = function(groupName) {
+		return keys.find(function(k) {
+			return k.group === groupName;
+		});
+	};
+
 	function capitalize(s) {
 		if (typeof s !== 'string') return '';
 		return s.charAt(0).toUpperCase() + s.slice(1);
@@ -424,6 +430,7 @@ angular.module('reef')
 		getFilterDisplayName: getFilterDisplayName,
 		setInitialFiltersByGroup: setInitialFiltersByGroup,
 		assignFilterGroupToItem: assignFilterGroupToItem,
-		getScienceKeyByName: getScienceKeyByName
+		getScienceKeyByName: getScienceKeyByName,
+		getKeyGroupByName: getKeyGroupByName
 	}
 });
