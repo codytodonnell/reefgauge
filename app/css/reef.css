@@ -75,6 +75,14 @@ nav .home-link {
 	left: 15px;
 }
 
+nav .border {
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	height: 4px;
+	background: linear-gradient(0.25turn, #712684, #2B59C3, #CE2780);
+}
+
 .sidebar {
 	height: 100%;
 	border-right: 1px solid #ccc;
@@ -86,7 +94,8 @@ nav .home-link {
 	line-height: 50px;
 	position: absolute;
 	top: 0;
-	background: #eee;
+	background: #494949;
+	color: #fff;
 	z-index: 10;
 }
 
@@ -96,20 +105,19 @@ nav .home-link {
 	text-align: left;
 	font-size: 1em;
 	margin: 0;
-	border-bottom: 3px solid #eee;
 	cursor: pointer;
 	transition: 0.25s;
 }
 
 .sidebar .tabs h2:hover {
-	background: #ccc;
+	background: #777777;
 }
 
 .sidebar .tab-selected {
-	border-bottom-color: #000 !important;
+	border-bottom: 3px solid #000;
     color: #fff;
     pointer-events: none;
-    background: #494949;
+    background: #777777;
 }
 
 .sidebar .tab-selected.coral {
@@ -122,10 +130,6 @@ nav .home-link {
 
 .sidebar .tab-selected.benthos {
 	background: #CE2780;
-}
-
-.sidebar .tabs h2.tab-selected:hover {
-	background: #712684;
 }
 
 .sidebar .tab-content {
@@ -167,7 +171,7 @@ nav .home-link {
 }
 
 .tile.expandable:not(.tile-selected):hover {
-	background: #eee;
+	background: #ddd;
 }
 
 .tile:last-child {
@@ -197,6 +201,7 @@ nav .home-link {
 .tile-selected {
 	border: 2px solid #000;
 	cursor: default;
+	background: #eee;
 }
 
 /*.checkbox-list {
@@ -220,10 +225,27 @@ nav .home-link {
 	max-width: 100%;
 	margin-bottom: 10px;
 	white-space: pre-wrap;
+	border: 1px solid #ccc;
+	box-shadow: 1px 1px #aaa;
+	transition: 0.5s;
+}
+
+.checkbox-grid .grid-item-container button:hover {
+	background: #ddd !important;
+}
+
+.checkbox-grid .grid-item-container button.active {
+	background: #eee;
+}
+
+.checkbox-grid .grid-item-container button i {
+	position: absolute;
+	left: 25px;
+	top: 10px;
 }
 
 .btn-plain {
-	background: #ddd;
+	background: #fff;
 	border: 1px solid #aaa;
 	transition: 0.25s;
 }
@@ -383,8 +405,8 @@ nav .home-link {
 .legend {
 	position: absolute;
 	width: 362px;
-	top: 15px;
-	right: 15px;
+	top: 10px;
+	right: 10px;
 	z-index: 10;
 	background: #474747;
 	opacity: 0.7;

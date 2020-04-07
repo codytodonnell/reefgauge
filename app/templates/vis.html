@@ -36,7 +36,7 @@
 						</ul> -->
 						<div class="checkbox-grid row">
 							<div class="grid-item-container col-md-4" ng-repeat="f in g.communityKeys">
-								<button class="btn btn-primary" ng-model="f.checked" uib-btn-checkbox ng-change="vc.setCommunityFilters(g)">{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></button>
+								<button class="btn" ng-model="f.checked" uib-btn-checkbox ng-change="vc.setCommunityFilters(g)"><i class="fas fa-check" ng-if="f.checked"></i>{{f.value_common_name ? f.value_common_name : f.value}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></button>
 							</div>
 						</div>
 					</div>

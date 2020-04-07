@@ -140,7 +140,7 @@ angular.module('reef')
 		if($stateParams.group && ($stateParams.group === 'Coral' || $stateParams.group === 'Fish' || $stateParams.group === 'Benthos')) {
 			var keyGroup = keyService.getKeyGroupByName($stateParams.group);
 			vm.showKeyGroup(keyGroup);
-		} else if($stateParams.group && stateParams.group === 'Compare') {
+		} else if($stateParams.group && $stateParams.group === 'Compare') {
 			vm.showCompareTab();
 		} else {
 			var keyGroup = vm.config.keys.find(function(g) { return g.selected == true; });
