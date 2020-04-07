@@ -143,7 +143,8 @@ angular.module('reef')
 		} else if($stateParams.group && stateParams.group === 'Compare') {
 			vm.showCompareTab();
 		} else {
-			var keyGroup = keyService.getKeyGroupByName('Coral');
+			var keyGroup = vm.config.keys.find(function(g) { return g.selected == true; });
+			// var keyGroup = keyService.getKeyGroupByName('Coral');
 			vm.showKeyGroup(keyGroup);
 		}
 	}

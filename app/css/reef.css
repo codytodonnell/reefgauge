@@ -152,6 +152,10 @@ nav .home-link {
 	color: #CE2780;
 }
 
+.sidebar .tab-content .btn-wide {
+	margin-bottom: 10px;
+}
+
 .tile {
 	border: 1px solid #ccc;
 	border-radius: 35px;
@@ -226,6 +230,10 @@ nav .home-link {
 
 .btn-plain:hover {
 	background: #ccc;
+}
+
+.btn-wide {
+	width: 100%;
 }
 
 .var-select {
@@ -494,30 +502,82 @@ nav .home-link {
 	font-size: 1.2em;
 }
 
-.home h1 {
-	font-size: 3em;
+.home header {
+	margin-top: 50px;
+	margin-bottom: 50px;
 }
 
-.home h2 {
+.home header h1 {
+	font-size: 3em;
+	margin: 0;
+}
+
+.home header h2 {
 	font-size: 1.3em;
 	font-style: italic;
 	color: #606060;
-	margin-top: 0;
+	margin: 0;
+}
+
+.home-info {
+	margin-bottom: 50px;
 }
 
 .home-explorer {
 	text-align: center;
 	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-bottom: 100px;
 }
 
-.home-graphic {
+.home-explorer .btn {
+	font-size: 1em;
+	border-radius: 0;
+	border-bottom: 2px solid #712684;
+}
+
+.home-explorer button.tile {
+	width: 300px;
+}
+
+.home-descriptions {
 	text-align: left;
 }
 
-.home-graphic img {
+.home-descriptions > .row:first-child {
+	margin-bottom: 50px;
+}
+
+.home-descriptions h2 {
+	text-align: left;
+	/*border-top: 1px solid #aaa;
+	padding-top: 20px;*/
+	margin-bottom: 50px;
+	margin-top: 0;
+}
+
+.home-descriptions img {
 	height: 100px;
+	padding-right: 10px;
+	padding-bottom: 10px;
 	float: left;
+}
+
+.home-descriptions .coral {
+	color: #712684;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.home-descriptions .fish {
+	color: #2B59C3;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+
+.home-descriptions .benthos {
+	color: #CE2780;
+	font-weight: bold;
+	font-size: 1.2em;
 }
 
 .disclaimer {

@@ -1,20 +1,22 @@
 <article class="container home">
-	<h1>ReefGauge</h1>
-	<h2>Caribbean Beta</h2>
+	<header>
+		<h1>ReefGauge</h1>
+		<h2>Caribbean Beta</h2>
+	</header>
 	<!-- <p>Coral reefs are one of the world’s most complex, mesmerizing, and fragile environments. Understanding and protecting them requires collective knowledge from both the scientific community and the community of divers and ocean advocates. ReefGauge is a learning tool that blends knowledge from these communities together to empower all of us to be ambassadors for coral reefs.</p> -->
-	<p>ReefGauge is a learning tool that blends data from the scientific community and the diving community to help divers, researchers, and ocean advocates better understand reef health. Coral reefs are stabilized by a balanced relationship between coral, fish, and benthos. Start exploring to learn about the different reef health indicators and to become a more empowered ambassador for coral reefs.</p>
+	<p class="home-info">ReefGauge is a learning tool that blends data from the scientific community and the diving community to help divers, researchers, and ocean advocates better understand reef health. Coral reefs are stabilized by a balanced relationship between coral, fish, and benthos. Start exploring to learn about the different reef health indicators and to become a more empowered ambassador for coral reefs.</p>
 	<div class="home-explorer">
 		<div>
 			<span>Show me </span>
 			<div class="btn-group" uib-dropdown>
-				<button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">{{hc.keyGroupName}} <span class="caret"></span></button>
+				<button type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">{{hc.keyGroupName}} <span class="caret"></span></button>
 				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 					<li role="menuitem" ng-repeat="name in hc.keyGroupNames" ng-click="hc.selectKeyGroup(name)">{{name}}</li>
 				</ul>
 			</div>
 			<span> data from the </span>
 			<div class="btn-group" uib-dropdown>
-				<button type="button" class="btn btn-primary" uib-dropdown-toggle ng-disabled="disabled">{{hc.communityType}} <span class="caret"></span></button>
+				<button type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">{{hc.communityType}} <span class="caret"></span></button>
 				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 					<li role="menuitem" ng-repeat="type in hc.communityTypes" ng-click="hc.selectCommunityType(type)">{{type}}</li>
 				</ul>
@@ -23,22 +25,24 @@
 		</div>
 		<button class="tile" ng-click="hc.exploreWithParams()">Explore</button>
 	</div>
-	<div class="home-graphic">
+	<div class="home-descriptions">
 		<div class="row">
+			<h2 class="col-sm-12">Reef Health Indicators</h2>
 			<div class="col-sm-4">
 				<img src="images/coral.svg">
-				<span>Benthos refers to the small organisms like algae, starfish, and bacteria, that inhabit reef structures and the ocean floor. A reef’s benthic community is made up of promoters that help promote coral growth and detractors that prevent corals from surviving.</span>
+				<span><span class="coral">Corals</span> are the basic building blocks of reefs, providing habitat for a diverse range of underwater organisms, and ensuring a healthy ecosystem. Tall, healthy, and abundant coral is a good indication that a reef is healthy.</span>
 			</div>
 			<div class="col-sm-4">
-				<img src="images/coral.svg">
-				<span>Benthos refers to the small organisms like algae, starfish, and bacteria, that inhabit reef structures and the ocean floor. A reef’s benthic community is made up of promoters that help promote coral growth and detractors that prevent corals from surviving.</span>
+				<img src="images/fish.svg">
+				<span><span class="fish">Fish</span> are vital to a stable reef because they help feed on algae and other organisms that can be harmful to corals. Many fishes also rely on coral reefs for habitat, so a healthy reef should normally have abundant fish populations.</span>
 			</div>
 			<div class="col-sm-4">
-				<img src="images/coral.svg">
-				<span>Benthos refers to the small organisms like algae, starfish, and bacteria, that inhabit reef structures and the ocean floor. A reef’s benthic community is made up of promoters that help promote coral growth and detractors that prevent corals from surviving.</span>
+				<img src="images/benthos.svg">
+				<span><span class="benthos">Benthos</span> refers to the small organisms like algae, starfish, and bacteria, that inhabit reef structures and the ocean floor. A reef’s benthic community is made up of promoters that help promote coral growth and detractors that prevent corals from surviving.</span>
 			</div>
 		</div>
 		<div class="row">
+			<h2 class="col-sm-12">Communities</h2>
 			<div class="col-sm-4">
 				<img src="images/coral.svg">
 				<span>Benthos refers to the small organisms like algae, starfish, and bacteria, that inhabit reef structures and the ocean floor. A reef’s benthic community is made up of promoters that help promote coral growth and detractors that prevent corals from surviving.</span>

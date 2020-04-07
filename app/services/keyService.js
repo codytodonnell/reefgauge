@@ -29,7 +29,7 @@ angular.module('reef')
 					selected: true,
 					primary_indicator: true,
 					image: "images/live-coral-cover.jpg",
-					description: "Corals are the basic building blocks of reefs, providing habitat for a diverse range of underwater organisms, and ensuring a healthy ecosystem. Looking at how much of a reef is covered by living coral helps us gauge how healthy a reef is. Over the past decade, live coral cover has been notably low across most of the Caribbean."
+					description: "Abundant living coral is one of the best indicators of a healthy reef. To measure this, researchers sample an area of the reef and measure how much of that area is covered by coral."
 				},
 				{
 					key: "rmax",
@@ -204,33 +204,7 @@ angular.module('reef')
 					selected: true,
 					primary_indicator: true,
 					image: "images/macroalgae.jpg",
-					description: "Benthos refers to the small organisms that inhabit reef structures and the ocean floor and play a key role in coral growth or mortality. A reef’s benthic community is made up of promoters that help promote coral growth and detractors that prevent corals from surviving. Crustose coralline algae, a benthic promoter, helps cement reefs together and provide surface for coral larvae. Macroalgae, a benthic detractor, can outcompete coral and completely cover sections of reef. AGRRA uses a benthic index from 1-4 to represent a reef’s ratio of benthic promoters to benthic detractors with a higher index indicating a greater majority of promoters."
-				},
-				{
-					key: "cca",
-					display_name: "Crustose Coralline Algae",
-					units: '% of sampled area',
-					short_units: '%',
-					scale: 'linear',
-					domain: [1, 5.1, 12.1, 25],
-					positive: true,
-					group: "Benthos",
-					selected: false,
-					image: "",
-					description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-				},
-				{
-					key: "ma",
-					display_name: "Macroalgae",
-					units: '% of sampled area',
-					short_units: '%',
-					scale: 'linear',
-					domain: [1, 5.1, 12.1, 25],
-					positive: false,
-					group: "Benthos",
-					selected: false,
-					image: "",
-					description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+					description: "This benthic index is a number from 1-4 that represents a reef’s ratio of benthic promoters to benthic detractors. A higher index value indicates a greater majority of promoters."
 				},
 				{
 					key: "possum",
@@ -243,7 +217,7 @@ angular.module('reef')
 					group: "Benthos",
 					selected: false,
 					image: "",
-					description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+					description: "Benthic promoters are all of the organisms that help promote coral growth in a reef system. These are things like crustose coralline algae and young living coral."
 				},
 				{
 					key: "negsum",
@@ -256,7 +230,33 @@ angular.module('reef')
 					group: "Benthos",
 					selected: false,
 					image: "",
-					description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+					description: "Benthic detractors are all of the organisms that prevent coral growth in a reef system. Macroalgae, cyanobacteria, and certain types of sponges are examples of species that compete with coral to grow in the same spots of a reef. Too much of these detractor species is an indicator of poor health for a reef."
+				},
+				{
+					key: "cca",
+					display_name: "Crustose Coralline Algae",
+					units: '% of sampled area',
+					short_units: '%',
+					scale: 'linear',
+					domain: [1, 5.1, 12.1, 25],
+					positive: true,
+					group: "Benthos",
+					selected: false,
+					image: "",
+					description: "Crustose coralline algae is a benthic promoter that helps cement reefs together and provide surface for coral larvae."
+				},
+				{
+					key: "ma",
+					display_name: "Macroalgae",
+					units: '% of sampled area',
+					short_units: '%',
+					scale: 'linear',
+					domain: [1, 5.1, 12.1, 25],
+					positive: false,
+					group: "Benthos",
+					selected: false,
+					image: "",
+					description: "Macroalgae is a benthic detractor that can outcompete coral and completely cover sections of reef. Many types of macroalgae are commonly referred to as seaweed."
 				}
 			],
 			communityKeys: [

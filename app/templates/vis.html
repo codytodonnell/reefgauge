@@ -13,6 +13,7 @@
 				<div ng-repeat="g in vc.config.keys" class="col-sm-12" ng-show="g.selected">
 					<div>
 						<h3 ng-class="{'{{g.group.toLowerCase()}}': true}">{{g.group}} Indicators</h3>
+						<p>Circles on the map represent reefs that have been assessed by the <strong>scientific community</strong>. Select an indicator to see it reflected in the circles' size and color.</p>
 						<div class="tile expandable" ng-repeat="k in g.scienceKeys" ng-click="vc.selectScienceKey(g, k)" ng-class="{'tile-selected': k.selected}">
 							<h4>{{k.display_name}}</h4>
 							<div ng-if="k.selected">
@@ -24,11 +25,12 @@
 					</div>
 					<div>
 						<h3 ng-class="{'{{g.group.toLowerCase()}}': true}">{{g.group}} Observations</h3>
-						<p>Visual observations of reef environments are key to understanding their health. ReefGauge has collected over 6,000 observations of relevant reef health indicators from the dive community. These observations are submitted through our <a href="https://www.inaturalist.org/projects/reefgauge" target="_blank">partnered citizen science project on iNaturalist</a>. Each square on the map represents one observation. Browse the different reef groups to see observations of key health indicators for that group.</p>
+						<p>Squares on the map represent observations from the <strong>diving community</strong>. Select a species group to toggle it on and off.</p>
+						<!-- <p>Visual observations of reef environments are key to understanding their health. ReefGauge has collected over 6,000 observations of relevant reef health indicators from the dive community. These observations are submitted through our <a href="https://www.inaturalist.org/projects/reefgauge" target="_blank">partnered citizen science project on iNaturalist</a>. Each square on the map represents one observation. Browse the different reef groups to see observations of key health indicators for that group.</p> -->
 					</div>
 					<div>
-						<button class="btn btn-plain" ng-if="!vc.hasAnyCheckedFilters(g)" ng-click="vc.checkAllFiltersInGroup(g)">Check All</button>
-						<button class="btn btn-plain" ng-if="vc.hasAnyCheckedFilters(g)" ng-click="vc.uncheckAllFiltersInGroup(g)">Uncheck All</button>
+						<button class="btn btn-plain btn-wide" ng-if="!vc.hasAnyCheckedFilters(g)" ng-click="vc.checkAllFiltersInGroup(g)">Select All</button>
+						<button class="btn btn-plain btn-wide" ng-if="vc.hasAnyCheckedFilters(g)" ng-click="vc.uncheckAllFiltersInGroup(g)">Remove All</button>
 						<!-- <ul class="checkbox-list">
 							<li ng-repeat="f in g.communityKeys"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></label></li>
 						</ul> -->
