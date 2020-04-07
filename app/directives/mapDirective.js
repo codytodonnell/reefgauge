@@ -409,7 +409,7 @@
 
 				var tipContent = d.site !== "" ? d.site : d.batch + " " + d.code;
 
-				tip.html('<span>' + tipContent + '</span')
+				tip.html('<span>' + tipContent + '</span>')
 					.attr('id', d.id)
 					.style('left', node.attr("cx") + "px")
 					.style('top', node.attr("cy") - node.attr("r") - 4 + "px")

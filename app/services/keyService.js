@@ -431,6 +431,7 @@ angular.module('reef')
 		setInitialFiltersByGroup: setInitialFiltersByGroup,
 		assignFilterGroupToItem: assignFilterGroupToItem,
 		getScienceKeyByName: getScienceKeyByName,
-		getKeyGroupByName: getKeyGroupByName
+		getKeyGroupByName: getKeyGroupByName,
+		capitalize: capitalize
 	}
 });

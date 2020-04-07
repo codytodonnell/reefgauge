@@ -7,7 +7,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
     $stateProvider
         .state('home', {
             url: '/',
-            templateUrl: 'app/templates/home.html'
+            templateUrl: 'app/templates/home.html',
+            controller: 'homeController',
+            controllerAs: 'hc'
         })
         .state('explore', {
             url: '/explore?group',
