@@ -123,6 +123,30 @@ nav .border {
 	background: #777777;
 }
 
+.sidebar .tabs img, .sidebar .tabs i {
+	height: 20px;
+	margin-right: 5px;
+}
+
+@media screen and (max-width: 1408px) and (min-width: 1031px) {
+	.sidebar .tabs img, .sidebar .tabs i {
+		display: none !important;
+	}
+
+	.sidebar .tabs h2 {
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 1031px) {
+	.sidebar .tabs span {
+		display: none !important;
+	}
+	.sidebar .tabs h2 {
+		text-align: center;
+	}
+}
+
 .sidebar .tab-selected {
 	border-bottom: 3px solid #000;
     color: #fff;

@@ -2,8 +2,8 @@
 	<div class="explore-row row">
 		<section class="sidebar col-sm-4">
 			<div class="tabs row">
-				<h2 ng-repeat="g in vc.config.keys" class="col-md-3" ng-click="vc.showKeyGroup(g)" ng-class="{'tab-selected': g.selected, {{g.group.toLowerCase()}}: true}"><i class="fas fa-clipboard"></i> {{g.group}}</h2>
-				<h2 class="col-md-3" ng-click="vc.showCompareTab()" ng-class="vc.config.compare_open ? 'tab-selected' : ''"><i class="fas fa-exchange-alt"></i> Compare</h2>
+				<h2 ng-repeat="g in vc.config.keys" class="col-xs-3" ng-click="vc.showKeyGroup(g)" ng-class="{'tab-selected': g.selected, {{g.group.toLowerCase()}}: true}"><img ng-src="images/{{g.icon}}"> <span>{{g.group}}</span></h2>
+				<h2 class="col-md-3" ng-click="vc.showCompareTab()" ng-class="vc.config.compare_open ? 'tab-selected' : ''"><i class="fas fa-exchange-alt"></i> <span>Compare</span></h2>
 			</div>
 			<!-- <div>
 						<h3>Scientific Assessments of Reef Health</h3>
@@ -69,7 +69,7 @@
 		<section class="vis-container col-sm-8">
 			<map></map>
 			<drilldown></drilldown>
-			<legend config="vc.config"></legend>
+			<map-legend config="vc.config"></map-legend>
 		</section>
 	</div>
 </article>

@@ -15,7 +15,7 @@ angular.module('reef')
 		{
 			group: "Coral",
 			selected: true,
-			open: false,
+			icon: "coral-white.svg",
 			scienceKeys: [
 				{
 					key: "slcavg",
@@ -118,7 +118,7 @@ angular.module('reef')
 		{
 			group: "Fish",
 			selected: false,
-			open: false,
+			icon: "fish-white.svg",
 			scienceKeys: [
 				{
 					key: "havg",
@@ -190,6 +190,7 @@ angular.module('reef')
 		{
 			group: "Benthos",
 			selected: false,
+			icon: "benthos-white.svg",
 			scienceKeys: [
 				{
 					key: "bi",

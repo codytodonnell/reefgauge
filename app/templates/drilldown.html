@@ -7,7 +7,7 @@
 					<img ng-src="{{item.image_url}}">
 				</td>
 				<td>
-					<h3>{{item.common_name}}</h3>
+					<h3>{{item.common_name ? item.common_name : item.scientific_name}}</h3>
 					<p>Observed by {{item.user_login}} on {{item.observed_on}}</p>
 					<table class="details-table">
 						<tr>

@@ -1,6 +1,6 @@
 angular.module('reef')
 
-.directive('legend', ['keyService', 'visService', '$rootScope', function(keyService, visService, $rootScope) {
+.directive('mapLegend', ['keyService', 'visService', '$rootScope', function(keyService, visService, $rootScope) {
 	return {
 		restrict: 'E',
 		scope: {
@@ -23,7 +23,7 @@ angular.module('reef')
 		    // set the dimensions and margins of the graph
 			var margin = {top: 20, right: 5, bottom: 5, left: 15},
 			    width = 330 - margin.left - margin.right,
-			    height = 230 - margin.top - margin.bottom;
+			    height = 200 - margin.top - margin.bottom;
 
 		    var svgScience = d3.select('#legend-science-svg')
 		    	.attr("width", width + margin.left + margin.right)
@@ -31,7 +31,7 @@ angular.module('reef')
 
 			var svgCommunity = d3.select('#legend-community-svg')
 		    	.attr("width", width + margin.left + margin.right)
-			    .attr("height", 30);
+			    .attr("height", 20);
 
 			var band = d3.scalePoint()
 			    .range([margin.top, height])
