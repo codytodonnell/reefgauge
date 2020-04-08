@@ -366,6 +366,10 @@ nav .border {
 	pointer-events: none;
 }
 
+#map .tooltip p {
+	margin: 0;
+}
+
 .drilldown {
 	background: #6f7171;
 	color: #fff;
@@ -384,7 +388,7 @@ nav .border {
 }
 
 .drilldown.open {
-	transform: translate(-50%, -110%);
+	transform: translate(0, -105%);
 }
 
 .drilldown h3 {

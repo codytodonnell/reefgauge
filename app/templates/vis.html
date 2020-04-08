@@ -49,20 +49,20 @@
 					<h3>Explore all the Indicators</h3>
 					<div class="btn-group var-select" uib-dropdown>
 						<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
-						Size points by {{vc.getScienceKeyByName(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
-						</button>
-						<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-							<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceSize(prop.key)" ng-class="prop == vc.config.science.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
-						</ul>
-				    </div>
-					<div class="btn-group var-select" uib-dropdown>
-						<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
 						Color points by {{vc.getScienceKeyByName(vc.config.science.colorBy).display_name}} <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-							<li role="menuitem" ng-repeat="prop in vc.config.keys" ng-click="vc.setScienceColor(prop.key)" ng-class="prop == vc.config.science.colorBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
+							<li role="menuitem" ng-repeat="prop in vc.scienceKeys" ng-click="vc.setScienceColor(prop.key)" ng-class="prop == vc.config.science.colorBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
 						</ul>
-				    </div>					
+				    </div>		
+				    <div class="btn-group var-select" uib-dropdown>
+						<button id="color-button" type="button" class="btn btn-plain" uib-dropdown-toggle ng-disabled="disabled">
+						Size points by {{vc.getScienceKeyByName(vc.config.science.sizeBy).display_name}} <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+							<li role="menuitem" ng-repeat="prop in vc.scienceKeys" ng-click="vc.setScienceSize(prop.key)" ng-class="prop == vc.config.science.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
+						</ul>
+				    </div>			
 				</div>
 			</div>
 		</section>

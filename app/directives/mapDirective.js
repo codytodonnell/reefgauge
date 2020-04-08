@@ -420,7 +420,7 @@
 				$rootScope.$broadcast('nodeClicked');
 				var bounds = map.getBounds();
 				var quarterHeight = (bounds._ne.lat - bounds._sw.lat) * 0.25;
-				map.panTo([d.longitude, (d.latitude - quarterHeight)]);
+				map.panTo([d.longitude, d.latitude]);
 			}
 
 			function pointHover(d) {
@@ -432,9 +432,22 @@
 					.style("stroke-opacity", 0.8)
 					.style("stroke-width", 4);
 
-				var tipContent = d.site !== "" ? d.site : d.batch + " " + d.code;
+				var tipContent = '';
+				var colorKey = keyService.getScienceKeyByName(config.science.colorBy);
 
-				tip.html('<span>' + tipContent + '</span>')
+				if(config.science.colorBy === config.science.sizeBy) {
+					var colorKey = keyService.getScienceKeyByName(config.science.colorBy);
+					tipContent = colorKey.display_name + ': ' + d[colorKey.key] + " " + colorKey.short_units;
+				} else {
+					var colorKey = keyService.getScienceKeyByName(config.science.colorBy);
+					var sizeKey = keyService.getScienceKeyByName(config.science.sizeBy);
+					tipContent = '<p>' + colorKey.display_name + ': ' + d[colorKey.key] + " " + colorKey.short_units + '</p>' +
+						'<p>' + sizeKey.display_name + ': ' + d[sizeKey.key] + " " + sizeKey.short_units + '</p>';
+				}
+
+				// var tipContent = d.site !== "" ? d.site : d.batch + " " + d.code;
+
+				tip.html('<p>' + tipContent + '</p>')
 					.attr('id', d.id)
 					.style('left', node.attr("cx") + "px")
 					.style('top', node.attr("cy") - node.attr("r") - 4 + "px")
@@ -501,7 +514,7 @@
 				$rootScope.$broadcast('nodeClicked');
 				var bounds = map.getBounds();
 				var quarterHeight = (bounds._ne.lat - bounds._sw.lat) * 0.25;
-				map.panTo([d.longitude, (d.latitude - quarterHeight)]);
+				map.panTo([d.longitude, d.latitude]);
 			}
 
 			function squareFill(d) {

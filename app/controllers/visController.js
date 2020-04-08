@@ -22,6 +22,7 @@ angular.module('reef')
 	vm.communityFilterGroups = keyService.communityFilterGroups;
 	vm.getFilterDisplayName = keyService.getFilterDisplayName;
 	vm.setCommunityFilters = visService.setCommunityFilters;
+	vm.scienceKeys = getScienceKeys();
 
 	vm.toggleScienceData = function() {
 		vm.config.science.show = !vm.config.science.show;
@@ -65,7 +66,7 @@ angular.module('reef')
 		vm.config.community.show = false;
 		vm.config.science.show = true;
 		$state.go('explore', {
-			group: keyGroup.group, 
+			group: 'Compare', 
 			science: vm.config.science.show, 
 			community: vm.config.community.show
 		}, {notify: false});
@@ -155,6 +156,14 @@ angular.module('reef')
 	function setScienceSizeAndColor(key) {
 		visService.setScienceSize(key);
 		visService.setScienceColor(key);
+	}
+
+	function getScienceKeys() {
+		var keys = [];
+		vm.config.keys.forEach(function(g) {
+			keys = keys.concat(g.scienceKeys);
+		});
+		return keys;
 	}
 
 	function initConfig() {
