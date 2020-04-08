@@ -478,39 +478,47 @@ nav .border {
 	font-weight: bold;
 }
 
-.legend {
+#legend {
 	position: absolute;
-	width: 362px;
-	top: 10px;
-	right: 10px;
+	width: 175px;
+	height: 100%;
+	top: 0;
+	right: 0;
 	z-index: 10;
 	background: #474747;
 	opacity: 0.7;
 	border: 1px solid #ccc;
-	padding: 15px 15px 0px 15px;
 	color: #fff;
-	font-size: 0.7em;
+	font-size: 0.8em;
 }
 
-.legend h3 {
-	margin-top: 0;
-	margin-bottom: 15px;
+#legend.closed {
+	height: auto;
+}
+
+#legend h3 {
+	margin: 10px;
     font-size: 1em;
     font-weight: bold;
     cursor: pointer;
 }
 
-.legend p {
-	margin: 0;
-}
-
-.legend .units {
+#legend .units {
 	font-size: 0.8em;
 }
 
-.legend svg text {
+#legend svg text {
 	font-size: 0.9em;
 	fill: #fff;
+}
+
+.legend-science {
+	margin-top: 5px
+}
+
+.legend-science p {
+	margin-left: 10px;
+	margin-bottom: 0;
 }
 
 .popup-container {

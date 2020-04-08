@@ -20,12 +20,20 @@ angular.module('reef')
 			var sizeLegendValues = angular.copy($scope.sizeKey.domain);
 			sizeLegendValues.unshift(0);
 
-		    // set the dimensions and margins of the graph
-			var margin = {top: 20, right: 5, bottom: 5, left: 15},
-			    width = 330 - margin.left - margin.right,
-			    height = 200 - margin.top - margin.bottom;
+			var legendHeight = parseInt(d3.select('#legend').style('height'));
 
-		    var svgScience = d3.select('#legend-science-svg')
+			var communityHeight = 20;
+
+		    // set the dimensions and margins of the graph
+			var margin = {top: 20, right: 5, bottom: 5, left: 30},
+			    width = 175 - margin.left - margin.right,
+			    height = 275 - margin.top - margin.bottom;
+
+		    var svgColor = d3.select('#legend-color-svg')
+		    	.attr("width", width + margin.left + margin.right)
+			    .attr("height", height + margin.top + margin.bottom);
+
+			var svgSize = d3.select('#legend-size-svg')
 		    	.attr("width", width + margin.left + margin.right)
 			    .attr("height", height + margin.top + margin.bottom);
 
@@ -65,7 +73,7 @@ angular.module('reef')
 
 		    var labelScaleNegative = ['very good', 'good', 'fair', 'poor', 'critical'];
 
-		    var colorPoint = svgScience.selectAll('.color-point')
+		    var colorPoint = svgColor.selectAll('.color-point')
 		    	.data(colorLegendValues)
 		    	.enter()
 		    	.append('g')
@@ -81,13 +89,13 @@ angular.module('reef')
 		    	.attr('x', 30)
 		    	.attr('y', 5);
 
-		    var sizePoint = svgScience.selectAll('.size-point')
+		    var sizePoint = svgSize.selectAll('.size-point')
 		    	.data(sizeLegendValues)
 		    	.enter()
 		    	.append('g')
 		    	.attr('class', 'size-point')
 		    	.attr('transform', function(d, i) {
-		    		return 'translate(' + width*0.6 + ',' + band(i) + ')';
+		    		return 'translate(' + margin.left + ',' + band(i) + ')';
 		    	});
 
 		    sizePoint.append('circle');
@@ -149,7 +157,7 @@ angular.module('reef')
 			    		}
 			    	});
 
-			    svgScience.selectAll('.color-point')
+			    svgColor.selectAll('.color-point')
 			    	.style('opacity', function(d, i) {
 			    		if($scope.colorKey.key === 'bi' && i === 4) {
 			    			return 0;
@@ -174,7 +182,7 @@ angular.module('reef')
 			    		}
 			    	});
 
-			    svgScience.selectAll('.size-point')
+			    svgSize.selectAll('.size-point')
 			    	.style('opacity', function(d, i) {
 			    		if($scope.sizeKey.key === 'bi' && i === 4) {
 			    			return 0;

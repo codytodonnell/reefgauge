@@ -1,17 +1,16 @@
-<div class="legend">
+<div id="legend" ng-class="open ? 'open' : 'closed'">
 	<h3 ng-click="toggleLegend()">Legend <i class="fas pull-right" ng-class="open ? 'fa-minus' : 'fa-plus'"></i></h3>
 	<svg id="legend-community-svg" ng-show="open"></svg>
 	<div ng-show="open">
-		<div class="row">
-			<div class="col-xs-6">
-				<p>{{colorKey.display_name}}</p>
-				<p class="units">{{colorKey.units}}</p>
-			</div>
-			<div class="col-xs-6">
-				<p>{{sizeKey.display_name}}</p>
-				<p class="units">{{sizeKey.units}}</p>
-			</div>
+		<div class="legend-science">
+			<p>{{colorKey.display_name}}</p>
+			<p class="units">{{colorKey.units}}</p>
+			<svg id="legend-color-svg"></svg>
 		</div>
-		<svg id="legend-science-svg"></svg>
+		<div class="legend-science">
+			<p>{{sizeKey.display_name}}</p>
+			<p class="units">{{sizeKey.units}}</p>
+			<svg id="legend-size-svg"></svg>
+		</div>
 	</div>
 </div>
