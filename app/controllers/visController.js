@@ -15,8 +15,6 @@ angular.module('reef')
 	vm.xvar2 = "CCA";
 	vm.yvar2 = "MA";
 
-	// vm.topLevelKeys = getTopLevelKeys();
-
 	vm.setScienceOrder = visService.setScienceOrder;
 	vm.setScienceColor = visService.setScienceColor;
 	vm.setScienceSize = visService.setScienceSize;
@@ -145,20 +143,35 @@ angular.module('reef')
 	}
 
 	function initConfig() {
-		if($stateParams.group && ($stateParams.group === 'Coral' || $stateParams.group === 'Fish' || $stateParams.group === 'Benthos')) {
+		if($stateParams.hasOwnProperty('science')) {
+			if($stateParams.science === 'false') {
+				vm.config.science.show = false;
+			} else {
+				vm.config.science.show = true;
+			}
+		} else {
+			vm.config.science.show = true;
+		}
+
+		if($stateParams.hasOwnProperty('community')) {
+			if($stateParams.community === 'false') {
+				vm.config.community.show = false;
+			} else {
+				vm.config.community.show = true;
+			}
+		} else {
+			vm.config.community.show = true;
+		}
+
+		if($stateParams.hasOwnProperty('group') && ($stateParams.group === 'Coral' || $stateParams.group === 'Fish' || $stateParams.group === 'Benthos')) {
 			var keyGroup = keyService.getKeyGroupByName($stateParams.group);
 			vm.showKeyGroup(keyGroup);
-		} else if($stateParams.group && $stateParams.group === 'Compare') {
+		} else if($stateParams.hasOwnProperty('group') && $stateParams.group === 'Compare') {
 			vm.showCompareTab();
 		} else {
 			var keyGroup = vm.config.keys.find(function(g) { return g.selected == true; });
-			// var keyGroup = keyService.getKeyGroupByName('Coral');
 			vm.showKeyGroup(keyGroup);
 		}
 	}
-
-	// function getTopLevelKeys() {
-	// 	return vm.config.keys.filter(function(d) { return d.top_level === true; })
-	// }
 }]);
 

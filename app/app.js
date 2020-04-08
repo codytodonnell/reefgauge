@@ -12,9 +12,15 @@ app.config(function($stateProvider, $urlRouterProvider) {
             controllerAs: 'hc'
         })
         .state('explore', {
-            url: '/explore?group',
+            url: '/explore?group?science?community',
             params: { 
             	group: { 
+            		dynamic: true 
+            	},
+            	science: { 
+            		dynamic: true 
+            	} ,
+            	community: { 
             		dynamic: true 
             	} 
             },

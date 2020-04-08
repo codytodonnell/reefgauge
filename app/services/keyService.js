@@ -14,7 +14,7 @@ angular.module('reef')
 	var keys = [
 		{
 			group: "Coral",
-			selected: false,
+			selected: true,
 			open: false,
 			scienceKeys: [
 				{
@@ -419,6 +419,12 @@ angular.module('reef')
 		});
 	};
 
+	var getActiveKeyGroup = function() {
+		return keys.find(function(k) {
+			return k.selected === true;
+		});
+	};
+
 	function capitalize(s) {
 		if (typeof s !== 'string') return '';
 		return s.charAt(0).toUpperCase() + s.slice(1);
@@ -432,6 +438,7 @@ angular.module('reef')
 		assignFilterGroupToItem: assignFilterGroupToItem,
 		getScienceKeyByName: getScienceKeyByName,
 		getKeyGroupByName: getKeyGroupByName,
+		getActiveKeyGroup: getActiveKeyGroup,
 		capitalize: capitalize
 	}
 });
