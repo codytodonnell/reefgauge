@@ -1,3 +1,13 @@
+/*********************
+* Color Guide
+*
+* main-alt: #4649ae;
+* dark-grey: #494949;
+* coral: #712684;
+* fish: #2B59C3;
+* benthos: #CE2780;
+*********************/
+
 html {
 	height: 100%
 }
@@ -258,6 +268,24 @@ nav .border {
 	width: 100%;
 }
 
+.btn-tile {
+	width: 300px;
+	background: #4649ae;
+	color: #fff;
+}
+
+.btn-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	z-index: 20;
+	color: #000;
+}
+
+.btn-tile:hover {
+	opacity: 0.9;
+}
+
 .var-select {
 	width: 100%;
 	margin-bottom: 10px;
@@ -306,7 +334,7 @@ nav .border {
 	z-index: 2;
 }
 
-.tooltip {
+#map .tooltip {
 	background: #494949;
 	border: 1px solid #ccc;
 	color: #fff;
@@ -315,8 +343,9 @@ nav .border {
 }
 
 .drilldown {
-	background: #fff;
-	width: 90%;
+	background: #6f7171;
+	color: #fff;
+	width: 70%;
 	margin: auto;
 	height: auto;
 	position: absolute;
@@ -326,6 +355,8 @@ nav .border {
     z-index: 10;
     padding: 15px;
 	transition: 0.5s;
+	font-size: 0.9em;
+	opacity: 0.95;
 }
 
 .drilldown.open {
@@ -333,26 +364,39 @@ nav .border {
 }
 
 .drilldown h3 {
-	margin: 0;
+	margin: 0 10px 0px 0px;
+	display: inline-block;
 }
 
 .drilldown .community-drill img {
-	width: 100%;
+	/*width: 100%;*/
+	max-height: 200px;
+	max-width: 250px;
+	height: auto;
+	width: auto;
+}
+
+.drilldown .community-drill td:last-child {
+	vertical-align: top;
+	padding-left: 15px;
 }
 
 .drilldown .drill-header {
 	margin-bottom: 15px;
 }
 
+.drilldown .drill-header span {
+	color: #eee;
+}
+
 .drilldown .drill-row:not(:last-child) {
 	margin-bottom: 15px;
 }
 
-.close-button {
-	position: absolute;
-	top: 15px;
-	right: 15px;
-	z-index: 20;
+.drilldown a {
+	color: #8EB9FF;
+	display: block;
+	margin-top: 10px;
 }
 
 /*.dash-item {
@@ -379,9 +423,10 @@ nav .border {
 }*/
 
 .quad-block {
-	height: 150px;
+	height: 85px;
     border: 1px solid #ccc;
-    padding: 15px;
+    padding: 10px;
+    color: #000;
 }
 
 .quad-block span {
@@ -390,7 +435,15 @@ nav .border {
 }
 
 .quad-value {
-	font-size: 2em;
+	font-size: 1.5em;
+}
+
+.quad-units {
+	font-size: 0.8em;
+}
+
+.details-table {
+	width: 100%;
 }
 
 .details-table tr:not(:first-child) td {
@@ -398,7 +451,6 @@ nav .border {
 }
 
 .details-table td:first-child {
-	min-width: 200px;
 	font-weight: bold;
 }
 
@@ -545,20 +597,27 @@ nav .border {
 	margin-bottom: 50px;
 }
 
-.home-explorer {
+.home-selections {
 	text-align: center;
 	margin-top: 50px;
 	margin-bottom: 100px;
 }
 
-.home-explorer .btn {
+.home-selections .btn {
 	font-size: 1em;
 	border-radius: 0;
+}
+
+.home-selections .btn.coral {
 	border-bottom: 2px solid #712684;
 }
 
-.home-explorer button.tile {
-	width: 300px;
+.home-selections .btn.fish {
+	border-bottom: 2px solid #2B59C3;
+}
+
+.home-selections .btn.benthos {
+	border-bottom: 2px solid #CE2780;
 }
 
 .home-descriptions {

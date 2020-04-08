@@ -371,6 +371,15 @@
 						.each(function(s) {
 							if(s.id !== d.id) s.selected = false;
 						});
+					svg.selectAll(".point")
+						.transition()
+						.duration(500)
+						.style("stroke", pointStroke)
+						.style("stroke-opacity", pointStrokeOpacity)
+						.style("stroke-width", pointStrokeWidth)
+						.each(function(p) {
+							if(p.id !== d.id) p.selected = false;
+						});
 					d3.select(this)
 						.transition()
 						.duration(500)
@@ -444,6 +453,15 @@
 						.style("stroke-width", pointStrokeWidth)
 						.each(function(p) {
 							if(p.id !== d.id) p.selected = false;
+						});
+					svg.selectAll(".square")
+						.transition()
+						.duration(500)
+						.style("stroke", squareStroke)
+						.style("stroke-opacity", squareStrokeOpacity)
+						.style("stroke-width", squareStrokeWidth)
+						.each(function(s) {
+							if(s.id !== d.id) s.selected = false;
 						});
 					d3.select(this)
 						.transition()

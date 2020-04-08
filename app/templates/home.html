@@ -5,25 +5,25 @@
 	</header>
 	<!-- <p>Coral reefs are one of the world’s most complex, mesmerizing, and fragile environments. Understanding and protecting them requires collective knowledge from both the scientific community and the community of divers and ocean advocates. ReefGauge is a learning tool that blends knowledge from these communities together to empower all of us to be ambassadors for coral reefs.</p> -->
 	<p class="home-info">ReefGauge is a learning tool that blends data from the scientific community and the diving community to help divers, researchers, and ocean advocates better understand reef health. Coral reefs are stabilized by a balanced relationship between coral, fish, and benthos. Start exploring to learn about the different reef health indicators and to become a more empowered ambassador for coral reefs.</p>
-	<div class="home-explorer">
+	<div class="home-selections">
 		<div>
 			<span>Show me </span>
 			<div class="btn-group" uib-dropdown>
-				<button type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">{{hc.keyGroupName}} <span class="caret"></span></button>
+				<button type="button" class="btn" ng-class="hc.keyGroupName" uib-dropdown-toggle ng-disabled="disabled">{{hc.keyGroupName}} <span class="caret"></span></button>
 				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 					<li role="menuitem" ng-repeat="name in hc.keyGroupNames" ng-click="hc.selectKeyGroup(name)">{{name}}</li>
 				</ul>
 			</div>
 			<span> data from the </span>
 			<div class="btn-group" uib-dropdown>
-				<button type="button" class="btn" uib-dropdown-toggle ng-disabled="disabled">{{hc.communityType}} <span class="caret"></span></button>
+				<button type="button" class="btn" ng-class="hc.keyGroupName" uib-dropdown-toggle ng-disabled="disabled">{{hc.communityType}} <span class="caret"></span></button>
 				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
 					<li role="menuitem" ng-repeat="type in hc.communityTypes" ng-click="hc.selectCommunityType(type)">{{type}}</li>
 				</ul>
 			</div>
 			<span> {{hc.communityType == 'scientific and diving' ? 'communities' : 'community'}} around the Caribbean.</span>
 		</div>
-		<button class="tile" ng-click="hc.exploreWithParams()">Explore</button>
+		<button class="tile btn-tile" ng-click="hc.exploreWithParams()">Explore</button>
 	</div>
 	<div class="home-descriptions">
 		<div class="row">
