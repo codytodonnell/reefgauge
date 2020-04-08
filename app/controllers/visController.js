@@ -25,6 +25,11 @@ angular.module('reef')
 
 	vm.toggleScienceData = function() {
 		vm.config.science.show = !vm.config.science.show;
+		$state.go('explore', {
+			group: $stateParams.group, 
+			science: vm.config.science.show, 
+			community: vm.config.community.show
+		}, {notify: false});
 	};
 
 	vm.toggleCommunityData = function() {
@@ -44,7 +49,11 @@ angular.module('reef')
 		var selectedKey = keyGroup.scienceKeys.find(function(k) { return k.selected == true; });
 		vm.selectScienceKey(keyGroup, selectedKey);
 		visService.setCommunityFilters(keyGroup);
-		$state.go('explore', {group: keyGroup.group}, {notify: false});
+		$state.go('explore', {
+			group: keyGroup.group, 
+			science: vm.config.science.show, 
+			community: vm.config.community.show
+		}, {notify: false});
 	};
 
 	vm.showCompareTab = function() {
@@ -53,7 +62,13 @@ angular.module('reef')
 			g.selected = false;
 		});
 		vm.config.compare_open = true;
-		$state.go('explore', {group: 'Compare'}, {notify: false});
+		vm.config.community.show = false;
+		vm.config.science.show = true;
+		$state.go('explore', {
+			group: keyGroup.group, 
+			science: vm.config.science.show, 
+			community: vm.config.community.show
+		}, {notify: false});
 	};
 
 	vm.selectScienceKey = function(keyGroup, key) {

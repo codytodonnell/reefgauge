@@ -152,6 +152,8 @@ angular.module('reef')
 			    			return '<' + colorLegendValues[1] + ' (' + colorLabelScale[i] + ')';
 			    		} else if(i === colorLegendValues.length - 1) {
 			    			return '>' + d + ' (' + colorLabelScale[i] + ')';
+			    		} else if(colorLegendValues[i+1] == null) {
+			    			return d;
 			    		} else {
 			    			return d + ' - ' + colorLegendValues[i+1] + ' (' + colorLabelScale[i] + ')';
 			    		}
@@ -177,6 +179,8 @@ angular.module('reef')
 			    			return '<' + sizeLegendValues[1] + ' (' + sizeLabelScale[i] + ')';
 			    		} else if(i === sizeLegendValues.length - 1) {
 			    			return '>' + d + ' (' + sizeLabelScale[i] + ')';
+			    		} else if(sizeLegendValues[i+1] == null) {
+			    			return d;
 			    		} else {
 			    			return d + ' - ' + sizeLegendValues[i+1] + ' (' + sizeLabelScale[i] + ')';
 			    		}

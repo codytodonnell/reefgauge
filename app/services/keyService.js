@@ -199,7 +199,7 @@ angular.module('reef')
 					units: 'index from 1-4',
 					short_units: '',
 					scale: 'index',
-					domain: [2, 3, 4],
+					domain: [2, 3, 4, null],
 					positive: true,
 					group: "Benthos",
 					selected: true,
