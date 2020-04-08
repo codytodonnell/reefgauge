@@ -150,10 +150,18 @@
 			// 	}
 			// });
 
-			$scope.$watch(function() { return visService.getConfig().dataMode; }, function(newValue, oldValue) {
-				if(newValue && newValue !== oldValue) {
-					// reverseNodeOrder();
-				}
+			$scope.$watch(function() { return visService.getConfig().science.show; }, function(newValue, oldValue) {
+				toggleScience();
+				// if(newValue === false) {
+				// 	reverseNodeOrder();
+				// }
+			});
+
+			$scope.$watch(function() { return visService.getConfig().community.show; }, function(newValue, oldValue) {
+				toggleCommunity();
+				// if(newValue === false) {
+				// 	reverseNodeOrder();
+				// }
 			});
 
 			$rootScope.$on('drillClosed', function(event, data) {
@@ -248,7 +256,11 @@
 				    .transition()
 				    .duration(1000)
 				    .style('fill', function(d) {
-						return colorScale(d[key]);
+				    	if(config.science.show) {
+							return colorScale(d[key]);
+						} else {
+							return '#aaa';
+						}
 					});
 			}
 
@@ -262,7 +274,11 @@
 						return radiusScale(d[sizeKey]);
 					})
 					.style('fill', function(d) {
-						return colorScale(d[colorKey]);
+						if(config.science.show) {
+							return colorScale(d[colorKey]);
+						} else {
+							return '#aaa';
+						}
 					});
 			}
 
@@ -497,7 +513,7 @@
 			}
 
 			function squareFillOpacity(d) {
-				return config.community.show ? 0.8 : 0.4;
+				return config.community.show ? 0.8 : 0.2;
 			}
 
 			function squareStroke(d) {
@@ -526,7 +542,7 @@
 			}
 
 			function pointFillOpacity(d) {
-				return config.science.show ? 0.5 : 0.1;
+				return config.science.show ? 0.5 : 0.05;
 			}
 
 			function pointStrokeOpacity(d) {

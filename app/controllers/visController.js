@@ -25,6 +25,14 @@ angular.module('reef')
 	vm.getFilterDisplayName = keyService.getFilterDisplayName;
 	vm.setCommunityFilters = visService.setCommunityFilters;
 
+	vm.toggleScienceData = function() {
+		vm.config.science.show = !vm.config.science.show;
+	};
+
+	vm.toggleCommunityData = function() {
+		vm.config.community.show = !vm.config.community.show;
+	};
+
 	vm.showKeyGroup = function(keyGroup) {
 		document.getElementsByClassName('tab-content')[0].scrollTop = 0;
 		vm.config.compare_open = false;
