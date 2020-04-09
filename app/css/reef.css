@@ -337,8 +337,6 @@ nav .active-nav, nav .active-nav:hover {
 .var-select > button {
 	width: 100%;
     text-align: left;
-    font-size: 0.9em;
-    background: #eee;
     color: #000;
 }
 
