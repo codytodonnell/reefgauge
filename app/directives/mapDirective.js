@@ -138,18 +138,6 @@
 				}
 			});
 
-		 //    $scope.$watch(function() { return visService.getConfig().science.sizeBy; }, function(newValue, oldValue) {
-			// 	if(newValue && scienceData) {
-			// 		sizeScienceBy(newValue);
-			// 	}
-			// });
-
-			// $scope.$watch(function() { return visService.getConfig().science.colorBy; }, function(newValue, oldValue) {
-			// 	if(newValue && scienceData) {
-			// 		colorScienceBy(newValue);
-			// 	}
-			// });
-
 			$scope.$watch(function() { return visService.getConfig().science.show; }, function(newValue, oldValue) {
 				toggleScience();
 				// if(newValue === false) {
@@ -162,6 +150,11 @@
 				// if(newValue === false) {
 				// 	reverseNodeOrder();
 				// }
+			});
+
+			$scope.$watch(function() { return visService.getConfig().compare_open; }, function(newValue, oldValue) {
+				toggleScience();
+				toggleCommunity();
 			});
 
 			$rootScope.$on('drillClosed', function(event, data) {
@@ -245,6 +238,7 @@
 				svg.selectAll(".point")
 				    .transition()
 				    .duration(1000)
+				    .style("fill-opacity", pointFillOpacity)
 				    .attr('r', function(d) {
 						return radiusScale(d[key]);
 					});
@@ -256,7 +250,7 @@
 				    .transition()
 				    .duration(1000)
 				    .style('fill', function(d) {
-				    	if(config.science.show) {
+				    	if(config.science.show || config.compare_open) {
 							return colorScale(d[key]);
 						} else {
 							return '#aaa';
@@ -270,11 +264,13 @@
 				svg.selectAll(".point")
 				    .transition()
 				    .duration(1000)
+				    .style("fill-opacity", pointFillOpacity)
+					.style("stroke-opacity", pointStrokeOpacity)
 				    .attr('r', function(d) {
 						return radiusScale(d[sizeKey]);
 					})
 					.style('fill', function(d) {
-						if(config.science.show) {
+						if(config.science.show || config.compare_open) {
 							return colorScale(d[colorKey]);
 						} else {
 							return '#aaa';
@@ -518,15 +514,15 @@
 			}
 
 			function squareFill(d) {
-				return config.community.show ? ordinalColorScale(d.filter_group) : "#aaa";
+				return config.community.show && !config.compare_open ? ordinalColorScale(d.filter_group) : "#aaa";
 			}
 
 			function squareStrokeOpacity(d) {
-				return config.community.show ? 0.8 : 0;
+				return config.community.show && !config.compare_open ? 0.8 : 0;
 			}
 
 			function squareFillOpacity(d) {
-				return config.community.show ? 0.8 : 0.2;
+				return config.community.show && !config.compare_open ? 0.8 : 0.2;
 			}
 
 			function squareStroke(d) {
@@ -546,7 +542,7 @@
 			}
 
 			function pointFill(d) {
-				if(config.science.show) {
+				if(config.science.show || config.compare_open) {
 					var scale = getScienceColorScale(config.science.colorBy);
 					return scale(d[config.science.colorBy]);
 				} else {
@@ -555,11 +551,11 @@
 			}
 
 			function pointFillOpacity(d) {
-				return config.science.show ? 0.5 : 0.05;
+				return config.science.show || config.compare_open ? 0.5 : 0.05;
 			}
 
 			function pointStrokeOpacity(d) {
-				return config.science.show ? 0.3 : 0;
+				return config.science.show || config.compare_open ? 0.3 : 0;
 			}
 
 			function pointStroke(d) {

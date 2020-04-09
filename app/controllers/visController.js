@@ -63,8 +63,8 @@ angular.module('reef')
 			g.selected = false;
 		});
 		vm.config.compare_open = true;
-		vm.config.community.show = false;
-		vm.config.science.show = true;
+		// vm.config.community.show = false;
+		// vm.config.science.show = true;
 		$state.go('explore', {
 			group: 'Compare', 
 			science: vm.config.science.show, 
