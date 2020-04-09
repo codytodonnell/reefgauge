@@ -15,15 +15,18 @@
     <body ng-cloak>
     	<nav>
 			<ul>
-				<li ui-sref="home"><i class="fas fa-home"></i> ReefGauge</li>
-				<li ui-sref="explore"><i class="fas fa-globe-americas"></i> Explore</li>
-				<li ui-sref="contribute"><i class="far fa-eye"></i> Contribute</li>
-				<li ui-sref="glossary"><i class="fas fa-book"></i> Glossary</li>
-				<li ui-sref="about"><i class="fas fa-question-circle"></i> About</li>
+				<li ui-sref="home" ui-sref-active="active-nav"><i class="fas fa-home"></i> ReefGauge</li>
+				<li ui-sref="explore" ui-sref-active="active-nav"><i class="fas fa-globe-americas"></i> Explore</li>
+				<li ui-sref="contribute" ui-sref-active="active-nav"><i class="far fa-eye"></i> Contribute</li>
+				<li ui-sref="glossary" ui-sref-active="active-nav"><i class="fas fa-book"></i> Glossary</li>
+				<li ui-sref="about" ui-sref-active="active-nav"><i class="fas fa-question-circle"></i> About</li>
 			</ul>
 			<div class="border"></div>
 		</nav>
         <main ui-view></main>
+        <footer>
+        	<span>ReefGauge was developed at the Georgia Institute of Technology in 2020. <a ui-sref="about">Learn more about the project.</a></span>
+        </footer>
         <script src='https://api.mapbox.com/mapbox-gl-js/v1.6.1/mapbox-gl.js'></script>
         <script src="bower_components/angular/angular.min.js"></script>
         <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -36,6 +39,7 @@
         <script src="app/app.js"></script>
         <script src="app/controllers/homeController.js"></script>
         <script src="app/controllers/visController.js"></script>
+        <script src="app/controllers/glossaryController.js"></script>
         <script src="app/directives/scatterDirective.js"></script>
         <script src="app/directives/scatterTwoVarsDirective.js"></script>
         <script src="app/directives/parallelCoordsDirective.js"></script>

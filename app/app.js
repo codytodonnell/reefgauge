@@ -34,7 +34,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
         })
         .state('glossary', {
             url: '/glossary',
-            templateUrl: 'app/templates/glossary.html'
+            templateUrl: 'app/templates/glossary.html',
+            controller: 'glossaryController',
+            controllerAs: 'gc'
+        })
+        .state('about', {
+            url: '/about',
+            templateUrl: 'app/templates/about.html'
         })
         .state('demo', {
             url: '/demo',
