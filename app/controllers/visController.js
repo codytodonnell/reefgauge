@@ -194,7 +194,14 @@ angular.module('reef')
 			vm.showCompareTab();
 		} else {
 			var keyGroup = vm.config.keys.find(function(g) { return g.selected == true; });
-			vm.showKeyGroup(keyGroup);
+			if(keyGroup) {
+				vm.showKeyGroup(keyGroup);
+			} else if(vm.config.compare_open) {
+				vm.showCompareTab();
+			} else {
+				var fallback = keyService.getKeyGroupByName('coral');
+				vm.showKeyGroup(fallback);
+			}
 		}
 	}
 }]);

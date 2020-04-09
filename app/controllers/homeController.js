@@ -37,7 +37,7 @@ angular.module('reef')
 		var keyGroup = keyService.getActiveKeyGroup();
 		var config = visService.getConfig();
 
-		vm.keyGroupName = keyGroup.group.toLowerCase();
+		vm.keyGroupName = keyGroup ? keyGroup.group.toLowerCase() : 'coral';
 
 		if(config.science.show && config.community.show) {
 			vm.communityType = 'scientific and diving';

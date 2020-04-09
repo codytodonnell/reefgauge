@@ -90,6 +90,11 @@ nav ul li:hover {
 	color: #aaa;
 }
 
+nav img {
+	height: 30px;
+	width: auto;
+}
+
 nav .home-link {
 	position: absolute;
 	left: 15px;
@@ -648,6 +653,7 @@ nav .active-nav, nav .active-nav:hover {
 .home header h1 {
 	font-size: 3em;
 	margin: 0;
+	display: inline-block;
 }
 
 .home header h2 {
@@ -656,6 +662,19 @@ nav .active-nav, nav .active-nav:hover {
 	font-style: italic;
 	color: #606060;
 	margin: 0;
+	display: inline-block;
+}
+
+.home header > div {
+	display: inline-block;
+	margin-left: 20px;
+	text-align: left;
+}
+
+.home header img {
+	width: 100px;
+	height: auto;
+	vertical-align: baseline;
 }
 
 .home-info {
