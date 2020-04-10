@@ -1,10 +1,10 @@
 angular.module('reef')
 
-.directive('navBar', ['$state', function($state) {
+.directive('pageFooter', ['$state', function($state) {
 	return {
 		restrict: 'E',
 		scope: {},
-		templateUrl: 'app/templates/navbar.html',
+		templateUrl: 'app/templates/footer.html',
 		link: function($scope) {
 			$scope.state = $state;
 			console.log($state);

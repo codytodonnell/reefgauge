@@ -15,7 +15,7 @@
 						<h3 ng-class="{'{{g.group.toLowerCase()}}': true}">
 							<i class="fas" ng-class="vc.config.science.show ? 'fa-toggle-on' : 'fa-toggle-off'" ng-click="vc.toggleScienceData()"></i> {{g.group}} Indicators
 						</h3>
-						<p>Circles on the map represent reefs that have been assessed by the <strong>scientific community</strong>. Select an indicator to see it reflected in the circles' size and color.</p>
+						<p>Circles on the map represent reefs that have been assessed by the <strong>scientific community</strong> through <a href="https://www.agrra.org/" target="_blank">AGRRA</a>. Select an indicator to see it reflected in the circles' size and color.</p>
 						<div class="tile expandable" ng-repeat="k in g.scienceKeys" ng-click="vc.selectScienceKey(g, k)" ng-class="{'tile-selected': k.selected}">
 							<h4>{{k.display_name}}</h4>
 							<div ng-if="k.selected">
@@ -29,7 +29,7 @@
 						<h3 ng-class="{'{{g.group.toLowerCase()}}': true}">
 							<i class="fas" ng-class="vc.config.community.show ? 'fa-toggle-on' : 'fa-toggle-off'" ng-click="vc.toggleCommunityData()"></i> {{g.group}} Observations
 						</h3>
-						<p>Squares on the map represent observations from the <strong>diving community</strong>. Select a species group to toggle it on and off.</p>
+						<p>Squares on the map represent observations from the <strong>diving community</strong> on <a href="https://www.inaturalist.org/projects/reefgauge" target="_blank">iNaturalist</a>. Select a species group to toggle it on and off.</p>
 						<!-- <p>Visual observations of reef environments are key to understanding their health. ReefGauge has collected over 6,000 observations of relevant reef health indicators from the dive community. These observations are submitted through our <a href="https://www.inaturalist.org/projects/reefgauge" target="_blank">partnered citizen science project on iNaturalist</a>. Each square on the map represents one observation. Browse the different reef groups to see observations of key health indicators for that group.</p> -->
 					</div>
 					<div>
@@ -39,8 +39,14 @@
 							<li ng-repeat="f in g.communityKeys"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></label></li>
 						</ul> -->
 						<div class="checkbox-grid row">
-							<div class="grid-item-container col-md-4" ng-repeat="f in g.communityKeys">
-								<button class="btn" ng-model="f.checked" uib-btn-checkbox ng-change="vc.setCommunityFilters(g)"><i class="fas fa-check" ng-if="f.checked"></i>{{f.value_common_name ? f.value_common_name : f.value}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></button>
+							<div class="grid-item-container col-lg-4 col-md-6" ng-repeat="f in g.communityKeys">
+								<span class="grid-item" ng-model="f.checked" uib-btn-checkbox ng-change="vc.setCommunityFilters(g)">
+									<img src="images/agariciidae.jpg">
+									<span class="checkbox-subtitle"><i ng-if="g.group==='Benthos'">{{f.promoter ? 'promoter' : 'detractor'}}</i></span>
+									<span class="checkbox-title">{{f.value_common_name ? f.value_common_name : f.value}}</span>
+									<span class="checkbox-check" ng-class="{'{{g.group.toLowerCase()}}': true}"><i class="fas" ng-class="f.checked ? 'fa-eye' : 'fa-eye-slash'"></i></span>
+									<span class="checkbox-ellipsis" ng-click="vc.readMore(f); $event.stopPropagation();" uib-tooltip="Read more" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-ellipsis-h"></i></span>
+								</span>
 							</div>
 						</div>
 					</div>
@@ -63,6 +69,9 @@
 							<li role="menuitem" ng-repeat="prop in vc.scienceKeys" ng-click="vc.setScienceSize(prop.key)" ng-class="prop == vc.config.science.sizeBy ? 'selected-dropdown-item' : ''">{{prop.display_name}}</li>
 						</ul>
 				    </div>			
+				</div>
+				<div class="col-sm-12" ng-if="vc.communityKeyInfo">
+					<h3>{{vc.communityKeyInfo.value_common_name ? vc.communityKeyInfo.value_common_name : vc.communityKeyInfo.value}}</h3>
 				</div>
 			</div>
 		</section>

@@ -32,20 +32,8 @@ app.config(function($stateProvider, $urlRouterProvider) {
             url: '/contribute',
             templateUrl: 'app/templates/contribute.html'
         })
-        .state('glossary', {
-            url: '/glossary',
-            templateUrl: 'app/templates/glossary.html',
-            controller: 'glossaryController',
-            controllerAs: 'gc'
-        })
         .state('about', {
             url: '/about',
             templateUrl: 'app/templates/about.html'
-        })
-        .state('demo', {
-            url: '/demo',
-            templateUrl: 'app/templates/demo.html',
-            controller: 'visController',
-            controllerAs: 'vc'
         });
 });

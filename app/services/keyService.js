@@ -110,7 +110,8 @@ angular.module('reef')
 				{
 					key: "taxon_genus_name",
 					value: "Acropora",
-					value_common_name: "Table, Elkhorn, and Staghorn Corals",
+					// value_common_name: "Table, Elkhorn, and Staghorn Corals",
+					value_common_name: null,
 					checked: true
 				},
 			]
@@ -209,7 +210,7 @@ angular.module('reef')
 				},
 				{
 					key: "possum",
-					display_name: "Bethic Promoters",
+					display_name: "Benthic Promoters",
 					units: '% of sampled area',
 					short_units: '%',
 					scale: 'linear',
@@ -222,7 +223,7 @@ angular.module('reef')
 				},
 				{
 					key: "negsum",
-					display_name: "Bethic Detractors",
+					display_name: "Benthic Detractors",
 					units: '% of sampled area',
 					short_units: '%',
 					scale: 'linear',

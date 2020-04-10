@@ -189,7 +189,7 @@ nav .active-nav, nav .active-nav:hover {
 	overflow: auto;
     max-height: 100%;
     margin-top: 50px;
-    padding-bottom: 300px;
+    padding-bottom: 100px;
 }
 
 .sidebar .tab-content h3 {
@@ -272,23 +272,87 @@ nav .active-nav, nav .active-nav:hover {
 	font-weight: normal;
 }*/
 
-.checkbox-grid .grid-item-container button {
+.checkbox-grid .grid-item {
+	display: inline-block;
 	height: 100px;
 	width: 100%;
 	max-width: 100%;
 	margin-bottom: 10px;
 	white-space: pre-wrap;
 	border: 1px solid #ccc;
+	border-radius: 4px;
 	box-shadow: 1px 1px #aaa;
 	transition: 0.5s;
+	position: relative;
+	overflow: hidden;
+    color: #fff;
 }
 
-.checkbox-grid .grid-item-container button:hover {
-	background: #ddd !important;
+.checkbox-grid .grid-item img {
+	height: auto;
+	width: 100%;
+	position: absolute;
+	top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    filter: grayscale(100%);
 }
 
-.checkbox-grid .grid-item-container button.active {
-	background: #eee;
+/*.checkbox-grid .grid-item.active {
+	border: 2px solid #000;
+}*/
+
+.checkbox-grid .checkbox-title {
+	background: #494949;
+    opacity: 0.9;
+    padding: 5px;
+    display: inline-block;
+    border-radius: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    font-size: 0.8em;
+}
+
+.checkbox-grid .checkbox-check, .checkbox-grid .checkbox-ellipsis {
+	background: red;
+    border-radius: 35px;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+   	background: #494949;
+   	position: absolute;
+	bottom: 5px;
+}
+
+.checkbox-grid .checkbox-check {
+	left: 5px;
+}
+
+.checkbox-grid .checkbox-ellipsis {
+	right: 5px;
+}
+
+.checkbox-grid .checkbox-ellipsis:hover {
+	background: #777777;
+}
+
+.checkbox-grid .grid-item.active .checkbox-check.coral {
+	background: #712684;
+}
+
+.checkbox-grid .grid-item.active .checkbox-check.fish {
+	background: #2B59C3;
+}
+
+.checkbox-grid .grid-item.active .checkbox-check.benthos {
+	background: #CE2780;
+}
+
+.checkbox-grid i {
+	vertical-align: middle;
 }
 
 .checkbox-grid .grid-item-container button i {

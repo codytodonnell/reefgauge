@@ -8,12 +8,6 @@ angular.module('reef')
 	// cleanDataService.bulkFetchCommunityData();
 
 	vm.config = visService.getConfig();
-	
-	vm.xvar = "Ecoregion";
-	vm.yvar = "MA";
-
-	vm.xvar2 = "CCA";
-	vm.yvar2 = "MA";
 
 	vm.setScienceOrder = visService.setScienceOrder;
 	vm.setScienceColor = visService.setScienceColor;
@@ -23,6 +17,7 @@ angular.module('reef')
 	vm.getFilterDisplayName = keyService.getFilterDisplayName;
 	vm.setCommunityFilters = visService.setCommunityFilters;
 	vm.scienceKeys = getScienceKeys();
+	vm.communityKeyInfo = null;
 
 	vm.toggleScienceData = function() {
 		vm.config.science.show = !vm.config.science.show;
@@ -149,6 +144,10 @@ angular.module('reef')
 	vm.openContribute = function() {
 		vm.config.home_open = true;
 		vm.config.popup_page = 'contribute';
+	};
+
+	vm.readMore = function(communityKey) {
+		vm.communityKeyInfo = communityKey;
 	};
 
 	initConfig();
