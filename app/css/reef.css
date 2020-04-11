@@ -288,6 +288,10 @@ nav .active-nav, nav .active-nav:hover {
     color: #fff;
 }
 
+.checkbox-grid .grid-item:hover {
+	box-shadow: 3px 3px #aaa;
+}
+
 .checkbox-grid .grid-item img {
 	height: auto;
 	width: 100%;
@@ -298,21 +302,17 @@ nav .active-nav, nav .active-nav:hover {
     filter: grayscale(100%);
 }
 
-/*.checkbox-grid .grid-item.active {
-	border: 2px solid #000;
-}*/
-
 .checkbox-grid .checkbox-title {
 	background: #494949;
     opacity: 0.9;
     padding: 5px;
     display: inline-block;
-    border-radius: 30px;
+    border-radius: 4px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    white-space: nowrap;
+    text-align: center;
     font-size: 0.8em;
 }
 
@@ -325,11 +325,14 @@ nav .active-nav, nav .active-nav:hover {
    	background: #494949;
    	position: absolute;
 	bottom: 5px;
+	cursor: pointer;
+	transition: 0.25s;
 }
 
 .checkbox-grid .checkbox-check {
 	left: 5px;
 }
+
 
 .checkbox-grid .checkbox-ellipsis {
 	right: 5px;
@@ -351,6 +354,18 @@ nav .active-nav, nav .active-nav:hover {
 	background: #CE2780;
 }
 
+.checkbox-grid .checkbox-check.coral:hover {
+	background: #8A5199 !important;
+}
+
+.checkbox-grid .checkbox-check.fish:hover {
+	background: #4C74D3 !important;
+}
+
+.checkbox-grid .checkbox-check.benthos:hover {
+	background: #E560A7 !important;
+}
+
 .checkbox-grid i {
 	vertical-align: middle;
 }
@@ -359,6 +374,17 @@ nav .active-nav, nav .active-nav:hover {
 	position: absolute;
 	left: 25px;
 	top: 10px;
+}
+
+.sidebar-overlay {
+	position: absolute;
+	height: 100%;
+	background: #fff;
+}
+
+.sidebar-overlay img {
+	width: 100%;
+	margin-bottom: 10px;
 }
 
 .btn-plain {

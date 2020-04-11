@@ -2,7 +2,7 @@
 	<div class="explore-row row">
 		<section class="sidebar col-sm-4">
 			<div class="tabs row">
-				<h2 ng-repeat="g in vc.config.keys" class="col-xs-3" ng-click="vc.showKeyGroup(g)" ng-class="{'tab-selected': g.selected, {{g.group.toLowerCase()}}: true}"><img ng-src="images/{{g.icon}}"> <span>{{g.group}}</span></h2>
+				<h2 ng-repeat="g in vc.config.keys" class="col-xs-3" ng-click="vc.showKeyGroup(g)" ng-class="{'tab-selected': g.selected, {{g.group.toLowerCase()}}: true}"><img ng-src="images/graphics/{{g.icon}}"> <span>{{g.group}}</span></h2>
 				<h2 class="col-md-3" ng-click="vc.showCompareTab()" ng-class="vc.config.compare_open ? 'tab-selected' : ''"><i class="fas fa-exchange-alt"></i> <span>Compare</span></h2>
 			</div>
 			<!-- <div>
@@ -41,11 +41,12 @@
 						<div class="checkbox-grid row">
 							<div class="grid-item-container col-lg-4 col-md-6" ng-repeat="f in g.communityKeys">
 								<span class="grid-item" ng-model="f.checked" uib-btn-checkbox ng-change="vc.setCommunityFilters(g)">
-									<img src="images/agariciidae.jpg">
+									<img ng-src="{{f.image}}">
 									<span class="checkbox-subtitle"><i ng-if="g.group==='Benthos'">{{f.promoter ? 'promoter' : 'detractor'}}</i></span>
 									<span class="checkbox-title">{{f.value_common_name ? f.value_common_name : f.value}}</span>
-									<span class="checkbox-check" ng-class="{'{{g.group.toLowerCase()}}': true}"><i class="fas" ng-class="f.checked ? 'fa-eye' : 'fa-eye-slash'"></i></span>
-									<span class="checkbox-ellipsis" ng-click="vc.readMore(f); $event.stopPropagation();" uib-tooltip="Read more" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-ellipsis-h"></i></span>
+									<span class="checkbox-check" ng-if="f.checked" ng-class="{'{{g.group.toLowerCase()}}': true}" uib-tooltip="Hide" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-eye"></i></span>
+									<span class="checkbox-check" ng-if="!f.checked" ng-class="{'{{g.group.toLowerCase()}}': true}" uib-tooltip="Show" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-eye-slash"></i></span>
+									<span class="checkbox-ellipsis" ng-click="vc.openReadMore(f); $event.stopPropagation();" uib-tooltip="Read more" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-ellipsis-h"></i></span>
 								</span>
 							</div>
 						</div>
@@ -70,8 +71,11 @@
 						</ul>
 				    </div>			
 				</div>
-				<div class="col-sm-12" ng-if="vc.communityKeyInfo">
+				<div class="col-sm-12 sidebar-overlay" ng-if="vc.communityKeyInfo">
 					<h3>{{vc.communityKeyInfo.value_common_name ? vc.communityKeyInfo.value_common_name : vc.communityKeyInfo.value}}</h3>
+					<img ng-src="{{vc.communityKeyInfo.image}}">
+					<p>{{vc.communityKeyInfo.description}}</p>
+					<a ng-click="vc.closeReadMore()"><i class="fas fa-arrow-left"></i> Go back</a>
 				</div>
 			</div>
 		</section>
