@@ -342,6 +342,15 @@
 						.style("stroke-opacity", 0.8)
 						.style("stroke-width", 10);
 
+					var tipContent = d.common_name ? d.common_name : d.scientific_name;
+
+					tip.html('<p>' + tipContent + '</p>')
+						.attr('id', d.id)
+						.style('left', (+node.attr("x") + 5) + "px")
+						.style('top', +node.attr("y") - +node.attr("height") + "px")
+						.style('transform', 'translate(-50%, -100%)')
+						.style('opacity', 0.9);
+
 					svg.append("svg:image")
 						.attr('id', 'image-' + d.id)
 						.attr('class', 'community-hover-image')
@@ -361,6 +370,8 @@
 						.style("stroke-opacity", squareStrokeOpacity)
 						.style("stroke-width", squareStrokeWidth);
 				}
+
+				tip.style('opacity', 0);
 
 				d3.selectAll(".community-hover-image")
 					.remove();
