@@ -19,10 +19,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
             	},
             	science: { 
             		dynamic: true 
-            	} ,
+            	},
             	community: { 
             		dynamic: true 
-            	} 
+            	}
             },
             templateUrl: 'app/templates/vis.html',
             controller: 'visController',

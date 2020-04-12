@@ -380,11 +380,26 @@ nav .active-nav, nav .active-nav:hover {
 	position: absolute;
 	height: 100%;
 	background: #fff;
+	overflow: auto;
+    padding-bottom: 75px;
+}
+
+.sidebar-overlay h3 {
+	cursor: pointer;
 }
 
 .sidebar-overlay img {
 	width: 100%;
 	margin-bottom: 10px;
+}
+
+.sidebar-overlay .footnote {
+	font-size: 0.8em;
+}
+
+.sidebar-overlay .footnote-toggle {
+	margin-right: 5px;
+	cursor: pointer;
 }
 
 .btn-plain {

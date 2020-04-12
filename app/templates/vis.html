@@ -39,14 +39,14 @@
 							<li ng-repeat="f in g.communityKeys"><input type="checkbox" ng-model="f.checked" ng-change="vc.setCommunityFilters(g)"><label>{{vc.getFilterDisplayName(f)}}<i ng-if="g.name==='Benthos'"> {{f.promoter ? 'promoter' : 'detractor'}}</i></label></li>
 						</ul> -->
 						<div class="checkbox-grid row">
-							<div class="grid-item-container col-lg-4 col-md-6" ng-repeat="f in g.communityKeys">
+							<div class="grid-item-container col-lg-4 col-md-6" ng-repeat="f in g.communityKeys | orderBy:'value_display_name'">
 								<span class="grid-item" ng-model="f.checked" uib-btn-checkbox ng-change="vc.setCommunityFilters(g)">
 									<img ng-src="{{f.image}}">
 									<span class="checkbox-subtitle"><i ng-if="g.group==='Benthos'">{{f.promoter ? 'promoter' : 'detractor'}}</i></span>
-									<span class="checkbox-title">{{f.value_common_name ? f.value_common_name : f.value}}</span>
+									<span class="checkbox-title">{{f.value_display_name}}</span>
 									<span class="checkbox-check" ng-if="f.checked" ng-class="{'{{g.group.toLowerCase()}}': true}" uib-tooltip="Hide" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-eye"></i></span>
 									<span class="checkbox-check" ng-if="!f.checked" ng-class="{'{{g.group.toLowerCase()}}': true}" uib-tooltip="Show" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-eye-slash"></i></span>
-									<span class="checkbox-ellipsis" ng-click="vc.openReadMore(f); $event.stopPropagation();" uib-tooltip="Read more" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-ellipsis-h"></i></span>
+									<span class="checkbox-ellipsis" ng-click="vc.openInfoOverlay(f); $event.stopPropagation();" uib-tooltip="Read more" tooltip-append-to-body="true" tooltip-placement="bottom"><i class="fas fa-ellipsis-h"></i></span>
 								</span>
 							</div>
 						</div>
@@ -71,12 +71,13 @@
 						</ul>
 				    </div>			
 				</div>
-				<div class="col-sm-12 sidebar-overlay" ng-if="vc.communityKeyInfo">
+				<info-overlay ng-if="vc.infoOverlayItem" item="vc.infoOverlayItem"></info-overlay>
+				<!-- <div class="col-sm-12 sidebar-overlay" ng-if="vc.communityKeyInfo">
 					<h3>{{vc.communityKeyInfo.value_common_name ? vc.communityKeyInfo.value_common_name : vc.communityKeyInfo.value}}</h3>
 					<img ng-src="{{vc.communityKeyInfo.image}}">
 					<p>{{vc.communityKeyInfo.description}}</p>
 					<a ng-click="vc.closeReadMore()"><i class="fas fa-arrow-left"></i> Go back</a>
-				</div>
+				</div> -->
 			</div>
 		</section>
 		<section class="vis-container col-sm-8">

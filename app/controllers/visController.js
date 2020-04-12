@@ -146,12 +146,8 @@ angular.module('reef')
 		vm.config.popup_page = 'contribute';
 	};
 
-	vm.openReadMore = function(communityKey) {
-		vm.communityKeyInfo = communityKey;
-	};
-
-	vm.closeReadMore = function() {
-		vm.communityKeyInfo = null;
+	vm.openInfoOverlay = function(item) {
+		vm.infoOverlayItem = item;
 	};
 
 	initConfig();

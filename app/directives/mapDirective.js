@@ -75,11 +75,9 @@
 		    var d3Projection = getD3();
 		    
 		    var path = d3.geoPath()
-		 	// d3.json("https://api.inaturalist.org/v1/observations?project_id=66630&order=desc&order_by=created_at")
 		  	Promise.all([
 		    	d3.json("data/ReefMasterBySite.json"),
-		    	// d3.csv("data/inat-elkhorn-coral-observations.csv")
-		    	d3.csv("data/inat-reefgauge-022820.csv")
+		    	d3.csv("data/inat-reefgauge-041120.csv")
 		    ]).then(function(results) {
 
 		    	scienceData = results[0];
