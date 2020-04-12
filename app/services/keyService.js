@@ -214,9 +214,9 @@ angular.module('reef')
 					subgroup: 'Herbivorous',
 					checked: true,
 					image: 'images/parrotfish.jpg',
-					image_credit: 'By <a rel="nofollow" class="external text" href="https://www.flickr.com/people/39136124@N00">Paul Asman and Jill Lenoble</a> - <a rel="nofollow" class="external text" href="https://www.flickr.com/photos/pauljill/4686630424/">rainbow parrotfish Scarus guacamaia</a>Uploaded by <a href="//commons.wikimedia.org/wiki/User:Amada44" title="User:Amada44">Amada44</a>, <a href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=25257260">Link</a>',
+					image_credit: 'By <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/people/39136124@N00">Paul Asman and Jill Lenoble</a> - <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/photos/pauljill/4686630424/">rainbow parrotfish Scarus guacamaia</a>Uploaded by <a target="_blank" href="//commons.wikimedia.org/wiki/User:Amada44" title="User:Amada44">Amada44</a>, <a target="_blank" href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=25257260">Link</a>',
 					description: 'Parrotfishes are heribivorous fish that feed on harmful benthic detractors like macroalgae. They are named for their dentition, which is distinct from other fish, including other labrids. Their numerous teeth are arranged in a tightly packed mosaic on the external surface of their jaw bones, forming a parrot-like beak with which they rasp algae from coral and other rocky substrates (which contributes to the process of bioerosion).',
-					description_credit: 'Wikipedia contributors. (2020, February 25). Parrotfish. In Wikipedia, The Free Encyclopedia. Retrieved 00:03, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Parrotfish&oldid=942548038">Link</a>'
+					description_credit: 'Wikipedia contributors. (2020, February 25). Parrotfish. In Wikipedia, The Free Encyclopedia. Retrieved 00:03, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Parrotfish&oldid=942548038">Link</a>'
 				},
 				{
 					key: "taxon_family_name",
@@ -225,9 +225,9 @@ angular.module('reef')
 					subgroup: 'Herbivorous',
 					checked: true,
 					image: 'images/acanthuridae.jpg',
-					image_credit: 'By <a href="//commons.wikimedia.org/wiki/User:Holleday" title="User:Holleday">H. Krisp</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by/3.0" title="Creative Commons Attribution 3.0">CC BY 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=15477882">Link</a>',
+					image_credit: 'By <a target="_blank" href="//commons.wikimedia.org/wiki/User:Holleday" title="User:Holleday">H. Krisp</a> - <span class="int-own-work" lang="en">Own work</span>, <a target="_blank" href="https://creativecommons.org/licenses/by/3.0" title="Creative Commons Attribution 3.0">CC BY 3.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=15477882">Link</a>',
 					description: 'Acanthuridae are the family of surgeonfishes, tangs, and unicornfishes. The family includes about 86 extant species of herbivorous marine fish living in tropical seas, usually around coral reefs. The distinctive characteristic of the family is that they have scalpel-like modified scales, one or more on either side of the peduncle of the tail. The spines are dangerously sharp and may seriously injure anyone who carelessly handles such a fish. The dorsal, anal, and caudal fins are large, extending for most of the length of the body. The mouths are small and have a single row of teeth adapted to grazing on algae.',
-					description_credit: 'Wikipedia contributors. (2019, December 12). Acanthuridae. In Wikipedia, The Free Encyclopedia. Retrieved 00:08, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Acanthuridae&oldid=930429476">Link</a>'
+					description_credit: 'Wikipedia contributors. (2019, December 12). Acanthuridae. In Wikipedia, The Free Encyclopedia. Retrieved 00:08, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Acanthuridae&oldid=930429476">Link</a>'
 				},
 				{
 					key: "taxon_family_name",
@@ -236,9 +236,9 @@ angular.module('reef')
 					subgroup: 'Piscivorous',
 					checked: true,
 					image: 'images/grouper.jpg',
-					image_credit: 'By <a href="//commons.wikimedia.org/wiki/User:Albert_kok" title="User:Albert kok">Albert kok</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=76645257">Link</a>',
+					image_credit: 'By <a target="_blank" href="//commons.wikimedia.org/wiki/User:Albert_kok" title="User:Albert kok">Albert kok</a> - <span class="int-own-work" lang="en">Own work</span>, <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=76645257">Link</a>',
 					description: 'Groupers are piscivorous reef-dwelling fish and are one of the most important species in a reef’s ecosystem. They habitually eat fish, octopuses, and crustaceans, some of which are harmful to corals. This means they play an important role in controlling populations of species that inhibit coral growth. They typically having a stout body and a large mouth. They swallow prey rather than biting pieces off it. They do not have many teeth on the edges of their jaws, but they have heavy crushing tooth plates inside the pharynx.',
-					description_credit: 'Wikipedia contributors. (2020, February 2). Grouper. In Wikipedia, The Free Encyclopedia. Retrieved 23:55, April 11, 2020, from https://en.wikipedia.org/w/index.php?title=Grouper&oldid=938796445">Link</a>',
+					description_credit: 'Wikipedia contributors. (2020, February 2). Grouper. In Wikipedia, The Free Encyclopedia. Retrieved 23:55, April 11, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Grouper&oldid=938796445">Link</a>',
 				},
 				{
 					key: "taxon_family_name",
@@ -247,9 +247,9 @@ angular.module('reef')
 					subgroup: 'Piscivorous',
 					checked: true,
 					image: 'images/grunt.jpg',
-					image_credit: 'By <a rel="nofollow" class="external text" href="https://www.flickr.com/people/39136124@N00">Paul Asman and Jill Lenoble</a> - <a rel="nofollow" class="external text" href="https://www.flickr.com/photos/pauljill/3475244764/">french and smallmouth grunt Haemulon flavolineatum and chrysargyreum</a>Uploaded by <a href="//commons.wikimedia.org/wiki/User:Amada44" title="User:Amada44">Amada44</a>, <a href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=25298536">Link</a>',
+					image_credit: 'By <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/people/39136124@N00">Paul Asman and Jill Lenoble</a> - <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/photos/pauljill/3475244764/">french and smallmouth grunt Haemulon flavolineatum and chrysargyreum</a>Uploaded by <a target="_blank" href="//commons.wikimedia.org/wiki/User:Amada44" title="User:Amada44">Amada44</a>, <a target="_blank" href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=25298536">Link</a>',
 					description: 'Haemulidae is a family of piscivorous fishes in the order Perciformes known commonly as grunts. There are about 133 species in 19 genera. These fish are found in tropical fresh, brackish, and saltwaters around the world. They are bottom-feeding predators, named for their ability to produce sound by grinding their teeth. They also engage in mutualistic relationship with cleaner gobies of genus Elacatinus, allowing them to feed on ectoparasites on their bodies.',
-					description_credit: 'Wikipedia contributors. (2019, December 3). Haemulidae. In Wikipedia, The Free Encyclopedia. Retrieved 00:11, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Haemulidae&oldid=929029473">Link</a>'
+					description_credit: 'Wikipedia contributors. (2019, December 3). Haemulidae. In Wikipedia, The Free Encyclopedia. Retrieved 00:11, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Haemulidae&oldid=929029473">Link</a>'
 				},
 				{
 					key: "taxon_family_name",
@@ -258,10 +258,11 @@ angular.module('reef')
 					subgroup: 'Piscivorous',
 					checked: true,
 					image: 'images/snapper.jpg',
-					image_credit: 'By <a href="//commons.wikimedia.org/wiki/User:Albert_kok" title="User:Albert kok">Albert kok</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=3489462">Link</a>',
+					image_credit: 'By <a target="_blank" href="//commons.wikimedia.org/wiki/User:Albert_kok" title="User:Albert kok">Albert kok</a> - <span class="int-own-work" lang="en">Own work</span>, <a target="_blank" href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=3489462">Link</a>',
 					description: 'Snappers inhabit tropical and subtropical regions of all oceans and are important piscorovous predators in reef systems. Some snappers grow up to about 1 m (3.3 ft) in length however one specific Snapper, the Cubera Snapper, grows up to 5 ft in length. Most are active carnivores, feeding on crustaceans or other fish, though a few are plankton-feeders.',
-					description_credit: 'Wikipedia contributors. (2020, March 20). Lutjanidae. In Wikipedia, The Free Encyclopedia. Retrieved 00:25, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Lutjanidae&oldid=946436630">Link</a>'
-					description_credit_show: false				}
+					description_credit: 'Wikipedia contributors. (2020, March 20). Lutjanidae. In Wikipedia, The Free Encyclopedia. Retrieved 00:25, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Lutjanidae&oldid=946436630">Link</a>',
+					description_credit_show: false				
+				}
 			]
 		},
 		{
@@ -345,9 +346,9 @@ angular.module('reef')
 					subgroup: 'Promoter',
 					checked: true,
 					image: 'images/corallinales.jpg',
-					image_credit: 'By <a href="//commons.wikimedia.org/wiki/User:Pbsouthwood" title="User:Pbsouthwood">Pbsouthwood</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=26279827">Link</a>',
+					image_credit: 'By <a target="_blank" href="//commons.wikimedia.org/wiki/User:Pbsouthwood" title="User:Pbsouthwood">Pbsouthwood</a> - <span class="int-own-work" lang="en">Own work</span>, <a target="_blank" href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=26279827">Link</a>',
 					description: 'Coralline algae are red algae in the order Corallinales. They are characterized by a thallus that is hard because of calcareous deposits contained within the cell walls. The colors of these algae are most typically pink, or some other shade of red, but some species can be purple, yellow, blue, white, or gray-green. Coralline algae play an important role in the ecology of coral reefs. A close look at almost any intertidal rocky shore or coral reef will reveal an abundance of pink to pinkish-grey patches, distributed throughout the rock surfaces. These patches of pink "paint" are actually living crustose coralline red algae.',
-					description_credit: 'Wikipedia contributors. (2020, February 22). Coralline algae. In Wikipedia, The Free Encyclopedia. Retrieved 01:49, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Coralline_algae&oldid=942125566">Link</a>'
+					description_credit: 'Wikipedia contributors. (2020, February 22). Coralline algae. In Wikipedia, The Free Encyclopedia. Retrieved 01:49, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Coralline_algae&oldid=942125566">Link</a>'
 				},
 				{
 					key: "taxon_order_name",
@@ -356,9 +357,9 @@ angular.module('reef')
 					subgroup: 'Detractor',
 					checked: true,
 					image: 'images/cyanobacteria.jpg',
-					image_credit: 'By <a rel="nofollow" class="external text" href="https://www.flickr.com/people/93242958@N00">Derek Keats</a> from Johannesburg, South Africa - <a rel="nofollow" class="external text" href="https://www.flickr.com/photos/dkeats/6165864891/">Red cyanobacteria on dead gorgonian</a>, <a href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=24230008">Link</a>',
+					image_credit: 'By <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/people/93242958@N00">Derek Keats</a> from Johannesburg, South Africa - <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/photos/dkeats/6165864891/">Red cyanobacteria on dead gorgonian</a>, <a target="_blank" href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=24230008">Link</a>',
 					description: 'Aquatic cyanobacteria are known for their extensive and highly visible blooms that can form in both freshwater and marine environments. In coral reef environments, corals can become overgrown by cyanobacteria which prevents coral reproduction and growth. The blooms can have the appearance of blue-green paint or scum. These blooms can be toxic, and frequently lead to the closure of recreational waters when spotted.',
-					description_credit: 'Wikipedia contributors. (2020, April 11). Cyanobacteria. In Wikipedia, The Free Encyclopedia. Retrieved 00:42, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Cyanobacteria&oldid=950337193">Link</a>'
+					description_credit: 'Wikipedia contributors. (2020, April 11). Cyanobacteria. In Wikipedia, The Free Encyclopedia. Retrieved 00:42, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Cyanobacteria&oldid=950337193">Link</a>'
 				},
 				{
 					key: "taxon_genus_name",
@@ -367,9 +368,9 @@ angular.module('reef')
 					subgroup: 'Detractor',
 					checked: true,
 					image: 'images/halimeda.jpg',
-					image_credit: 'By Philippe Bourjon - The uploader on Wikimedia Commons received this from the author/copyright holder., <a href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=35081064">Link</a>',
+					image_credit: 'By Philippe Bourjon - The uploader on Wikimedia Commons received this from the author/copyright holder., <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0" title="Creative Commons Attribution-Share Alike 4.0">CC BY-SA 4.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=35081064">Link</a>',
 					description: 'Halimeda is a genus of green macroalgae. The algal body (thallus) is composed of calcified green segments. Calcium carbonate is deposited in its tissues, making it inedible to most herbivores.',
-					description_credit: 'Wikipedia contributors. (2019, November 1). Halimeda. In Wikipedia, The Free Encyclopedia. Retrieved 01:51, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Halimeda&oldid=924116832">Link</a>'
+					description_credit: 'Wikipedia contributors. (2019, November 1). Halimeda. In Wikipedia, The Free Encyclopedia. Retrieved 01:51, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Halimeda&oldid=924116832">Link</a>'
 				},
 				{
 					key: "taxon_genus_name",
@@ -378,9 +379,9 @@ angular.module('reef')
 					subgroup: 'Detractor',
 					checked: true,
 					image: 'images/caulerpa.jpg',
-					image_credit: 'By Dr. Robert Ricker, NOAA/NOS/ORR - <a rel="nofollow" class="external free" href="http://www.photolib.noaa.gov/bigs/rikr0034.jpg">http://www.photolib.noaa.gov/bigs/rikr0034.jpg</a>, Public Domain, <a href="https://commons.wikimedia.org/w/index.php?curid=16457639">Link</a>',
+					image_credit: 'By Dr. Robert Ricker, NOAA/NOS/ORR - <a target="_blank" rel="nofollow" class="external free" href="http://www.photolib.noaa.gov/bigs/rikr0034.jpg">http://www.photolib.noaa.gov/bigs/rikr0034.jpg</a>, Public Domain, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=16457639">Link</a>',
 					description: 'Caulerpa is a genus of seaweeds in the family Caulerpaceae (among the green algae) and includes species such as green feather algae and sea grapes. Most Caulerpa species evolved in tropical waters, where herbivores have immunity to toxic compounds within the alga. Temperate water herbivores have no natural immunity to these toxins, allowing Caulerpa to grow unchecked if introduced to temperate waters.',
-					description_credit: 'Wikipedia contributors. (2019, December 18). Caulerpa. In Wikipedia, The Free Encyclopedia. Retrieved 01:11, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Caulerpa&oldid=931439253">Link</a>'
+					description_credit: 'Wikipedia contributors. (2019, December 18). Caulerpa. In Wikipedia, The Free Encyclopedia. Retrieved 01:11, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Caulerpa&oldid=931439253">Link</a>'
 				},
 				{
 					key: "taxon_genus_name",
@@ -389,9 +390,9 @@ angular.module('reef')
 					subgroup: 'Detractor',
 					checked: true,
 					image: 'images/cliona.jpg',
-					image_credit: 'By The original uploader was <a href="https://en.wikipedia.org/wiki/fr:User:Elapied" class="extiw" title="w:fr:User:Elapied">Elapied</a> at <a href="https://en.wikipedia.org/wiki/fr:" class="extiw" title="w:fr:">French Wikipedia</a>. - Transferred from <span class="plainlinks"><a class="external text" href="https://fr.wikipedia.org">fr.wikipedia</a></span> to Commons., <a href="https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en" title="Creative Commons Attribution-Share Alike 2.0 fr">CC BY-SA 2.0 fr</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=1931236">Link</a>',
+					image_credit: 'By The original uploader was <a target="_blank" href="https://en.wikipedia.org/wiki/fr:User:Elapied" class="extiw" title="w:fr:User:Elapied">Elapied</a> at <a target="_blank" href="https://en.wikipedia.org/wiki/fr:" class="extiw" title="w:fr:">French Wikipedia</a>. - Transferred from <span class="plainlinks"><a target="_blank" class="external text" href="https://fr.wikipedia.org">fr.wikipedia</a></span> to Commons., <a target="_blank" href="https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en" title="Creative Commons Attribution-Share Alike 2.0 fr">CC BY-SA 2.0 fr</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=1931236">Link</a>',
 					description: 'Cliona is a genus of demosponges that includes species of burrowing sponges such as cliona delitrix. This sponge is found in shallow water in the Caribbean Sea and the Gulf of Mexico. It usually grows on a massive coral, not only covering its surface but also burrowing into its interior, but is sometimes found on some other calcareous substrate such as a shell or a limestone rock. It does not normally grow on branching corals.',
-					description_credit: 'Wikipedia contributors. (2019, December 18). Cliona delitrix. In Wikipedia, The Free Encyclopedia. Retrieved 01:18, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Cliona_delitrix&oldid=931427566">Link</a>'
+					description_credit: 'Wikipedia contributors. (2019, December 18). Cliona delitrix. In Wikipedia, The Free Encyclopedia. Retrieved 01:18, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Cliona_delitrix&oldid=931427566">Link</a>'
 				},
 				{
 					key: "taxon_class_name",
@@ -400,9 +401,9 @@ angular.module('reef')
 					subgroup: 'Detractor',
 					checked: true,
 					image: 'images/phaeophyceae.jpg',
-					image_credit: 'By <a href="//commons.wikimedia.org/wiki/User:JanRehschuh" title="User:JanRehschuh">JanRehschuh</a> - <span class="int-own-work" lang="en">Own work</span>, <a href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a href="https://commons.wikimedia.org/w/index.php?curid=20541235">Link</a>',
+					image_credit: 'By <a target="_blank" href="//commons.wikimedia.org/wiki/User:JanRehschuh" title="User:JanRehschuh">JanRehschuh</a> - <span class="int-own-work" lang="en">Own work</span>, <a target="_blank" href="https://creativecommons.org/licenses/by-sa/3.0" title="Creative Commons Attribution-Share Alike 3.0">CC BY-SA 3.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=20541235">Link</a>',
 					description: 'The brown algae, comprising the class Phaeophyceae, are a large group of multicellular algae, including many seaweeds located in colder waters within the Northern Hemisphere. Most brown algae live in marine environments, where they play an important role both as food and as a potential habitat. Particularly after mass coral mortality, macroalgae such as brown algae can overgrow areas of reef this dominating the ecosystem and detracting from coral growth.',
-					description_credit: 'Wikipedia contributors. (2020, March 20). Brown algae. In Wikipedia, The Free Encyclopedia. Retrieved 01:31, April 12, 2020, from https://en.wikipedia.org/w/index.php?title=Brown_algae&oldid=946528121">Link</a>'
+					description_credit: 'Wikipedia contributors. (2020, March 20). Brown algae. In Wikipedia, The Free Encyclopedia. Retrieved 01:31, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Brown_algae&oldid=946528121">Link</a>'
 				}
 			]
 		}
