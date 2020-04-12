@@ -14,6 +14,10 @@ angular.module('reef')
 
 			$scope.colorKey = keyService.getScienceKeyByName($scope.config.science.colorBy);
 
+			$scope.isSingleDimension = function() {
+				return $scope.config.science.colorBy === $scope.config.science.sizeBy ? true : false;
+			};
+
 			var colorLegendValues = angular.copy($scope.colorKey.domain);
 			colorLegendValues.unshift(0);
 
@@ -82,8 +86,7 @@ angular.module('reef')
 		    		return 'translate(' + margin.left + ', ' + band(i) + ')';
 		    	});
 
-		    colorPoint.append('circle')
-		    	.attr('r', 10);
+		    colorPoint.append('circle');
 
 		    colorPoint.append('text')
 		    	.attr('x', 30)
@@ -144,7 +147,10 @@ angular.module('reef')
 				colorPoint.data(colorLegendValues);
 
 		    	colorPoint.select('circle')
-		    		.style('fill', function(d) { return colorScale(d); });
+		    		.style('fill', function(d) { return colorScale(d); })
+		    		.attr('r', function(d) { 
+		    			return $scope.isSingleDimension() ? radiusScale(d) : 10; 
+		    		});
 
 			    colorPoint.select('text')
 			    	.text(function(d, i) { 

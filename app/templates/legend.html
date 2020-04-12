@@ -7,7 +7,7 @@
 			<p class="units">{{colorKey.units}}</p>
 			<svg id="legend-color-svg"></svg>
 		</div>
-		<div class="legend-science">
+		<div class="legend-science" ng-show="!isSingleDimension()">
 			<p>{{sizeKey.display_name}}</p>
 			<p class="units">{{sizeKey.units}}</p>
 			<svg id="legend-size-svg"></svg>

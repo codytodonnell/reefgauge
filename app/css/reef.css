@@ -382,7 +382,7 @@ nav .active-nav, nav .active-nav:hover {
 	top: 10px;
 }
 
-.sidebar-overlay {
+.sidebar-overlay, .compare-tab {
 	position: absolute;
 	height: 100%;
 	background: #fff;
@@ -438,6 +438,10 @@ nav .active-nav, nav .active-nav:hover {
 
 .btn-tile:hover {
 	opacity: 0.9;
+}
+
+.clickable {
+	cursor: pointer;
 }
 
 .var-select {
@@ -613,7 +617,7 @@ nav .active-nav, nav .active-nav:hover {
 #legend {
 	position: absolute;
 	width: 175px;
-	height: 100%;
+	height: auto;
 	top: 0;
 	right: 0;
 	z-index: 10;
@@ -622,6 +626,7 @@ nav .active-nav, nav .active-nav:hover {
 	border: 1px solid #ccc;
 	color: #fff;
 	font-size: 0.8em;
+	padding-bottom: 5px;
 }
 
 #legend.closed {

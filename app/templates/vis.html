@@ -12,8 +12,8 @@
 			<div class="tab-content row">
 				<div ng-repeat="g in vc.config.keys" class="col-sm-12" ng-show="g.selected">
 					<div>
-						<h3 ng-class="{'{{g.group.toLowerCase()}}': true}">
-							<i class="fas" ng-class="vc.config.science.show ? 'fa-toggle-on' : 'fa-toggle-off'" ng-click="vc.toggleScienceData()"></i> {{g.group}} Indicators
+						<h3 class="clickable" ng-class="{'{{g.group.toLowerCase()}}': true}" ng-click="vc.toggleScienceData()">
+							<i class="fas" ng-class="vc.config.science.show ? 'fa-toggle-on' : 'fa-toggle-off'"></i> {{g.group}} Indicators
 						</h3>
 						<p>Circles on the map represent reefs that have been assessed by the <strong>scientific community</strong> through <a href="https://www.agrra.org/" target="_blank">AGRRA</a>. Select an indicator to see it reflected in the circles' size and color.</p>
 						<div class="tile expandable" ng-repeat="k in g.scienceKeys" ng-click="vc.selectScienceKey(g, k)" ng-class="{'tile-selected': k.selected}">
@@ -26,8 +26,8 @@
 						</div>
 					</div>
 					<div>
-						<h3 ng-class="{'{{g.group.toLowerCase()}}': true}">
-							<i class="fas" ng-class="vc.config.community.show ? 'fa-toggle-on' : 'fa-toggle-off'" ng-click="vc.toggleCommunityData()"></i> {{g.group}} Observations
+						<h3 class="clickable" ng-class="{'{{g.group.toLowerCase()}}': true}" ng-click="vc.toggleCommunityData()">
+							<i class="fas" ng-class="vc.config.community.show ? 'fa-toggle-on' : 'fa-toggle-off'"></i> {{g.group}} Observations
 						</h3>
 						<p>Squares on the map represent observations from the <strong>diving community</strong> on <a href="https://www.inaturalist.org/projects/reefgauge" target="_blank">iNaturalist</a>. Select a species group to toggle it on and off.</p>
 						<!-- <p>Visual observations of reef environments are key to understanding their health. ReefGauge has collected over 6,000 observations of relevant reef health indicators from the dive community. These observations are submitted through our <a href="https://www.inaturalist.org/projects/reefgauge" target="_blank">partnered citizen science project on iNaturalist</a>. Each square on the map represents one observation. Browse the different reef groups to see observations of key health indicators for that group.</p> -->
@@ -52,8 +52,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-sm-12" ng-show="vc.config.compare_open">
-					<h3>Explore all the Indicators</h3>
+				<div class="col-sm-12 compare-tab" ng-show="vc.config.compare_open">
+					<h3>Customize and Compare Indicators</h3>
+					<p>See how two indicators relate to each other by comparing them on the map simultaneously. Choose one indicator to determine the color of the points and a second indicator to determine the size.</p>
 					<div class="btn-group var-select" uib-dropdown>
 						<button id="color-button" type="button" class="tile" uib-dropdown-toggle ng-disabled="disabled">
 						<strong>Color</strong> points by {{vc.getScienceKeyByName(vc.config.science.colorBy).display_name}} <span class="caret"></span>
