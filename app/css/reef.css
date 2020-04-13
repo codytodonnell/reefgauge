@@ -195,6 +195,7 @@ nav .active-nav, nav .active-nav:hover {
 .sidebar .tab-content h3 {
 	font-size: 1.3em;
 	margin-top: 20px;
+	display: inline-block;
 }
 
 .sidebar .tab-content h3.coral {

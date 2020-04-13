@@ -35,6 +35,7 @@ angular.module('reef')
 	vm.showKeyGroup = function(keyGroup) {
 		document.getElementsByClassName('tab-content')[0].scrollTop = 0;
 		vm.config.compare_open = false;
+		vm.infoOverlayItem = null;
 		vm.config.keys.forEach(function(g) {
 			if(g.group === keyGroup.group) {
 				g.selected = true;
@@ -57,9 +58,8 @@ angular.module('reef')
 		vm.config.keys.forEach(function(g) {
 			g.selected = false;
 		});
+		vm.infoOverlayItem = null;
 		vm.config.compare_open = true;
-		// vm.config.community.show = false;
-		// vm.config.science.show = true;
 		$state.go('explore', {
 			group: 'Compare', 
 			science: vm.config.science.show, 

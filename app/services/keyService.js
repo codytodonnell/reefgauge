@@ -28,6 +28,7 @@ angular.module('reef')
 					group: "Coral",
 					selected: true,
 					primary_indicator: true,
+					top_level: true,
 					image: "images/live-coral-cover.jpg",
 					description: "Abundant living coral is one of the best indicators of a healthy reef. To measure this, researchers sample an area of the reef and measure how much of that area is covered by coral."
 				},
@@ -42,6 +43,7 @@ angular.module('reef')
 					group: "Coral",
 					selected: false,
 					primary_indicator: false,
+					top_level: true,
 					image: "",
 					description: "Coral reefs provide habitat for fish and other reef organisms. The structural relief is a measure of a coral reef’s vertical height and is a proxy for reef complexity (holes and crevices). Reefs with higher relief and/or complexity often provide more habitat for of fish and reef biota."
 				}
@@ -188,6 +190,7 @@ angular.module('reef')
 					group: "Fish",
 					selected: true,
 					primary_indicator: true,
+					top_level: true,
 					image: "images/parrotfish.jpg",
 					description: "Herbivorous fish such as Parrotfishes and Surgeonfishes keep corals healthy by feeding on a seaweed known as macroalgae that can compete with and overgrow corals. An abundant population of herbivorous fish can graze on macroalgae and help maintain space for coral larvae and young coral to thrive."
 				},
@@ -202,6 +205,7 @@ angular.module('reef')
 					group: "Fish",
 					selected: false,
 					primary_indicator: true,
+					top_level: true,
 					image: "images/grouper.jpg",
 					description: "Piscivorous fish, fish that feed on other fish, are important members of reef systems because they keep populations of coral-preying organisms in check. Look out for piscivorous fish like Groupers and Snappers — these are indicators of a healthy reef."
 				}
@@ -214,14 +218,14 @@ angular.module('reef')
 					subgroup: 'Herbivorous',
 					checked: true,
 					image: 'images/parrotfish.jpg',
-					image_credit: 'By <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/people/39136124@N00">Paul Asman and Jill Lenoble</a> - <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/photos/pauljill/4686630424/">rainbow parrotfish Scarus guacamaia</a>Uploaded by <a target="_blank" href="//commons.wikimedia.org/wiki/User:Amada44" title="User:Amada44">Amada44</a>, <a target="_blank" href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=25257260">Link</a>',
+					image_credit: 'By <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/people/39136124@N00">Paul Asman and Jill Lenoble</a> - <a target="_blank" href="//commons.wikimedia.org/wiki/Flickr" class="mw-redirect" title="Flickr">Flickr</a>: <a target="_blank" rel="nofollow" class="external text" href="https://www.flickr.com/photos/39136124@N00/3460151791">rainbow parrotfish Scarus guacamaia terminal phase</a>, <a target="_blank" href="https://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a>, <a target="_blank" href="https://commons.wikimedia.org/w/index.php?curid=19382034">Link</a>',
 					description: 'Parrotfishes are heribivorous fish that feed on harmful benthic detractors like macroalgae. They are named for their dentition, which is distinct from other fish, including other labrids. Their numerous teeth are arranged in a tightly packed mosaic on the external surface of their jaw bones, forming a parrot-like beak with which they rasp algae from coral and other rocky substrates (which contributes to the process of bioerosion).',
 					description_credit: 'Wikipedia contributors. (2020, February 25). Parrotfish. In Wikipedia, The Free Encyclopedia. Retrieved 00:03, April 12, 2020, from <a target="_blank" href="https://en.wikipedia.org/w/index.php?title=Parrotfish&oldid=942548038">Link</a>'
 				},
 				{
 					key: "taxon_family_name",
 					value: "Acanthuridae",
-					value_display_name: "Surgeonfishes, Tangs, Unicornfishes",
+					value_display_name: "Acanthuridae",
 					subgroup: 'Herbivorous',
 					checked: true,
 					image: 'images/acanthuridae.jpg',
@@ -282,6 +286,7 @@ angular.module('reef')
 					group: "Benthos",
 					selected: true,
 					primary_indicator: true,
+					top_level: true,
 					image: "images/macroalgae.jpg",
 					description: "This benthic index is a number from 1-4 that represents a reef’s ratio of benthic promoters to benthic detractors. A higher index value indicates a greater majority of promoters."
 				},
@@ -295,6 +300,8 @@ angular.module('reef')
 					positive: true,
 					group: "Benthos",
 					selected: false,
+					primary_indicator: false,
+					top_level: true,
 					image: "",
 					description: "Benthic promoters are all of the organisms that help promote coral growth in a reef system. These are things like crustose coralline algae and young living coral."
 				},
@@ -308,6 +315,8 @@ angular.module('reef')
 					positive: false,
 					group: "Benthos",
 					selected: false,
+					primary_indicator: false,
+					top_level: true,
 					image: "",
 					description: "Benthic detractors are all of the organisms that prevent coral growth in a reef system. Macroalgae, cyanobacteria, and certain types of sponges are examples of species that compete with coral to grow in the same spots of a reef. Too much of these detractor species is an indicator of poor health for a reef."
 				},
@@ -321,6 +330,8 @@ angular.module('reef')
 					positive: true,
 					group: "Benthos",
 					selected: false,
+					primary_indicator: false,
+					top_level: false,
 					image: "",
 					description: "Crustose coralline algae is a benthic promoter that helps cement reefs together and provide surface for coral larvae."
 				},
@@ -334,6 +345,8 @@ angular.module('reef')
 					positive: false,
 					group: "Benthos",
 					selected: false,
+					primary_indicator: false,
+					top_level: false,
 					image: "",
 					description: "Macroalgae is a benthic detractor that can outcompete coral and completely cover sections of reef. Many types of macroalgae are commonly referred to as seaweed."
 				}

@@ -3,7 +3,7 @@
 		<section class="sidebar col-sm-4">
 			<div class="tabs row">
 				<h2 ng-repeat="g in vc.config.keys" class="col-xs-3" ng-click="vc.showKeyGroup(g)" ng-class="{'tab-selected': g.selected, {{g.group.toLowerCase()}}: true}"><img ng-src="images/graphics/{{g.icon}}"> <span>{{g.group}}</span></h2>
-				<h2 class="col-md-3" ng-click="vc.showCompareTab()" ng-class="vc.config.compare_open ? 'tab-selected' : ''"><i class="fas fa-exchange-alt"></i> <span>Compare</span></h2>
+				<h2 class="col-xs-3" ng-click="vc.showCompareTab()" ng-class="vc.config.compare_open ? 'tab-selected' : ''"><i class="fas fa-exchange-alt"></i> <span>Compare</span></h2>
 			</div>
 			<!-- <div>
 						<h3>Scientific Assessments of Reef Health</h3>
@@ -16,7 +16,7 @@
 							<i class="fas" ng-class="vc.config.science.show ? 'fa-toggle-on' : 'fa-toggle-off'"></i> {{g.group}} Indicators
 						</h3>
 						<p>Circles on the map represent reefs that have been assessed by the <strong>scientific community</strong> through <a href="https://www.agrra.org/" target="_blank">AGRRA</a>. Select an indicator to see it reflected in the circles' size and color.</p>
-						<div class="tile expandable" ng-repeat="k in g.scienceKeys" ng-click="vc.selectScienceKey(g, k)" ng-class="{'tile-selected': k.selected}">
+						<div class="tile expandable" ng-repeat="k in g.scienceKeys | filter: {top_level: true}" ng-click="vc.selectScienceKey(g, k)" ng-class="{'tile-selected': k.selected}">
 							<h4>{{k.display_name}}</h4>
 							<div ng-if="k.selected">
 								<!-- <img ng-src="{{k.image}}"> -->

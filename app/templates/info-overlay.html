@@ -1,5 +1,5 @@
 <div class="col-sm-12 sidebar-overlay">
-	<h3 ng-click="close()"><i class="fas fa-arrow-left"></i> {{item.value_display_name}}</h3>
+	<h3 ng-click="close()"><i class="fas fa-arrow-left"></i> {{item.value_display_name}} {{item.subgroup ? '(' + item.subgroup + ')' : ''}}</h3>
 	<img ng-src="{{item.image}}">
 	<p>{{item.description}}</p>
 	<div class="footnote">
