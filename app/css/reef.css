@@ -189,7 +189,6 @@ nav .active-nav, nav .active-nav:hover {
 	overflow: auto;
     max-height: 100%;
     margin-top: 50px;
-    padding-bottom: 100px;
 }
 
 .sidebar .tab-content h3 {
@@ -212,6 +211,10 @@ nav .active-nav, nav .active-nav:hover {
 
 .sidebar .tab-content .btn-wide {
 	margin-bottom: 10px;
+}
+
+.sidebar .checkbox-grid {
+	padding-bottom: 100px;
 }
 
 .tile {
