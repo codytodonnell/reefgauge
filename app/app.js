@@ -37,3 +37,9 @@ app.config(function($stateProvider, $urlRouterProvider) {
             templateUrl: 'app/templates/about.html'
         });
 });
+
+app.run(['$transitions', function ($transitions) {
+    $transitions.onSuccess({}, function () {
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+    })
+}]);
